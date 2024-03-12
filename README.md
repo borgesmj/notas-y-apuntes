@@ -5,6 +5,5 @@ Este repositorio es una recopilacion de las notas y apuntes de los cursos online
 * [Crear Multipage con VIte](./crear-multipage-vite/)
 * [Aprendiendo SQL](./aprendiendo-sql/)
 * [100 Days with Python](./100-days-python/)
-* [Retos de Frontend Mentor](./frontend-mentor/)
 * [Reto Python Codigo Facilito](./RetoPython-CodigoFacilito/)
 * [NodeJs, Express platzi](./nodejs-express-platzi/)
