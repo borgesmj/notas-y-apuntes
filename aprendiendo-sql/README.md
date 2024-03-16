@@ -15,6 +15,7 @@ Este contenido estará estructurado acorde al contenido de Desafio LATAM y se re
 | Dia 6: Operaciones con fechas | [ir](.#dia-6-operaciones-con-fechas) |
 | Dia 7: Funciones de agregacion | [ir](.#dia-7-funciones-de-agregacion) |
 | Dia 8: Distinct | [ir](.#dia-8-distinct) |
+| Dia 9: Introducción a grupos | [ir](.#dia-9-introducción-a-grupos) |
 
 
 ## Dia 1: Introduccion
@@ -1403,3 +1404,365 @@ Para la siguiente tabla "productos" deseamos obtener todas las combinaciones ún
 SELECT DISTINCT categoria, precio
 FROM productos
 ```
+## Dia 9: Introducción a grupos
+[ir al inicio](.#tabla-de-contenidos)
+### Agrupando valores con GROUUP BY
+La clausula GROUP BY es una poderosa gherramienta en SQL que se utilizar para agrupar filas con valores identicos en una o varias columnas especificas, permitiendo realizar operaciones de agregacion en ada grupo.
+
+Esta clausula viene dentro de la categoria de FUNCIONES DE GRUPO, asi como `count`, `sum`, `Average`, etc.
+
+La sintaxis para GROUP BY es 
+```
+SELECT column1, column2
+FROM table_name
+GROPU BY column1, column2
+```
+
+
+Ejemplo:
+
+Asumamos que tenemos una tabla llamada "sales". Esta tabla tiene tres columnas: ID, Item, y Ammount
+
+
+
+| ID | Item | Amount |
+|----|------|--------|
+| 1  | A    | 150    |
+| 2  | B    | 200    |
+| 3  | A    | 100    |
+| 4  | B    | 50     |
+| 5  | A    | 200    |
+| 6  | A    | 100    |
+| 7  | B    | 150    |
+
+Ejecutamos el siguiente comando de SQL
+
+```
+SELECT item, sum(Amount)
+FROM sales
+GROUP BY Item;
+```
+
+El codigo va a concatenar, o "agrupar" todos los items que sean los mismos a una nueva fila, aplicando la funciion SUM(). La salida será:
+
+| Item | SUM(amount) |
+|------|-------------|
+| A    | 550         |
+| B    | 400         |
+
+Tenemos la siguiente tabla colores:
+
+| COLOR    |
+|----------|
+| Rojo     |
+| Azul     |
+| Verde    |
+| Amarillo |
+| Naranja  |
+| Morado   |
+| Rosa     |
+| Café     |
+| Gris     |
+| Negro    |
+| Blanco   |
+| Rojo     |
+| Azul     |
+| Verde    |
+| Amarillo |
+
+Podemos seleccioar los elementos unicos utilizando GROUP BY de la siguiente forma
+
+```
+SELECT color as color_unico
+FROM colores
+GROUP BY color
+```
+
+como resultado obtendremos
+
+
+| COLOR    |
+|----------|
+| Amarillo |
+| Azul     |
+| Blanco   |
+| Café     |
+| Gris     |
+| Morado   |
+| Naranja  |
+| Negro    |
+| Rojo     |
+| Rosa     |
+| Verde    |
+
+Ejercicio:
+Dada la siguiente tabla de usuarios:
+
+| CORREO                       |
+|------------------------------|
+| juan.perez@empresa.com       |
+| maria.gonzalez@empresa.com   |
+| carlos.rodriguez@empresa.com |
+| ana.martinez@empresa.com     |
+| luis.garcia@empresa.com      |
+| carmen.lopez@empresa.com     |
+| jose.hernandez@empresa.com   |
+| francisco.martin@empresa.com |
+| laura.sanchez@empresa.com    |
+| antonio.diaz@empresa.com     |
+| juan.perez@empresa.com       |
+| maria.gonzalez@empresa.com   |
+
+Crea una consulta que nos muestre cada correo una unica vez. La columna mostrada deberá llamarse `correo_unico`
+
+```
+SELECT correo as correo_unico
+FROM usuarios
+GROUP BY correo
+```
+
+### Agrupar y contar
+GROUP BY es comunmente utilizada junto con funciones de agregacion como COUNT, MAX, MIN, SUM y AVG para obtener informacion resumida de un conjunto de datos
+
+En este ejrcicio aprenderemos a agrupar y contar
+
+Tenemos la siguiente tabla de colores
+
+| COLOR    |
+|----------|
+| Rojo     |
+| Azul     |
+| Verde    |
+| Amarillo |
+| Naranja  |
+| Morado   |
+| Rosa     |
+| Café     |
+| Gris     |
+| Negro    |
+| Blanco   |
+| Rojo     |
+| Azul     |
+| Verde    |
+| Amarillo |
+
+
+Queremos saber cuantas veces aparece cada color. esto lo podemos lograr combinando GROUP BY y la funcion de agregacion COUNT
+
+
+```
+SELECT color, count(color) as Repeticiones
+FROM colores
+GROUP BY color
+```
+
+| COLOR    | REPETICIONES |
+|----------|--------------|
+| Amarillo | 2            |
+| Azul     | 2            |
+| Blanco   | 1            |
+| Café     | 1            |
+| Gris     | 1            |
+| Morado   | 1            |
+| Naranja  | 1            |
+| Negro    | 1            |
+| Rojo     | 2            |
+| Rosa     | 1            |
+| Verde    | 2            |
+
+Ejercicio
+
+Dada la siguiente tabla de usuarios
+
+| CORREO                       |
+|------------------------------|
+| juan.perez@empresa.com       |
+| maria.gonzalez@empresa.com   |
+| carlos.rodriguez@empresa.com |
+| ana.martinez@empresa.com     |
+| luis.garcia@empresa.com      |
+| carmen.lopez@empresa.com     |
+| jose.hernandez@empresa.com   |
+| francisco.martin@empresa.com |
+| laura.sanchez@empresa.com    |
+| antonio.diaz@empresa.com     |
+| juan.perez@empresa.com       |
+| maria.gonzalez@empresa.com   |
+
+
+Crea una consulta que nos muestre cada correo electronico una unica vez junto a la cantidad de repeticiones. LAs columnas deben llamarse correo y repeticiones
+
+```
+SELECT correo, count(correo) as repeticiones
+from usuarios
+group by correo
+```
+
+### Ejercitando agrupar y contar
+
+Ejercicio
+Dada la siguiente tabla empleados
+
+| NOMBRE    | APELLIDO  | SUELDO | DEPARTAMENTO     |
+|-----------|-----------|--------|------------------|
+| Juan      | Pérez     | 3000   | Ventas           |
+| María     | González  | 3500   | Marketing        |
+| Carlos    | Rodríguez | 4000   | Tecnología       |
+| Ana       | Martínez  | 2800   | Recursos Humanos |
+| Luis      | García    | 3200   | Finanzas         |
+| Carmen    | López     | 3100   | Administración   |
+| José      | Hernández | 2900   | Operaciones      |
+| Francisco | Martín    | 3400   | Legal            |
+| Laura     | Sánchez   | 3300   | Compras          |
+| Antonio   | Díaz      | 3600   | Producción       |
+| Sofía     | Ruiz      | 2750   | Ventas           |
+| Jorge     | Vargas    | 3900   | Tecnología       |
+| Elena     | Castro    | 3050   | Marketing        |
+| Pedro     | Ortega    | 3150   | Finanzas         |
+
+Se pide contar cuantas personas trabajan en cada departamento. Las columnas resultantes deben llamarse departamento y cantidad_empleados
+
+```
+SELECT departamento, count(departamento) as cantidad_empleados
+from empleados
+group by departamento
+```
+
+### Agrupar y sumar
+En este ejercicio agruparemos y sumaremos. La logica de la consulta es la misma previamente mencionada, solo cambia la funcin de agrupacion a utilizar. Por ejemplo, tenemos una tabla de pedidos con los siguientes datos:
+
+| CLIENTE   | MONTO |
+|-----------|-------|
+| Cliente A | 1200  |
+| Cliente A | 800   |
+| Cliente B | 150   |
+| Cliente C | 200   |
+| Cliente B | 90    |
+
+Si queremos calcular cuanto ha gastado cada cliente, podemos realizar la siguiente consulta:
+
+```
+SELECT Cliente, sum(Monto) as Monto_total
+FROM pedidos
+GrOUP BY Cliente
+```
+
+Ejercicio
+Utilizando la siguiente tabla ventas e una empresa, crea una consulta que muestre cuanto vendio en total por cada categoria. Las columnas de la consulta deben llamarse categoria y monto_total
+
+| PRODUCTO        | MONTO | CATEGORIA         |
+|-----------------|-------|-------------------|
+| Laptop Pro      | 1200  | Electrónicos      |
+| Smartphone X    | 800   | Electrónicos      |
+| Silla Ergo      | 150   | Mobiliario        |
+| Mesa de Café    | 90    | Mobiliario        |
+| Reloj Elegante  | 250   | Accesorios        |
+| Bolso de Viaje  | 70    | Accesorios        |
+| Zapatillas Run  | 100   | Ropa              |
+| Camisa Casual   | 40    | Ropa              |
+| Licuadora Max   | 60    | Electrodomésticos |
+| Horno Compacto  | 110   | Electrodomésticos |
+| Libro de Cocina | 20    | Libros            |
+| Novela Misterio | 15    | Libros            |
+| Audífonos Plus  | 50    | Electrónicos      |
+| Lámpara Moderna | 45    | Mobiliario        |
+| Laptop Pro      | 1200  | Electrónicos      |
+| Silla Ergo      | 150   | Mobiliario        |
+| Bolso de Viaje  | 70    | Accesorios        |
+| Zapatillas Run  | 100   | Ropa              |
+
+```
+SELECT categoria as categoria, sum(monto) as monto_total
+FROM ventas
+group by categoria
+```
+### Agruopar y promediar
+
+Previamente aprendimos que AVG nos permite calcular el promedio de los elementos de una columna en una tabla. En este ejercicio lo utilizaremos para calcular promedios po grupo.
+
+```
+SELECT grupo, AVG(columna)
+FROM tabla
+GROUP BY grupo
+```
+
+Ejercicio
+
+Dada la siguiente tabla de estudiantes
+
+
+| NOMBRE_COMPLETO | NOTA |
+|-----------------|------|
+| Juan Pérez      | 7    |
+| Juan Pérez      | 8    |
+| Juan Pérez      | 6    |
+| María Rodríguez | 9    |
+| María Rodríguez | 7    |
+| María Rodríguez | 8    |
+| Carlos García   | 6    |
+| Carlos García   | 5    |
+| Carlos García   | 7    |
+| Ana Fernández   | 8    |
+| Ana Fernández   | 9    |
+| Ana Fernández   | 8    |
+| Luis Morales    | 7    |
+| Luis Morales    | 6    |
+| Luis Morales    | 5    |
+
+Encuentra el promedio de notas de cada estudiante. Las columnas deben tener el nombre completo y promedio_notas respectivamente
+
+Este ejercicio tiene un supuesto importante, que no hay dos estudiantes con el mismo nombre y apellido. DIscutiremos este tipo de supuestos mas adelante cuando revisemos el concepto de integridad.
+
+```
+SELECT nombre_completo, AVG(nota) as promedio_notas
+FROM estudiantes
+GROUP BY nombre_completo
+```
+
+### Maximo por grupo
+En este ejercicio combinaremos la funcion de agregacion MAX() con GROUP BY para poder obtener el monto mas alto de cada grupo. LA sintaxis de la consulta será igual a las vistas previamente, es decir:
+
+```
+SELECT grupo. MAX(columna)
+FROM tabla
+GROUP BY grupo
+```
+
+
+Ejercicio:
+
+Dada la siguiente tabla de ventas
+
+| PRODUCTO        | MONTO | CATEGORIA         |
+|-----------------|-------|-------------------|
+| Laptop Pro      | 1200  | Electrónicos      |
+| Smartphone X    | 800   | Electrónicos      |
+| Silla Ergo      | 150   | Mobiliario        |
+| Mesa de Café    | 90    | Mobiliario        |
+| Reloj Elegante  | 250   | Accesorios        |
+| Bolso de Viaje  | 70    | Accesorios        |
+| Zapatillas Run  | 100   | Ropa              |
+| Camisa Casual   | 40    | Ropa              |
+| Licuadora Max   | 60    | Electrodomésticos |
+| Horno Compacto  | 110   | Electrodomésticos |
+| Libro de Cocina | 20    | Libros            |
+| Novela Misterio | 15    | Libros            |
+| Audífonos Plus  | 50    | Electrónicos      |
+| Lámpara Moderna | 45    | Mobiliario        |
+| Laptop Pro      | 1200  | Electrónicos      |
+| Silla Ergo      | 150   | Mobiliario        |
+| Bolso de Viaje  | 70    | Accesorios        |
+| Zapatillas Run  | 100   | Ropa              |
+
+Crea una consulta para calcular el monto mas alto por cada categoria. La tabla resultante debe tener dos columnas: categoria y monto_mas_alto
+
+```
+SELECT categoria, max(monto) as monto_mas_alto
+FROM ventas
+group by categoria
+```
+
+
+
+
+
