@@ -65,6 +65,7 @@ El entorno de desarrollo está basado en Replit, que proporciona las siguientes 
 | Dia 32 | [*Listas*](./Dia-32/README.md) | [Codigo](./Dia-32/main.py) |
 | Dia 33 | [*Lista Dinamicas*](./Dia-33/README.md) | [Codigo](./Dia-33/main.py) |
 | Dia 34 | [*Pretty Print()*](./Dia-34/README.md) | [Codigo](./Dia-34/main.py) |
+| Dia 35 | [*Reto*](./Dia-35/README.md) | [Codigo](./Dia-35/main.py) |
 
 
 
