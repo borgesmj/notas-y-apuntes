@@ -1761,8 +1761,222 @@ SELECT categoria, max(monto) as monto_mas_alto
 FROM ventas
 group by categoria
 ```
+### Minimo por grupo
+En este ejercicio combinaremos la funcion MIN() con GROUP BY para obtener el monto mas bajo de cada grupo. La sintaxis de la consulta será igual a las vistas previamente, es decir:
+
+```
+SELECT grupo, MIN(columna) FROM tabla GROPU BY grupo
+```
+
+Ejercicio:
+
+Dada la tabla *ventas*
+
+| PRODUCTO        | MONTO | CATEGORIA         |
+|-----------------|-------|-------------------|
+| Laptop Pro      | 1200  | Electrónicos      |
+| Smartphone X    | 800   | Electrónicos      |
+| Silla Ergo      | 150   | Mobiliario        |
+| Mesa de Café    | 90    | Mobiliario        |
+| Reloj Elegante  | 250   | Accesorios        |
+| Bolso de Viaje  | 70    | Accesorios        |
+| Zapatillas Run  | 100   | Ropa              |
+| Camisa Casual   | 40    | Ropa              |
+| Licuadora Max   | 60    | Electrodomésticos |
+| Horno Compacto  | 110   | Electrodomésticos |
+| Libro de Cocina | 20    | Libros            |
+| Novela Misterio | 15    | Libros            |
+| Audífonos Plus  | 50    | Electrónicos      |
+| Lámpara Moderna | 45    | Mobiliario        |
+| Laptop Pro      | 1200  | Electrónicos      |
+| Silla Ergo      | 150   | Mobiliario        |
+
+Crea una consulta para calcular el monto mas bajo por cada grupo. La tabla resultante debe tener dos columnas `categoria` y `monto_mas_bajo`
+
+```
+SELECT categoria, min(monto) AS monto_mas_bajo 
+FROM ventas
+GROUP BY categoria
+```
+
+### Funciones de agregacion y fechas
+A la hora de construir informes, frecuentemente necesitaremos entregar informacion agrupada en un periodo de tiempo. Para lograr esto, utilizaremos una combinacion de GROUP BY con la funciuon strftime.
+
+Tenemos la tabla *ventas* con la siguiente informacion:
+
+| ID_VENTA | MONTO | FECHA_VENTA |
+|----------|-------|-------------|
+| 1        | 200   | 2010-01-15  |
+| 2        | 150   | 2011-02-20  |
+| 3        | 300   | 2012-03-10  |
+| 4        | 250   | 2012-04-05  |
+| 5        | 100   | 2014-05-25  |
+| 6        | 350   | 2015-06-18  |
+| 7        | 400   | 2015-07-22  |
+| 8        | 180   | 2015-08-09  |
+| 9        | 220   | 2018-09-30  |
+| 10       | 275   | 2018-10-11  |
+
+Se nos solicita determinar el monto total de ventas por año. Para resolverlo, tenemos qye agrupar por fecha y sumar los montos de la siguiente manera:
+
+```
+SELECT sum(monto), strftime("%Y"), fecha_venta AS año 
+FROM ventas 
+GROUP BY strftime("%Y", fecha_venta)
+```
 
 
+Ejercicio:
+Utilizando esta nueva tabla de ventas
+
+| ID_VENTA | MONTO | FECHA_VENTA |
+|----------|-------|-------------|
+| 1        | 200   | 2010-01-15  |
+| 2        | 150   | 2010-02-20  |
+| 3        | 300   | 2010-02-10  |
+| 4        | 250   | 2010-04-05  |
+| 5        | 100   | 2010-04-25  |
+| 6        | 350   | 2010-04-18  |
+| 7        | 400   | 2010-06-22  |
+| 8        | 180   | 2010-06-09  |
+| 9        | 220   | 2010-09-30  |
+| 10       | 275   | 2010-10-11  |
 
 
+Calcule el total de venta por mes El nombre de las columnas resultantes será "suma_ventas" y "mes" respectivamente.
 
+
+```
+SELECT sum(monto) as suma_ventas, strftime("%m", fecha_venta) as mes
+FROM ventas
+GROUP BY strftime("%m", fecha_venta)
+```
+
+### Ejercitando funciones de agregacion con fechas
+
+Se tiene una tabla llamada _inscripciones_ con distintas fechas de inscrpciones de un usuario a un sitio web
+
+| FECHA_INSCRIPCION |
+|-------------------|
+| 2022-01-15        |
+| 2022-01-20        |
+| 2022-02-10        |
+| 2022-02-05        |
+| 2022-03-25        |
+| 2022-03-18        |
+| 2022-04-22        |
+| 2022-04-09        |
+| 2022-05-30        |
+| 2022-05-11        |
+| 2022-06-19        |
+| 2022-06-29        |
+| 2022-07-12        |
+| 2022-07-21        |
+| 2022-08-08        |
+| 2022-08-17        |
+| 2022-09-13        |
+| 2022-09-26        |
+| 2022-10-14        |
+| 2022-10-28        |
+
+Cuenta cuantos usuarios se registraron cada mes. Las columnas resultantes deben llamarse "mes" y "cantidad_usuarios"
+
+```
+SELECT strftime("%m", fecha_inscripcion) as mes,  COUNT(Fecha_Inscripcion) AS cantidad_usuarios
+FROM inscripciones
+GROUP BY strftime("%m", fecha_inscripcion)
+```
+
+### Agrupando sin indicar el nombre de las columnas
+Cuando se trata de agrupar datos e una consulta SQL, existe una forma de evitar la redundancia de la clausula SELECT. POr ejemplo, considera la siguiente consulta
+
+```
+SELECT stfrtime("%Y", fecha_venta) as año_venta, sum(monto) from ventas group by strftime("%Y", fecha_venta)
+```
+
+Podemos simplificarla de la siguiente manera
+
+```
+SELECT strftime("%Y", fecha_venta) AS año, SUM(monto)
+FROM ventas
+GROUP BY 1
+```
+
+En esta notacion se interpreta como "agrupa por el primer criterio". TAmbien es posible aplicar esta sintaxis en la clausula ORDEB BY
+
+```
+SELECT strftime("%Y", fecha_venta) AS año, SUM(monto)
+FROM ventas 
+GROUP BY 1
+ORDER BY 1
+
+```
+
+De esta manera podemos lograr la agrupacion y ordenamiento sin repetir la expresion de la clausula SELECT
+
+Ejercicio:
+Dada la siguiente tabla de usuarios
+
+| CORREO                       |
+|------------------------------|
+| juan.perez@empresa.com       |
+| maria.gonzalez@empresa.com   |
+| carlos.rodriguez@empresa.com |
+| ana.martinez@empresa.com     |
+| luis.garcia@empresa.com      |
+| carmen.lopez@empresa.com     |
+| jose.hernandez@empresa.com   |
+| juan.perez@empresa.com       |
+| carmen.lopez@empresa.com     |
+| maria.gonzalez@empresa.com   |
+| juan.perez@empresa.com       |
+| maria.gonzalez@empresa.com   |
+
+Crea una consulta que nos muestre cada correo una unica vez, acompañado del momento de veces que se repite. Las columnas deben llevar los nombres "correo" "repeticiones", respectivamente y deben estar ordenados alfabeticamente
+
+```
+SELECT correo, count(correo) as repeticiones
+FROM usuarios
+GROUP BY 1
+ORDER BY 1 asc
+```
+
+### Agrupando por multiples columnas
+En SQL es posible agrupas por multipes columnas utilizando la siguiente sintaxis
+
+```
+SELECT columna1, columna2 funcion_agrupado(columna3)
+FROM tabla
+GROUP BY columna1, columna2
+```
+
+Y como aprendimos en el ejerciio anterior, tambien podemos escribir la consulta de la siguiente manera:
+
+```
+SELECT columna1, columna2, funcion_agrupado(columna3)
+FROM tabla
+GROUP BT 1, 2
+```
+
+Ejercicio
+Tenemos la siguiente tabla estudiantes
+
+| CORREO                  | MATERIA     | NOTA |
+|-------------------------|-------------|------|
+| estudiante1@ejemplo.com | Matemáticas | 8.5  |
+| estudiante2@ejemplo.com | Matemáticas | 9.0  |
+| estudiante3@ejemplo.com | Matemáticas | 7.5  |
+| estudiante1@ejemplo.com | Ciencias    | 8.0  |
+| estudiante2@ejemplo.com | Ciencias    | 9.5  |
+| estudiante3@ejemplo.com | Ciencias    | 7.0  |
+| estudiante1@ejemplo.com | Historia    | 8.7  |
+| estudiante2@ejemplo.com | Historia    | 9.2  |
+| estudiante3@ejemplo.com | Historia    | 7.8  |
+
+Calcula el promedio de cada estudiante en cada materia. LAs columnas deben llamarse correo, materi y promedio_notas
+
+```
+SELECT correo, materia, AVG(nota) as promedio_notas
+FROM estudiantes
+group by 1,2
+```
