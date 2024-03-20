@@ -2206,11 +2206,96 @@ RESULTADO
 [ir al inicio](.#tabla-de-contenidos)
 
 ### Instroduccion a subconsultas
-LAs subconsultas, tambien conocidas como "subqueries", nos permiten utilizar los resultados de una consulta dentro de otra consulta.
+Las subconsultas, tambien conocidas como "subqueries", nos permiten utilizar los resultados de una consulta dentro de otra consulta.
+En SQL, una subconculta es una consulta integrada dentro de otra consulta SQL. Alternativamente, ouede llamarla _consulta anidada_ o _interna_. La consulta contenedora a menudo se denomina _consulta externa_. LAs subconsultas se utilizan para recuperar datos que se utilizarán en la consulta principal como condicion oara restringir aun mas los datos que se recuperarán.
+
+Las subconsultas se pueden utilizar en varias partes de una consulta, que incluyen
+* SELECT clause
+* FROM clause
+* WHERE clause
+* GROUP BY clause
+* HAVING clause
+
+SINTAXIS:
+En general, la sintaxis se ouede escribir como:
+```
+SELECT column_name [, column_name]
+FROM   table1 [, table2 ]
+WHERE  column_name OPERATOR
+   (SELECT column_name [, column_name]
+   FROM table1 [, table2 ]
+   [WHERE]
+```
+
+### Tipos de subconsultas
+* Subconsulta Escalar: devuelve un valor único.
+  Una subconsulta escalar es una consulta que devuelve exactemente una columna con un unnico valor. Este tipo de subconsulta se puede utilizar en cualquier lugar de su SQL donde se permitan expresiones
+  Sintaxis:
+  ```
+  SELECT column_name [, column_name ]
+    FROM   table1 [, table2 ]
+    WHERE  column_name operator
+           (SELECT column_name [, column_name ]
+            FROM table_name 
+            WHERE condition);
+  ```
+  Ejemplo:
+  ```
+  SELECT name 
+  FROM student 
+  WHERE roll_id = (SELECT roll_id FROM student WHERE name='John');
+  ```
+* Subconsulta de fila: devuelve una sola fila o varias filas de dos o mas valores.
+  Las subconsultas de filas se utilizaan para devolver una o mas filas a la consulta de seleccion SQL. Sin embargo, la subconsulta deuelve varias columnas y filas, por lo tanto no se puede usar directamente donde se utilizarn expresiones escalares.
+  Sintaxis:
+  ```
+  SELECT column_name [, column_name ]
+    FROM   table1 [, table2 ]
+    WHERE  (column_name [, column_name ])
+          IN (SELECT column_name [, column_name ]
+              FROM table_name 
+              WHERE condition);
+  ```
+  Ejemplo:
+  ```
+  SELECT * FROM student 
+  WHERE (roll_id, age)=(SELECT MIN(roll_id),MIN(age) FROM student);
+  ```
+* Subconsulta de columna: devuelve un valor de una sola columna que es mas de una fila y una columna
+  Las subconsultas de columnas se utilizan para devolver una o mas columnas a la consulta de seleccion SQL externa. Se utilizan cuando se espera que la subconsulta devuelva mas de una columna a la consulta principal.
+  Sintaxis:
+  ```
+  SELECT column_name [, column_name ]
+    FROM   table1 [, table2 ]
+    WHERE  (SELECT column_name [, column_name ]
+            FROM table_name 
+            WHERE condition);
+  ```
+  Ejemplo:
+  ```
+  SELECT name, age FROM student 
+  WHERE name=(SELECT name FROM student);
+  ```
+* Subconsulta de tabla: devuelve mas de una fila y mas de una columna.
+  Las subconsultas de tabla se utilizan en la clausula FROM y devuelven una tabla que se puede utilizar como referencia de tabla en una declaracion SQL. Resultan utiles cuando desea realizar operaciones como unir varias tablas, unir datos de multiples fuentes, etc.
+  Sintaxis:
+  ```
+  SELECT column_name [, column_name ]
+    FROM
+        (SELECT column_name [, column_name ]
+         FROM   table1 [, table2 ])
+    WHERE  condition;
+  ```
+  Ejemplo:
+  ```
+  SELECT name, age 
+  FROM student 
+  WHERE (name, age) IN (SELECT name, age FROM student);
+  ```
 
 Veamos un ejemplo practico:
 
-Dada la tabña **Empleados**
+Dada la tabla **Empleados**
 
 | NOMBRE    | APELLIDO  | SUELDO | DEPARTAMENTO     |
 |-----------|-----------|--------|------------------|
@@ -2235,7 +2320,7 @@ Este tipo de preguntas podemos contestarlas utilizando subconsultas
 
 La idea para contestar esto es la siguiente:
 
-1. CAlculamos el promedio `SELECT AVG(sueldo) FROM empleados`
+1. Calculamos el promedio `SELECT AVG(sueldo) FROM empleados`
 2. Seleccionamos todos los empleados cuyo  sueldo es mayor a la consulta anterior `SELECT * FROM empleados WHERE sueldo > (SELECT AVG(sueldo) FROM empleados)`
 3. 
 Ejercicio:
@@ -2589,3 +2674,4 @@ FROM (
     GROUP BY jugador_id
 )
 ```
+> Recuerde que no todas las bases de datos SQL admiten todos los tipos de subconsultas. Aprender cómo y cuándo utilizar cada formulario es un aspecto esencial para crear consultas SQL efectivas.
