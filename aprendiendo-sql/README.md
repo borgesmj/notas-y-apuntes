@@ -1983,6 +1983,9 @@ FROM estudiantes
 group by 1,2
 ```
 ## Dia 10: HAVING
+
+[ir al inicio](.#tabla-de-contenidos)
+
 ### Introduccion a `HAVING`
 `HAVING` es una clausula de SQL que nos permite filtrar conjuntos de resultados en una clausula `GROUP BY`.  Se utiliza para mencionar condiciones sobre grupos que se seleccionan. En otras palabras, HAVING se utiliza principalmente con la clausula GROUP BY para filtrar los resultados que devuelve un GROUP BY
 
@@ -2199,6 +2202,9 @@ RESULTADO
 | Marketing    | 3150             |
 
 ## Dia 11: Subconsultas
+
+[ir al inicio](.#tabla-de-contenidos)
+
 ### Instroduccion a subconsultas
 LAs subconsultas, tambien conocidas como "subqueries", nos permiten utilizar los resultados de una consulta dentro de otra consulta.
 
