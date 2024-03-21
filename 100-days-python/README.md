@@ -69,6 +69,7 @@ El entorno de desarrollo está basado en Replit, que proporciona las siguientes 
 | Dia 36 | [*Manipulacion de los string*](./Dia-36/README.md) | [Codigo](./Dia-36/main.py) |
 | Dia 37 | [*Cortar Strings*](./Dia-37/README.md) | [Codigo](./Dia-37/main.py) |
 | Dia 37 | [*Strings y bucles*](./Dia-38/README.md) | [Codigo](./Dia-38/main.py) |
+| Dia 38 | [*El Ahorcado*](./Dia-39/README.md) | [Codigo](./Dia-39/main.py) |
 
 
 
