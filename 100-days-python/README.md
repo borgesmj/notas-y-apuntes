@@ -71,6 +71,7 @@ El entorno de desarrollo está basado en Replit, que proporciona las siguientes 
 | Dia 38 | [*Strings y bucles*](./Dia-38/README.md) | [Codigo](./Dia-38/main.py) |
 | Dia 39 | [*El Ahorcado*](./Dia-39/README.md) | [Codigo](./Dia-39/main.py) |
 | Dia 40 | [*Diccionarios*](./Dia-40/README.md) | [Codigo](./Dia-40/main.py) |
+| Dia 41 | [*Diccionarios con bucles*](./Dia-41/README.md) | [Codigo](./Dia-41/main.py) |
 
 
 
