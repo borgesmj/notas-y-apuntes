@@ -18,7 +18,7 @@ Este contenido estará estructurado acorde al contenido de Desafio LATAM y se re
 | Dia 9: Introducción a grupos | [ir](.#dia-9-introducción-a-grupos) |
 | Dia 10: HAVING | [ir](.#dia-10-having) |
 | Dia 11: Subconsultas | [ir](.#dia-11-subconsultas) |
-| Dia 12: Combinacion de consultas | [ir](.#dia-12-combinacion-deconsultas) |
+| Dia 12: Combinacion de consultas | [ir](.#dia-12-combinacion-de-consultas) |
 
 
 ## Dia 1: Introduccion
