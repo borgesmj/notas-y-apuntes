@@ -74,6 +74,7 @@ El entorno de desarrollo está basado en Replit, que proporciona las siguientes 
 | Dia 41 | [*Diccionarios con bucles*](./Dia-41/README.md) | [Codigo](./Dia-41/main.py) |
 | Dia 42 | [*Gotta Catch 'Em All.... *](./Dia-42/README.md) | [Codigo](./Dia-42/main.py) |
 | Dia 43 | [*Listas en 2D*](./Dia-43/README.md) | [Codigo](./Dia-43/main.py) |
+| Dia 44 | [*Listas dinámicas 2D*](./Dia-44/README.md) | [Codigo](./Dia-44/main.py) |
 
 
 
