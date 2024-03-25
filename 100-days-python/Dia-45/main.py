@@ -28,6 +28,10 @@ def addTask(todoList):
     priority = 'Baja'
     row.append(priority)
   todoList.append(row)
+  clearScreen(1)
+  print(f"Agregando {row[0]}...")
+  clearScreen(1)
+  print(f"{row[0]} agregada.")
   return todoList
 
 
@@ -57,19 +61,23 @@ def printList(todoList, longestTask):
     print()
     input('Para continuar presione la tecla ENTER')
   else:
+    longitud_total = longestTask + 36
+    longitud_igual = longitud_total
     print(f"|{'Tarea':^{longestTask+4}}|{'Fecha':^14}|{'Prioridad':^18}|")
-    print(
-      f"{'=======================================================':^{longestTask+24}}"
-    )
+    separateBar = f"{'=' * longitud_igual}"
+    print(f"{separateBar:^{longestTask}}")
     for row in todoList:
       print(
         f"{changeColor(row[2])}|{row[0]:^{longestTask+4}}|{row[1]:^14}|{row[2]:^18}|"
       )
     print("\033[0m")
     opcion = input("Para salir presione la tecla ENTER ")
+    if opcion:
+      return
 
 
 def editTask(todoList):
+  clearScreen(0.5)
   print("Elige la tarea que quieras editar")
   for index, task in enumerate(todoList):
     print(f"{index + 1}. {task[0]}")
@@ -77,11 +85,13 @@ def editTask(todoList):
   if index > len(todoList):
     print("Esta tarea no existe")
   else:
+    clearScreen(1)
+    print(f"Editando {todoList[index - 1][0]}")
     row = []
-    task = input('¿Cual es la nueva tarea?\n> ')
+    task = input('¿Como se llamará ahora esta tarea?\n> ')
     row.append(task)
     dueDate = input(
-      '¿Cual es la nueva fecha de entrega?\nEl formaro es dd/mm/YYYY\n> ')
+      'Introduce la nueva fecha\nEl formaro es dd/mm/YYYY\n> ')
     row.append(dueDate)
     opcion = input(
       '¿Cual es la nueva prioridad?\nEscriba el numero de la opción\n1. Alta\n2. Media\n3. Baja\n> '
@@ -95,10 +105,15 @@ def editTask(todoList):
     else:
       priority = 'Baja'
       row.append(priority)
+    clearScreen(1)
+    print("Guardando nueva tarea...")
+    clearScreen(1)
+    print("Nueva tarea guardada.")
     todoList[index - 1] = row
 
 
 def deleteTask(todoList):
+  clearScreen(1)
   print("Elige la tarea que quieras eliminar")
   for index, task in enumerate(todoList):
     print(f"{index + 1}. {task[0]}")
@@ -107,11 +122,20 @@ def deleteTask(todoList):
     print("Esta tarea no existe")
   else:
     taskToDelete = todoList[index - 1]
-    todoList.remove(taskToDelete)
-    return todoList
+    clearScreen(1)
+    print(f"¿Confirma que quiere eliminar {taskToDelete[0]} de la lista?\nLuego de esta accion no podrá recuperarse\ns/n")
+    opcion = input("> ")
+    if opcion == 's':
+      clearScreen(1)
+      print(f"Eliminando {taskToDelete[0]}")
+      clearScreen(1)
+      print("Tarea eliminada.")
+      todoList.remove(taskToDelete)
+      return todoList
+    else: 
+      return todoList
 
-
-todoList = []
+todoList = [['jugar', '04/19/2025', 'Alta']]
 
 while True:
   clearScreen(1)
@@ -132,6 +156,9 @@ while True:
   elif opcion == '4':
     todoList = deleteTask(todoList)
   elif opcion == '5':
+    clearScreen(1)
+    print("Gracias por usar nuestra aplicación")
+    clearScreen(2)
     exit()
   else:
     continue
