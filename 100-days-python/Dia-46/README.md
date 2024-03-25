@@ -159,7 +159,7 @@ print(courseProgress["Erica"]["daysComplete"])
 
 Había intentado hacer referencia a 'daysComplete' en la última línea. Esta clave no existe. Se llama 'daysCompleted' en el código.
 
-``python
+```
 john = {"diasCompletados": 46, "racha": 22}
 janet = {"díasCumplidos": 21, "racha": 21}
 erica = {"díasCumplidos": 75, "racha": 6}
