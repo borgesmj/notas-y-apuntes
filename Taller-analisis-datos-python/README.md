@@ -746,3 +746,102 @@ plt.show()
 ![alt text](image-22.png)
 
 Dentro de las principales correlaciones existentes, nos encontramos con la correlación positiva entre mortalidad infantil y tasa de fertilidad adolecente, también la correlación positiva entre el promedio de años de escolaridad y tasa de alfabetización. Correlación entre PIB per capita y porcentaje de población urbana.
+
+
+## Sección de modelación
+
+La regresión lineal es un modelo matemático usado para aproximar la relación de dependencia entre una variable dependiente Y, m variables independientes Xi y un término aleatorio (de error) e.
+
+$y_{i}=β_{0}+β_{1xi1}+...+β_{mxim}+ϵ{i}$
+
+La principal motivación es mostrar cuánto de la variabilidad de la variable dependiente Y es explicado por la variabilidad de las variables independientes Xi.
+
+Para trabajar el modelo de regresión lineal es fundamental usar datos limpios de valores perdidos, por lo que utilizaremos el dataset que llamamos data_limpia.
+
+Y los pasos a seguir para implementar el modelo de regresión lineal más simple:
+
+1.  Plantear el modelo con su formula
+2.  Ajustar el modelo utilizando el método  `.fit()`
+3.  Mostrar los resultados del modelo
+
+De esta podemos podemos responder preguntas como:
+
+> ¿Cual es la relación CO2 y el GDP?
+
+```python
+#Pandas es la librería básica para la manipulación y análisis de datos
+import pandas as pd
+#Numpy es la biblioteca para crear vectores y matrices, además de un conjunto grande de funciones matemáticas
+import numpy as np
+#Statsmodels es la biblioteca para realizar modelos
+import statsmodels.formula.api as smf
+
+# Extraemos la informacionn
+df_nations = pd.read_csv("https://raw.githubusercontent.com/DireccionAcademicaADL/Nations-DB/main/nations.csv", encoding="ISO-8859-1")
+
+# Borramos la columna innecesaria ["Unnamed: 0"]
+df_nations.drop(columns=["Unnamed: 0"], inplace=True)
+
+# Añadimos una nuevacolumna que calcule el nuevo monto de gdp actuales
+df_nations["gdp_pesos2021"] = df_nations["gdp"]*850
+
+# Añadimos una nueva columna que nos indique que paises estan sobre la media en emision de CO2
+df_nations["co2_recodificada"] = np.where(df_nations["co2"]> df_nations["co2"].mean(), 1, 0)
+
+# Creamos una tabla con data limpia
+df_limpia = df_nations.dropna()
+
+# Basados en esta nueva tabla realizamos la consulta
+# Plantear el modelo con su formula
+modelo1 = smf.ols("gdp ~ co2", data=df_limpia)
+
+# Ajustar el modelo utilizando el método .fit()
+modelo1 = modelo1.fit()
+
+# Mostrar los resultados del modelo
+print(modelo1.summary())
+```
+
+![alt text](image-23.png)
+
+A modo de ejercicio, te dejamos a continuación un modelo 2 para implementar, sigue el paso a paso y ejecuta el código por tu cuenta:
+
+1.  Fórmula:  `"gdp ~ chldmort + life + school + co2"`  y data utilizada es "df_limpia".
+2.  Ajustar el modelo con  `fit()`
+3.  Mostrar resultados
+
+```python
+#Pandas es la librería básica para la manipulación y análisis de datos
+import pandas as pd
+#Numpy es la biblioteca para crear vectores y matrices, además de un conjunto grande de funciones matemáticas
+import numpy as np
+#Statsmodels es la biblioteca para realizar modelos
+import statsmodels.formula.api as smf
+
+# Extraemos la informacionn
+df_nations = pd.read_csv("https://raw.githubusercontent.com/DireccionAcademicaADL/Nations-DB/main/nations.csv", encoding="ISO-8859-1")
+
+# Borramos la columna innecesaria ["Unnamed: 0"]
+df_nations.drop(columns=["Unnamed: 0"], inplace=True)
+
+# Añadimos una nuevacolumna que calcule el nuevo monto de gdp actuales
+df_nations["gdp_pesos2021"] = df_nations["gdp"]*850
+
+# Añadimos una nueva columna que nos indique que paises estan sobre la media en emision de CO2
+df_nations["co2_recodificada"] = np.where(df_nations["co2"]> df_nations["co2"].mean(), 1, 0)
+
+# Creamos una tabla con data limpia
+df_limpia = df_nations.dropna()
+
+# Basados en esta nueva tabla realizamos la consulta
+# Plantear el modelo con su formula
+modelo1 = smf.ols("gdp ~ chldmort + life + school + co2", data=df_limpia)
+
+# Ajustar el modelo utilizando el método .fit()
+modelo1 = modelo1.fit()
+
+# Mostrar los resultados del modelo
+print(modelo1.summary())
+```
+
+![alt text](image-24.png)
