@@ -7,4 +7,4 @@ Este repositorio es una recopilacion de las notas y apuntes de los cursos online
 * [100 Days with Python](./100-days-python#readme)
 * [Reto Python Codigo Facilito](./RetoPython-CodigoFacilito#readme)
 * [NodeJs, Express platzi](./nodejs-express-platzi#readme)
-* [Taller de Analisis de datos](./Taller-analisia-datos-python#readme)
+* [Taller de Analisis de datos](./Taller-analisis-datos-python#readme)
