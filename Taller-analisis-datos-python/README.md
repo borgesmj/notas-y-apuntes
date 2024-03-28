@@ -403,3 +403,346 @@ print(f"La tasa de alfabetismo en Europa es de {alf_europa}")
 ```
 
 ![alt text](image-14.png)
+
+## Visualizacion de datos
+La visualización gráfica de datos constituye una disciplina en si misma. Existen muchos tipos de datos y utilizar el gráfico correcto, según la necesidad de información y el objetivo a comunicar es clave en este proceso.
+![alt text](image-15.png)
+Fuente: Analytics Vidhya
+
+> Nota: hasta este punto hemos estado usando [replit.com](https://replit.com/), a partir de ahora usaremos la terminal de comando de Windows (en nuestro caso)
+
+Verificar la version de python en nuestra PC
+```python
+python --version
+```
+
+Si lo tenemos instalado, nos regresará la version de python en la pc
+vamos a crear una carpeta y luego nos movemos a esa carpeta
+```python
+mkdir data-analisis
+cd data-analisis
+```
+
+Vamos a necesitar saber que dependencias tenemos instaladas
+
+```python
+pip freeze > requirements.txt
+```
+Este comando guarda una lista de todas las bibliotecas instaladas en tu entorno virtual en un archivo llamado `requirements.txt`.
+
+Ahora instalamos las dependencias que necesitamos
+
+```python
+pip install pandas numpy seaborn matplotlib --user
+```
+
+Como dijimos al [principio](#dependencias) 
+* Pandas es la librería básica para la manipulación y análisis de datos
+* Numpy es la biblioteca para crear vectores y matrices, además de un conjunto grande de funciones matemáticas
+* Seaborn es una librería que usamos para graficar
+* matplotlib lo utilizaremos para crear la grafica y visualizarla.
+
+```python
+#Pandas es la librería básica para la manipulación y análisis de datos
+import pandas as pd
+#Numpy es la biblioteca para crear vectores y matrices, además de un conjunto grande de funciones matemáticas
+import numpy as np
+#Seaborn es una librería que usamos para graficar
+import seaborn as sns
+# Importamos matplotlib.pyplot para mostrar el gráfico
+import matplotlib.pyplot as plt
+
+
+
+
+# Extraemos la informacionn
+df_nations = pd.read_csv("https://raw.githubusercontent.com/DireccionAcademicaADL/Nations-DB/main/nations.csv", encoding="ISO-8859-1")
+
+# Borramos la columna innecesaria ["Unnamed: 0"]
+df_nations.drop(columns=["Unnamed: 0"], inplace=True)
+
+# Añadimos una nuevacolumna que calcule el nuevo monto de gdp actuales
+df_nations["gdp_pesos2021"] = df_nations["gdp"]*850
+
+# Añadimos una nueva columna que nos indique que paises estan sobre la media en emision de CO2
+df_nations["co2_recodificada"] = np.where(df_nations["co2"]> df_nations["co2"].mean(), 1, 0)
+
+# Usamos seaborn para graficar el histograma del índice Gini
+sns.displot(df_nations["gini"], kind="hist")
+
+# Mostramos la ventana emergente con el histograma
+plt.show()
+```
+
+Ejecutamos el comando `python main.py` dentro del directorio y nos regresa
+
+![alt text](image-16.png)
+
+Del gráfico anterior, se desprende que la mayor concentración del índice gini está entre los 30 y 50 puntos, pero sería valioso agregar el valor promedio del gini en nuestra muestra. ¿Cómo hacemos eso?
+
+```python
+#Pandas es la librería básica para la manipulación y análisis de datos
+import pandas as pd
+#Numpy es la biblioteca para crear vectores y matrices, además de un conjunto grande de funciones matemáticas
+import numpy as np
+#Seaborn es una librería que usamos para graficar
+import seaborn as sns
+#Statsmodels es la biblioteca para realizar modelos
+#import statsmodels.formula.api as smf
+# Importamos matplotlib.pyplot para mostrar el gráfico
+import matplotlib.pyplot as plt
+
+
+
+
+# Extraemos la informacionn
+df_nations = pd.read_csv("https://raw.githubusercontent.com/DireccionAcademicaADL/Nations-DB/main/nations.csv", encoding="ISO-8859-1")
+
+# Borramos la columna innecesaria ["Unnamed: 0"]
+df_nations.drop(columns=["Unnamed: 0"], inplace=True)
+
+# Añadimos una nuevacolumna que calcule el nuevo monto de gdp actuales
+df_nations["gdp_pesos2021"] = df_nations["gdp"]*850
+
+# Añadimos una nueva columna que nos indique que paises estan sobre la media en emision de CO2
+df_nations["co2_recodificada"] = np.where(df_nations["co2"]> df_nations["co2"].mean(), 1, 0)
+
+# Usamos seaborn para graficar el histograma del índice Gini
+sns.displot(df_nations["gini"], kind="hist")
+# Creamos una linea que muestra el valor promedio de gini
+plt.axvline(df_nations["gini"].mean(), color = "tomato")
+# Mostramos la ventana emergente con el histograma
+plt.show()
+```
+
+Volvemos a ejecutar `python main.py` y nos regresa:
+
+![alt text](image-17.png)
+
+Ahora utilizaremos gráficos de barras para observar comparaciones de comportamiento de regiones versus el resto del mundo.
+
+Ya habíamos creado los filtros de df_africa y df_europa, con esto vamos a comparar la mortalidad infantil.
+
+```python
+#Pandas es la librería básica para la manipulación y análisis de datos
+import pandas as pd
+#Numpy es la biblioteca para crear vectores y matrices, además de un conjunto grande de funciones matemáticas
+import numpy as np
+#Seaborn es una librería que usamos para graficar
+import seaborn as sns
+#Statsmodels es la biblioteca para realizar modelos
+#import statsmodels.formula.api as smf
+# Importamos matplotlib.pyplot para mostrar el gráfico
+import matplotlib.pyplot as plt
+
+
+
+
+# Extraemos la informacionn
+df_nations = pd.read_csv("https://raw.githubusercontent.com/DireccionAcademicaADL/Nations-DB/main/nations.csv", encoding="ISO-8859-1")
+
+# Borramos la columna innecesaria ["Unnamed: 0"]
+df_nations.drop(columns=["Unnamed: 0"], inplace=True)
+
+# Añadimos una nuevacolumna que calcule el nuevo monto de gdp actuales
+df_nations["gdp_pesos2021"] = df_nations["gdp"]*850
+
+# Añadimos una nueva columna que nos indique que paises estan sobre la media en emision de CO2
+df_nations["co2_recodificada"] = np.where(df_nations["co2"]> df_nations["co2"].mean(), 1, 0)
+
+# Tenemos los filtros df_africa y df_europe
+df_africa = df_nations[df_nations["region"]=="Africa"]
+df_europa =df_nations[df_nations["region"]=="Europe"]
+
+# Juntamos los dos filtros para cerar una misma tabla
+df_euafr = df_nations.loc[df_nations["region"].isin(["Europe","Africa"])]
+
+
+# Usamos seaborn para graficar el histograma del índice Gini
+sns.barplot(data=df_euafr, x="region", y="chldmort")
+# Mostramos la ventana emergente con el histograma
+plt.show()
+```
+Nos regresa
+
+![alt text](image-18.png)
+
+Otro gráfico de barras: Alfabetismo promedio entre Americas y el resto del mundo
+
+```python
+#Pandas es la librería básica para la manipulación y análisis de datos
+import pandas as pd
+#Numpy es la biblioteca para crear vectores y matrices, además de un conjunto grande de funciones matemáticas
+import numpy as np
+#Seaborn es una librería que usamos para graficar
+import seaborn as sns
+#Statsmodels es la biblioteca para realizar modelos
+#import statsmodels.formula.api as smf
+# Importamos matplotlib.pyplot para mostrar el gráfico
+import matplotlib.pyplot as plt
+
+
+
+
+# Extraemos la informacionn
+df_nations = pd.read_csv("https://raw.githubusercontent.com/DireccionAcademicaADL/Nations-DB/main/nations.csv", encoding="ISO-8859-1")
+
+# Borramos la columna innecesaria ["Unnamed: 0"]
+df_nations.drop(columns=["Unnamed: 0"], inplace=True)
+
+# Añadimos una nuevacolumna que calcule el nuevo monto de gdp actuales
+df_nations["gdp_pesos2021"] = df_nations["gdp"]*850
+
+# Añadimos una nueva columna que nos indique que paises estan sobre la media en emision de CO2
+df_nations["co2_recodificada"] = np.where(df_nations["co2"]> df_nations["co2"].mean(), 1, 0)
+
+# Otro gráfico de barras: Alfabetismo promedio entre Americas y el resto del mundo
+
+# Filtrar los datos para las Americas y el resto del mundo
+df_americas = df_nations[df_nations['region'] == 'Americas']
+df_resto_mundo = df_nations[df_nations['region'] != 'Americas']
+
+# Calcular el alfabetismo promedio para cada grupo
+alfabetismo_promedio_americas = df_americas['literacy'].mean()
+alfabetismo_promedio_resto_mundo = df_resto_mundo['literacy'].mean()
+
+
+# Usamos seaborn para graficar el histograma el alfabetismo promedio para cada grupo
+sns.barplot(x=['Americas', 'Rest of the world'], y=[alfabetismo_promedio_americas, alfabetismo_promedio_resto_mundo])
+
+# Mostramos la ventana emergente con el histograma
+plt.show()
+```
+
+![alt text](image-19.png)
+
+Ahora usando gráfico Boxplot para observar la distribución de la escolaridad por región
+
+```python
+#Pandas es la librería básica para la manipulación y análisis de datos
+import pandas as pd
+#Numpy es la biblioteca para crear vectores y matrices, además de un conjunto grande de funciones matemáticas
+import numpy as np
+#Seaborn es una librería que usamos para graficar
+import seaborn as sns
+#Statsmodels es la biblioteca para realizar modelos
+#import statsmodels.formula.api as smf
+# Importamos matplotlib.pyplot para mostrar el gráfico
+import matplotlib.pyplot as plt
+
+
+
+
+# Extraemos la informacionn
+df_nations = pd.read_csv("https://raw.githubusercontent.com/DireccionAcademicaADL/Nations-DB/main/nations.csv", encoding="ISO-8859-1")
+
+# Borramos la columna innecesaria ["Unnamed: 0"]
+df_nations.drop(columns=["Unnamed: 0"], inplace=True)
+
+# Añadimos una nuevacolumna que calcule el nuevo monto de gdp actuales
+df_nations["gdp_pesos2021"] = df_nations["gdp"]*850
+
+# Añadimos una nueva columna que nos indique que paises estan sobre la media en emision de CO2
+df_nations["co2_recodificada"] = np.where(df_nations["co2"]> df_nations["co2"].mean(), 1, 0)
+
+# Ahora usando gráfico Boxplot para observar la distribución de la escolaridad por región
+sns.boxplot(x=df_nations["region"], y=df_nations["school"])
+
+# Mostramos la ventana emergente con el histograma
+plt.show()
+```
+
+![alt text](image-20.png)
+
+Otra forma de observar la información es a traves de los diagramas de dispersión, pero para usar estos necesitamos eliminar datos perdidos en el dataset.
+
+```python
+#Pandas es la librería básica para la manipulación y análisis de datos
+import pandas as pd
+#Numpy es la biblioteca para crear vectores y matrices, además de un conjunto grande de funciones matemáticas
+import numpy as np
+#Seaborn es una librería que usamos para graficar
+import seaborn as sns
+#Statsmodels es la biblioteca para realizar modelos
+#import statsmodels.formula.api as smf
+# Importamos matplotlib.pyplot para mostrar el gráfico
+import matplotlib.pyplot as plt
+
+
+
+
+# Extraemos la informacionn
+df_nations = pd.read_csv("https://raw.githubusercontent.com/DireccionAcademicaADL/Nations-DB/main/nations.csv", encoding="ISO-8859-1")
+
+# Borramos la columna innecesaria ["Unnamed: 0"]
+df_nations.drop(columns=["Unnamed: 0"], inplace=True)
+
+# Añadimos una nuevacolumna que calcule el nuevo monto de gdp actuales
+df_nations["gdp_pesos2021"] = df_nations["gdp"]*850
+
+# Añadimos una nueva columna que nos indique que paises estan sobre la media en emision de CO2
+df_nations["co2_recodificada"] = np.where(df_nations["co2"]> df_nations["co2"].mean(), 1, 0)
+
+
+# Otra forma de observar la información es a traves de los diagramas de dispersión, pero para usar estos necesitamos eliminar datos perdidos en el dataset.
+df_limpia = df_nations.dropna()
+
+# Luego que tenemos los datos sin datos perdidos, procedemos a graficar en un grafico de dispersion
+sns.scatterplot(x=df_limpia["school"], y=df_limpia["literacy"])
+
+plt.show()
+```
+
+![alt text](image-21.png)
+
+
+El último tipo de gráfico que revisaremos en este taller, corresponde al mapa de calor o  `heatmap`. Este tipo de gráfico es una representación visual de los datos en que se muestra concentración o intensidad.
+
+En este caso lo utilizaremos para buscar correlación entre las distintas variables de nuestro dataset.
+
+**¿Qué es correlación?**
+
+Correlación es una medida estadística que expresa hasta qué punto dos variables están relacionadas linealmente. Es una herramienta común para describir relaciones simples sin hacer afirmaciones sobre causa y efecto.
+
+```python
+#Pandas es la librería básica para la manipulación y análisis de datos
+import pandas as pd
+#Numpy es la biblioteca para crear vectores y matrices, además de un conjunto grande de funciones matemáticas
+import numpy as np
+#Seaborn es una librería que usamos para graficar
+import seaborn as sns
+#Statsmodels es la biblioteca para realizar modelos
+#import statsmodels.formula.api as smf
+# Importamos matplotlib.pyplot para mostrar el gráfico
+import matplotlib.pyplot as plt
+
+
+
+
+# Extraemos la informacionn
+df_nations = pd.read_csv("https://raw.githubusercontent.com/DireccionAcademicaADL/Nations-DB/main/nations.csv", encoding="ISO-8859-1")
+
+# Borramos la columna innecesaria ["Unnamed: 0"]
+df_nations.drop(columns=["Unnamed: 0"], inplace=True)
+
+# Añadimos una nuevacolumna que calcule el nuevo monto de gdp actuales
+df_nations["gdp_pesos2021"] = df_nations["gdp"]*850
+
+# Añadimos una nueva columna que nos indique que paises estan sobre la media en emision de CO2
+df_nations["co2_recodificada"] = np.where(df_nations["co2"]> df_nations["co2"].mean(), 1, 0)
+
+# Seleccionamos solo las columnas numéricas para calcular la correlación
+numeric_columns = df_nations.select_dtypes(include=np.number)
+
+# Calculamos la correlación entre las columnas numéricas
+corr = numeric_columns.corr()
+
+# Creamos un gráfico de calor con la matriz de correlación
+sns.heatmap(corr, annot=True, cmap='Greens')
+plt.title('Matriz de Correlación')
+plt.show()
+```
+
+![alt text](image-22.png)
+
+Dentro de las principales correlaciones existentes, nos encontramos con la correlación positiva entre mortalidad infantil y tasa de fertilidad adolecente, también la correlación positiva entre el promedio de años de escolaridad y tasa de alfabetización. Correlación entre PIB per capita y porcentaje de población urbana.
