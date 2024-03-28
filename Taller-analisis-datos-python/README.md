@@ -70,6 +70,7 @@ Python cuando sabe que hay un comentario, lo ignora, solo se mantienen en codigo
 
 Los lenguajes de programación cuentan con una serie de herramientas básicas incorporadas, como las que acabamos de ver. Sin embargo, existen expansiones de funcionalidades que han sido derrolladas previamente de modo de ahorrarnos trabajo y hacer todo más simple.
 
+### Dependencias
 Estas "expansiones" se llaman  **bibliotecas o librerías**
 
 ```python
