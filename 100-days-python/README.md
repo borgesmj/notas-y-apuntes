@@ -82,7 +82,7 @@ El entorno de desarrollo está basado en Replit, que proporciona las siguientes 
 | Dia 49 | [*Lectura de un fichero*](./Dia-49/README.md) | [Codigo](./Dia-49/main.py) |
 | Dia 50 | [*Idea Maker...*](./Dia-50/README.md) | [Codigo](./Dia-50/main.py) |
 | Dia 51 | [*Guardar en y cargar desde archivos*](./Dia-51/README.md) | [Codigo](./Dia-51/main.py) |
-| Dia 51 | [*Evitar fallos*](./Dia-51/README.md) | [Codigo](./Dia-51/main.py) |
+| Dia 52 | [*Evitar fallos*](./Dia-52/README.md) | [Codigo](./Dia-52/main.py) |
 
 
 
