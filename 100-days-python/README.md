@@ -82,8 +82,9 @@ El entorno de desarrollo está basado en Replit, que proporciona las siguientes 
 | Dia 49 | [*Lectura de un fichero*](./Dia-49/README.md) | [Codigo](./Dia-49/main.py) |
 | Dia 50 | [*Idea Maker...*](./Dia-50/README.md) | [Codigo](./Dia-50/main.py) |
 | Dia 51 | [*Guardar en y cargar desde archivos*](./Dia-51/README.md) | [Codigo](./Dia-51/main.py) |
+| Dia 51 | [*Evitar fallos*](./Dia-51/README.md) | [Codigo](./Dia-51/main.py) |
 
 
 
 
-Para calcular el progreso segun la fecha actual, uso este [código](https://gist.github.com/borgesmj/7271f7d6a02e10024227a468f537c628) o ejecuta directo en este [enlace](https://replit.com/@borgesmj19/Calcular-progreso)
+Para calcular el progreso segun la fecha actual, uso este [código](https://gist.github.com/borgesmj/7271f7d6a02e10024227a468f537c628)
