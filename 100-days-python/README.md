@@ -84,6 +84,7 @@ El entorno de desarrollo está basado en Replit, que proporciona las siguientes 
 | Dia 51 | [*Guardar en y cargar desde archivos*](./Dia-51/README.md) | [Codigo](./Dia-51/main.py) |
 | Dia 52 | [*Evitar fallos*](./Dia-52/README.md) | [Codigo](./Dia-52/main.py) |
 | Dia 53 | [*Retos*](./Dia-53/README.md) | [Codigo](./Dia-53/main.py) |
+| Dia 54 | [*Comma-Separated Values*](./Dia-54/README.md) | [Codigo](./Dia-54/main.py) |
 
 
 
