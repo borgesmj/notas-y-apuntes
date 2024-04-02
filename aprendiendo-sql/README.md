@@ -42,7 +42,7 @@ SQL consiste en varios componentes, cada uno con su unico proposito en comunicac
   - TRUNCATE
 * Lenguaje de manipulación de datos ( Data manipulation Language - DML): Permite gestionar datos dentro de objetos de bases de datos. Estos comandos incluyen:
   - [SELECT](./#select)
-  - INSERT
+  - [INSERT](./#añadir-un-registro-en-una-tabla)
   - UPDATE
   - DELETE.
 * Lenguaje de control de datos ( Data control Langiage - DCL): Incluye comandos como GRANT y REVOKE, que tratan principalmente de derechos, permisos y otras tareas de gestión a ni vel de control para el sistema de base de datos.
