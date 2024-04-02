@@ -73,7 +73,7 @@ La declaracion `SLECT` en SQL es mayormente usada para obtener datos de la base 
 #### Sintaxis:
 Asi luce nuestro comando `Select`
 
-```
+```sql
 SELECT column1, column2 ...
 FROM table_name
 ```
@@ -86,7 +86,7 @@ Aqui hay unos ejemplos:
 #### Ejemplo 1
 Si tenemos una tabla llamada `employees` podemos seleccionar todos la informacion de los empleados utilizando:
 
-```
+```sql
 SELECT *
 FROM employees
 ```
@@ -94,7 +94,7 @@ FROM employees
 #### Ejemplo 2: Seleccionando desde multiples tablas
 Si tenemos multiples tablas, digase `employees` y `departaments` y queremos seleccionar la infoirmacion de ambos, podemos hacer lo siguiente:
 
-```
+```sql
 SELECT employees.name, departments.department 
 FROM employees, departments 
 WHERE employees.dept_id = departments.dept_id;
@@ -106,7 +106,7 @@ En este ejemplo, la clausula `FROM` está seguida por dos tablas `employees` y `
 ### Seleccionando todas las columnas de una tabla
 Si queremos seleccionar todas las columnas de una tabla, podemos usar el `*` asi:
 
-```
+```sql
 SELECT * FROM table_name
 ```
 ### Seleccionando una columna de la tabla
@@ -114,7 +114,7 @@ En este ejercicio se tiene una tabla llamado usuarios que tiene las columnas nom
 
 Selecciona sólo los nombres de la tabla usuarios.
 
-```
+```sql
 SELECT nombre
 from usuarios
 ```
@@ -122,25 +122,25 @@ from usuarios
 ### Seleccionando múltiples columnas de una tabla
 Supongamos que tenemos una tabla llamada productos con las columnas 'nombre', 'precio', 'cantidad' y 'proveedor'. Selecciona sólo el nombre, precio y el proveedor
 
-```
+```sql
 SELECT nombre, precio, proveedor FROM productos
 ```
 
 ### Asignando un alias a una columna con "AS"
 Se tiene una tabla llamada usuarios con las columnas nombre, apellido, email y teléfono. Selecciona todos los nombres bajo el alias "cliente"
 
-```
+```sql
 SELECT nombre as cliente from usuarios
 ```
 
 ### Asignando un alias a varias columnas con "AS"
 Cambia el nombre de la columna 'nombre' a 'nombre_usuario' y el nombre de la columna 'apellido' a 'apellido_usuario' en la tabla usuarios.
 
-```
+```sql
 select nombre as nombre_usuario, apellido as apellido_usuario from usuarios
 ```
 Otro ejemplo:
-```
+```sql
 SELECT e.name, d.department 
 FROM employees AS e, departments AS d
 WHERE e.dept_id = d.dept_id;
@@ -151,7 +151,7 @@ En este ejemplo, las tablas `employees` y `departments` son llamadas `e` y `d`re
 
 Selecciona el nombre y el email de los usuarios de la tabla usuarios, y asigna el nombre 'Correo electrónico' a la columna 'email'.
 
-```
+```sql
 select nombre, email as "Correo electrónico" from usuarios
 ```
 ## Dia 2: Seleccionando filas
@@ -165,7 +165,7 @@ SQL provee una clausula WHERE que es usada basicamente para filtrar los registro
 
 Por ejemplo, disponemos de una llamada productos con las columna "precio", podemos recuperar todas las filas que tengan el precio mayor a 100
 
-```
+```sql
 SELECT * from productos WHERE precio > 100
 ```
 
@@ -178,12 +178,12 @@ Si cambiamos el orden, podemos tener un error de sintaxis
 
 Se tiene una tabla llamada productos, con las columnas id, nombre, precio y descuento. Selecciona todos los registros cuyo descuento sea mayor a 10.
 
-```
+```sql
 select * from productos where descuento > 10
 ```
 Se tiene una tabla llamada productos, con las columnas id, nombre, precio y descuento.
 
-```
+```sql
 select * from productos where precio > 200
 ```
 ### Utilizando el operador mayor o igual que
@@ -192,7 +192,7 @@ Selecciona todos los registros de la tabla productos en los que el valor de la c
 
 Si mostraras sólo los productos con precio a mayor a 50, se mostaría la Lámpara de escritorio?
 
-```
+```sql
 select * from productos where precio >= 50
 ```
 
@@ -200,31 +200,31 @@ select * from productos where precio >= 50
 
 Se tiene una tabla usuarios con las columnas id, nombre, apellido, email y telefono. Selecciona todas los registros de la tabla usuarios donde el valor de la columna id sea menor a 3.
 
-```
+```sql
 select * from usuarios where id < 3
 ```
 
 #### Utilizando el operador menor o igual que en una condicion
 Selecciona todos los registros de la tabla productos en los que el valor de la columna 'precio' sea menor o igual a 100.
-```
+```sql
 select * from productos where precio <= 100
 ```
 #### Seleccionando multiples filas bajo una condición
 Selecciona el nombre, precio y cantidad de la tabla productos cuya cantidad sea mayor a 6.
 
-```
+```sql
 select nombre, precio, cantidad from productos where cantidad > 6
 ```
 
 #### Seleccionando filas bajo una condición de igualdad
 Selecciona el nombre del usuario de la tabla usuarios con id igual a 2
-```
+```sql
 select nombre from usuarios where id = 2
 ```
 
 #### Seleccionando filas bajo una condición de igualdad (tipo de dato string)
 Selecciona todas las filas de la tabla productos donde el nombre del producto sea 'Pantalón'.
-```
+```sql
 select * from productos where nombre = 'Pantalón'
 ```
 #### Seleccionando filas bajo una condición de igualdad (tipo de dato string) parte 2
@@ -234,7 +234,7 @@ Selecciona todos los productos de la tabla productos que tengan el nombre 'Silla
 
 Puedes probar con 'c' y observar que no obtendrás ningún resultado.
 
-```
+```sql
 select * from productos where nombre = "Silla de Oficina"
 ```
 #### Seleccionando filas bajo una condición de igualdad (tipo de dato booleano true)
@@ -243,26 +243,26 @@ Hasta el momento hemos trabajado con dos tipos de datos: números enteros, como 
 
 Supongamos que tenemos una tabla de productos con una columna 'destacado' de tipo booleano que indica si un producto está destacado o no. Para seleccionar todos los productos que están marcados como destacados, podemos usar la siguiente consulta:
 
-```
+```sql
 SELECT * FROM productos WHERE destacado = true;
 ```
 
 Adicionalmente se pueden ocupar los valores 1 y 0 en lugar de las palabras reservadas true o false, por ejemplo la siguiente consulta es identica a la anterior.
 
-```
+```sql
 SELECT * FROM productos WHERE destacado = 1;
 ```
 Se tiene una tabla de usuarios con los campos id, nombre, apellido, email, teléfono y status. La columna status es de tipo booleano.
 
 Selecciona todos los usuarios de la tabla usuarios cuyo status es activo.
 
-```
+```sql
 select * from usuarios where status = 1
 ```
 
 #### Seleccionando filas bajo una condición de igualdad (tipo de dato booleano false)
 Selecciona todos los productos de la tabla productos que no están destacados.
-```
+```sql
 select * from productos where destacado = 0
 ```
 
@@ -271,7 +271,7 @@ Se tiene una tabla de usuarios con los campos id, nombre, apellido, email y tel�
 
 Selecciona todos los usuarios cuyo nombre es 'María' y su email es 'mariagarcia@hotmail.com' de la tabla de usuarios.
 
-```
+```sql
 Select *
 from usuarios
 where nombre = "María" and email = "mariagarcia@hotmail.com"
@@ -280,7 +280,7 @@ where nombre = "María" and email = "mariagarcia@hotmail.com"
 Se tiene una tabla llamada productos que tiene los campos id, nombre, agotado y precio. La columna precio es de tipo Integer mientras que la columna agotado es de tipo Boolean.
 
 Selecciona los productos de la tabla productos que estén agotados y tengan un precio mayor a 100.
-```
+```sql
 select *
 from productos
 where agotado = 1 and precio > 100
@@ -290,7 +290,7 @@ Se tiene una tabla productos con los campos id, nombre, precio y descuento. El c
 
 Selecciona todos los productos cuyo precio sea mayor a 1000 o su descuento sea igual a 20.
 
-```
+```sql
 select *
 from productos
 where precio > 1000 or descuento = 20
@@ -300,7 +300,7 @@ Se tiene una tabla clientes con los campos id, nombre, ciudad y saldo. La ciudad
 
 Selecciona aquellos clientes de la tabla clientes que sean de la ciudad 'Madrid' o que su saldo sea negativo.
 
-```
+```sql
 select *
 from clientes
 where ciudad = "Madrid" or saldo < 0
@@ -318,7 +318,7 @@ Se tiene una tabla de productos con los campos id, nombre, precio y fecha_de_cre
 
 Selecciona todos los productos de la tabla productos que fueron creados después de '2021-05-01'.
 
-```
+```sql
 SELECT *
 FROM PRODUCTOS
 WHERE fecha_de_creación > '2021-05-01'
@@ -337,7 +337,7 @@ Se tiene la tabla productos con los campos id, nombre y stock. Dentro de los reg
 
 Selecciona todos los productos cuyo stock se encuentre entre 20 y 30.
 
-```
+```sql
 select *
 from productos
 where stock between 20 and 30
@@ -356,7 +356,7 @@ Se tiene una tabla usuarios con los campos id, nombre, apellido, email y teléfo
 
 Se pide seleccionar todos los usuarios cuyo apellido empiece con 'Ma'
 
-```
+```sql
 select *
 from usuarios
 where apellido like "Ma%"
@@ -368,7 +368,7 @@ Supongamos que queremos buscar todos los usuarios cuyo nombre termine con la let
 `SELECT * FROM usuarios WHERE nombre LIKE '%s'`
 Ejercicio
 Selecciona todos los usuarios de la tabla usuarios cuyo nombre termine con la letra 'o'
-```
+```sql
 select *
 from usuarios
 where nombre like "%o"
@@ -402,7 +402,7 @@ Se tiene una tabla productos con id, nombre, precio y descuento, siendo descuent
 
 Selecciona todos los registros de la tabla productos cuyo campo descuento no sea nulo.
 
-```
+```sql
 SELECT *
 FROM productos
 where descuento is not null
@@ -414,7 +414,7 @@ Se tiene una tabla usuarios con id, nombre, apellido, email y teléfono
 
 Selecciona todos los usuarios que no tengan un email registrado en la tabla de usuarios.
 
-```
+```sql
 select *
 from usuarios
 where email is null
@@ -427,14 +427,14 @@ La clasusula *order by* en SQL es usada para ordernar los resultados de una decl
 
 
 #### Sintaxis para orden ascendente
-```
+```sql
 Select column1, column2
 from table_name
 order by column1, column2, asc
 ```
 
 #### Sintaxis para orden desscendente
-```
+```sql
 Select column1, column2
 from table_name
 order by column1, column2, desc
@@ -442,26 +442,26 @@ order by column1, column2, desc
 
 Ejercicio:
 Ordena los registros de la tabla usuarios por el campo 'nombre'
-```
+```sql
 select * from usuarios order by nombre
 ```
 ### Ordenando filas asc explicito
 Ejercicio
 En este ejercicio se tiene una tabla usuarios con los campos id, nombre, apellido, email y teléfono. Se te pide ordenar los registros de la tabla 'usuarios' por el campo 'nombre' en orden ascendente.
-```
+```sql
 select * from usuarios order by nombre asc
 ```
 
 ### Ordenando filas desc
 Ejercicio
 Se tiene una tabla productos con los campos id, nombre, precio y stock. Selecciona sólo los precios de la tabla 'productos' ordenados de forma descendente.
-```
+```sql
 select precio from productos order by precio desc
 ```
 
 ### Ordenando filas con valores nulos
 Ordena la tabla empleados por la columna 'salario' de manera ascendente.
-```
+```sql
 select * from empleados order by salario asc
 ```
 
@@ -481,7 +481,7 @@ Dada una tabla productos con las columnas 'id', 'nombre' y 'precio' con los sigu
 
 Ordena las filas de la tabla en función del precio de forma ascendente. Asegúrate de que las filas con valores nulos en la columna 'precio' aparezcan al final de la lista ordenada.
 
-```
+```sql
 select * from productos order by precio asc nulls last
 ```
 ### Combinaciones de orden
@@ -502,7 +502,7 @@ Se tiene la tabla empleados con la siguiente información:
 | 5  | Luis Rodríguez | 4800    |
 
 Selecciona una lista de todos los empleados ordenados por su salario y por su nombre.
-```
+```sql
 select * from empleados order by salario asc, nombre asc
 ```
 
