@@ -1,14 +1,15 @@
-# Aprendiendo SQL
-Notas tomadas del [**curso interactivo de Desafio LATAM**](https://sqlinteractivo.desafiolatam.com/cursos/1) e informacion tomada de [roadmap.sh](https://roadmap.sh/sql)
 
-Este contenido estará estructurado acorde al contenido de Desafio LATAM y se refuerza con la informacion del roadmap.sh
+# Aprendiendo SQL
+Notas tomadas del [**curso interactivo de Desafío LATAM**](https://sqlinteractivo.desafiolatam.com/cursos/1) e información tomada de [roadmap.sh](https://roadmap.sh/sql)
+
+Este contenido estará estructurado acorde al contenido de Desafío LATAM y se refuerza con la información del roadmap.sh
 
 ## Tabla de contenidos
 
 | DIA                           | Enlace                                  |
 |-------------------------------|-----------------------------------------|
 | Dia 1: Conceptos básicos      | [ir](.#dia-1-introduccion)           |
-| Dia 2: Selecionando filas     | [ir](.#dia-2-seleccionando-filas)    |
+| Dia 2: Seleccionando filas     | [ir](.#dia-2-seleccionando-filas)    |
 | Dia 3: Ordenando Resultados   | [ir](.#dia-3-ordenando-resultados)   |
 | Dia 4: Limit                  | [ir](.#dia-4-limit)                  |
 | Dia 5: Operaciones con string | [ir](.#dia-5-operaciones-con-string) |
@@ -23,14 +24,14 @@ Este contenido estará estructurado acorde al contenido de Desafio LATAM y se re
 | Dia 14: Borrado y modificación de registros | [ir](.#dia-14-Borrado-y-modificación-de-registros) |
 
 
-## Dia 1: Introduccion
+## Dia 1: Introducción
 [ir al inicio](.#tabla-de-contenidos)
-### ¿Que significa SQL?
+### ¿Qué significa SQL?
 SQL viene de Structured Query Language (Lenguaje Estructurado de Consultas); es un lenguaje de programación que se utiliza para comunicarse y administrar bases de datos. SQL es un estándar para manipular datos almacenados en sistemas de gestión de bases de datos relacionales (relational database management systems - RDBMS), así como para el procesamiento de flujos en sistemas de gestión de flujos de datos relacionales (in a relational data stream management system - RDSMS). Fue desarrollado por primera vez en la década de 1970 por IBM.
 
-> Una base de datos relacional representa una coleccion de tablas relacionadas
+> Una base de datos relacional representa una colección de tablas relacionadas
 
-SQL consiste en varios componentes, cada uno con su unico proposito en comunicacion de bases de datos:
+SQL consiste en varios componentes, cada uno con su único propósito en comunicación de bases de datos:
 
 * Consultas: Es el componente que permite recuperar datos de una base de datos. La sentencia SELECT es la más utilizada para este fin.
 * Lenguaje de definición de datos ( Data Definition Language - DDL): Permite crear, modificar o eliminar bases de datos y sus objetos relacionados, como tablas, vistas, etc. Los comandos incluyen:
@@ -45,12 +46,12 @@ SQL consiste en varios componentes, cada uno con su unico proposito en comunicac
   - [INSERT](./#añadir-un-registro-en-una-tabla)
   - [DELETE](./#borrar-todos-los-registros-de-una-tabla)
   - [UPDATE](./#editar-registros)
-* Lenguaje de control de datos ( Data control Langiage - DCL): Incluye comandos como GRANT y REVOKE, que tratan principalmente de derechos, permisos y otras tareas de gestión a ni vel de control para el sistema de base de datos.
+* Lenguaje de control de datos ( Data control Language - DCL): Incluye comandos como GRANT y REVOKE, que tratan principalmente de derechos, permisos y otras tareas de gestión a nivel de control para el sistema de base de datos.
 
 **Tipos de  datos**
 * Numéricos:
   - Integer: valor entero
-  - Numeric (n,m): numero de hata 18 digitos (con decimales) donde **n** representa el total de digitos admitidos y **m** el numero de posiciones decimales.
+  - Numeric (n,m): numero de hasta 18 dígitos (con decimales) donde **n** representa el total de dígitos admitidos y **m** el numero de posiciones decimales.
   - Decimal (n.m): igual que numeric.
   - Float: npumero de coma flotante
 * Alfanumáricos:
@@ -65,7 +66,7 @@ SQL consiste en varios componentes, cada uno con su unico proposito en comunicac
 
 SQL viene en muchas formas, como bases de datos Oracle, Microsoft SQL Server y MySQL. A pesar de sus muchas diferencias, todas las bases de datos SQL manejan los mismos comandos.
 
-Una de las acciones que mas se requieren en SQL es consular los datos de una tabla. Esto lo podemos hacer con la instruccion `Select`
+Una de las acciones que mas se requieren en SQL es consular los datos de una tabla. Esto lo podemos hacer con la instrucción `Select`
 
 ### `Select`
 La sentencia `SELECT` se utiliza en SQL para seleccionar datos específicos de una base de datos. En otras palabras, se utiliza para seleccionar de la base de datos lo que se desea mostrar. La sintaxis de la sentencia SELECT es bastante sencilla:
