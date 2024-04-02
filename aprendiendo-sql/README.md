@@ -41,7 +41,7 @@ SQL consiste en varios componentes, cada uno con su unico proposito en comunicac
   - DROP
   - TRUNCATE
 * Lenguaje de manipulación de datos ( Data manipulation Language - DML): Permite gestionar datos dentro de objetos de bases de datos. Estos comandos incluyen:
-  - SELECT
+  - [SELECT](./#select)
   - INSERT
   - UPDATE
   - DELETE.
@@ -68,7 +68,7 @@ SQL viene en muchas formas, como bases de datos Oracle, Microsoft SQL Server y M
 Una de las acciones que mas se requieren en SQL es consular los datos de una tabla. Esto lo podemos hacer con la instruccion `Select`
 
 ### `Select`
-La declaracion `SLECT` en SQL es mayormente usada para obtener datos de la base de datos, es la mas esencial en SQL
+La sentencia `SELECT` se utiliza en SQL para seleccionar datos específicos de una base de datos. En otras palabras, se utiliza para seleccionar de la base de datos lo que se desea mostrar. La sintaxis de la sentencia SELECT es bastante sencilla:
 
 #### Sintaxis:
 Asi luce nuestro comando `Select`
