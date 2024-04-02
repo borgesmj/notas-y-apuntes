@@ -44,7 +44,7 @@ SQL consiste en varios componentes, cada uno con su unico proposito en comunicac
   - [SELECT](./#select)
   - [INSERT](./#añadir-un-registro-en-una-tabla)
   - [DELETE](./#borrar-todos-los-registros-de-una-tabla)
-  - [UPDATE].
+  - [UPDATE](./#editar-registros)
 * Lenguaje de control de datos ( Data control Langiage - DCL): Incluye comandos como GRANT y REVOKE, que tratan principalmente de derechos, permisos y otras tareas de gestión a ni vel de control para el sistema de base de datos.
 
 **Tipos de  datos**
