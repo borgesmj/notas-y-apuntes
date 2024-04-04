@@ -9,6 +9,7 @@ Podemos ralentizar la ejecución del programa, hacer un seguimiento de lo que es
 Mira tu panel lateral para encontrar este icono. 
 
 ![alt text](image.png)
+
 ¡Ese es el depurador!
 
 ##
@@ -26,6 +27,7 @@ for i in range(5):
 👉 Empezamos estableciendo un **breakpoint** pulsando a la izquierda del número de línea para que aparezca un punto azul. Este punto significa 'pausa aquí'.
 
 Estoy poniendo el breakpoint en la línea `print(i)`:
+
 ![alt text](image-1.png)
 
 
@@ -34,6 +36,7 @@ Ejecuta el código usando el icono 'play' en el panel de depuración:
 ![alt text](image-2.png)
 
 👉El programa se detendrá en el punto de interrupción. Podrás ver mucha información sobre lo que hay almacenado en tus variables, etc. en el panel de depuración.
+
 ![alt text](image-3.png)
 
 👉 Los otros iconos del panel de depuración nos permiten recorrer el código de diferentes maneras. En orden, son:
@@ -131,5 +134,5 @@ while True:
 </detalles>
 
 
-La solucion la encontramos en [main.py](./main.py)
+La solucion la encontramos en [main.py](./main.py). <br/>
 Para aprender a usar el debugging en Windows, lease la pequeña guia que he creado utilizando este [enlace](./Debugging.md)
