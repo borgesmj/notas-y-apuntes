@@ -89,6 +89,8 @@ El entorno de desarrollo está basado en Replit, que proporciona las siguientes 
 | Dia 56 | [*reto: Servicio de streaming de música*](./Dia-56/README.md) | [Codigo](./Dia-56/main.py) |
 | Dia 57 | [*¿Qué es la recursión?*](./Dia-57/README.md) | Codigo|
 | Dia 58 | [*Depuración*](./Dia-58/README.md) | [Codigo](./Dia-58/main.py)|
+| Dia 59 | [*Palindromos*](./Dia-59/README.md) | [Codigo](./Dia-59/main.py)|
+| Dia 60 | [*La magia del tiempo*](./Dia-60/README.md) | [Codigo](./Dia-60/main.py)|
 
 
 
