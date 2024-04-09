@@ -91,6 +91,7 @@ El entorno de desarrollo está basado en Replit, que proporciona las siguientes 
 | Dia 58 | [*Depuración*](./Dia-58/README.md) | [Codigo](./Dia-58/main.py)|
 | Dia 59 | [*Palindromos*](./Dia-59/README.md) | [Codigo](./Dia-59/main.py)|
 | Dia 60 | [*La magia del tiempo*](./Dia-60/README.md) | [Codigo](./Dia-60/main.py)|
+| Dia 61 | [*Replit DB*](./Dia-61/README.md) | [Codigo](./Dia-61/main.py)|
 
 
 
