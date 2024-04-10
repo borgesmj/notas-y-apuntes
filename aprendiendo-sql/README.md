@@ -23,7 +23,7 @@ Este contenido estará estructurado acorde al contenido de Desafío LATAM y se r
 | Dia 13: Insercion de registros | [ir](.#dia-13-insercion-de-registros) |
 | Dia 14: Borrado y modificación de registros | [ir](.#dia-14-Borrado-y-modificación-de-registros) |
 | Dia 15: Tablas | [ir](.#dia-15-tablas) |
-| Dia 16: Restricciones | [ir](.#dia-16-Restricciones) |
+| Dia 16: Restricciones | [ir](.#dia-16-restricciones) |
 
 
 ## Dia 1: Introducción
