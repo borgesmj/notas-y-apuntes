@@ -27,7 +27,7 @@ Este contenido estará estructurado acorde al contenido de Desafío LATAM y se r
 
 
 ## Dia 1: Introducción
-[ir al inicio](.#tabla-de-contenidos)
+:arrow_up: :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 ### ¿Qué significa SQL?
 SQL viene de Structured Query Language (Lenguaje Estructurado de Consultas); es un lenguaje de programación que se utiliza para comunicarse y administrar bases de datos. SQL es un estándar para manipular datos almacenados en sistemas de gestión de bases de datos relacionales (relational database management systems - RDBMS), así como para el procesamiento de flujos en sistemas de gestión de flujos de datos relacionales (in a relational data stream management system - RDSMS). Fue desarrollado por primera vez en la década de 1970 por IBM.
 
@@ -159,7 +159,7 @@ select nombre, email as "Correo electrónico" from usuarios
 ```
 ## Dia 2: Seleccionando filas
 
-[ir al inicio](.#tabla-de-contenidos)
+:arrow_up: :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
 SQL provee una clausula WHERE que es usada basicamente para filtrar los registros. Si la condicion especificada en la clausula WHERE se cumple, entonces solo se muestra los valores especificios de la tabla. Debes usar la clasusula WHERE para filtrar los registros y traer los registros necesarios.
 
@@ -423,7 +423,7 @@ from usuarios
 where email is null
 ```
 ## Dia 3: Ordenando resultados
-[ir al inicio](.#tabla-de-contenidos)
+:arrow_up: :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 ### Ordenando filas
 En este ejercicio aprenderemos a ordenar las filas de una tabla SQL y para estoi estudiaremos una nueva clausula llamada *ORDER BY*
 La clasusula *order by* en SQL es usada para ordernar los resultados de una declaracion SELECT in orden ascendente o descendente. El comando ordena por defecto de maera ascendente, siq ueremos ordenar de manera descendente debemos usar la palabra clave `desc`
@@ -526,7 +526,7 @@ select * from productos order by stock desc, color asc
 ```
 
 ## Dia 4: Limit
-[ir al inicio](.#tabla-de-contenidos)
+:arrow_up: :arrow_up: :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 ### Limitando la cantidad de resultados
 La cláusula LIMIT se utiliza para limitar la cantidad de resultados devueltos por una consulta. Esto es útil cuando sólo necesitamos ver una cierta cantidad de registros en lugar de todos los registros que cumplan con la condición de la consulta.
 
@@ -586,7 +586,7 @@ LIMIT 1
 ```
 ## Dia 5: Operaciones con string
 
-[ir al inicio](.#tabla-de-contenidos)
+:arrow_up: :arrow_up: :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
 ### Transformando un string en mayusculas
 Para transformar un string a mayusculas en [*SQLITE*](https://www.sqlite.org/) podemos utilizar la funcion UPPER()
@@ -763,7 +763,7 @@ where nombre = 'María'
 
 ## Dia 6: Operaciones con fechas
 
-[ir al inicio](.#tabla-de-contenidos)
+:arrow_up: :arrow_up: :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
 En SQL, DATE  es un tipo de dato que almacena la fecha. NO ALMACENA EL INFORMACION DEL TIEMPO. EL formato de la fecha es: 'YYYY-MM-DD', por ejemplo: '2022-01-01'
 SQL provee de varias funciones para manipular fechas.
@@ -942,7 +942,7 @@ Dada una tabla ventas con las columnas monto y fecha_venta, selecciona toda la i
 select * from ventas where strftime('%Y', fecha_venta) = '2015'
 ```
 ## Dia 7: Funciones de agregacion
-[ir al inicio](.#tabla-de-contenidos)
+:arrow_up: :arrow_up: :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
 ### El mayor valor de una columna
 En SQL hay funciones que nos permiten ejecutar operaciones sobre un conjunto de resultados. Estas reciben el nombre de **funciones de agregacion**
@@ -1191,7 +1191,7 @@ select count(*) from usuarios where nombre like '%a'
 ```
 ## Dia 8: Distinct
 
-[ir al inicio](.#tabla-de-contenidos)
+:arrow_up: :arrow_up: :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
 ### Seleccionar filtrando datos repetidos
 
@@ -1413,7 +1413,7 @@ SELECT DISTINCT categoria, precio
 FROM productos
 ```
 ## Dia 9: Introducción a grupos
-[ir al inicio](.#tabla-de-contenidos)
+:arrow_up: :arrow_up: :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 ### Agrupando valores con GROUUP BY
 La clausula GROUP BY es una poderosa gherramienta en SQL que se utilizar para agrupar filas con valores identicos en una o varias columnas especificas, permitiendo realizar operaciones de agregacion en ada grupo.
 
@@ -1990,7 +1990,7 @@ group by 1,2
 ```
 ## Dia 10: HAVING
 
-[ir al inicio](.#tabla-de-contenidos)
+:arrow_up: :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
 ### Introduccion a `HAVING`
 `HAVING` es una clausula de SQL que nos permite filtrar conjuntos de resultados en una clausula `GROUP BY`.  Se utiliza para mencionar condiciones sobre grupos que se seleccionan. En otras palabras, HAVING se utiliza principalmente con la clausula GROUP BY para filtrar los resultados que devuelve un GROUP BY
@@ -2209,7 +2209,7 @@ RESULTADO
 
 ## Dia 11: Subconsultas
 
-[ir al inicio](.#tabla-de-contenidos)
+:arrow_up: :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
 ### Instroduccion a subconsultas
 Las subconsultas, tambien conocidas como "subqueries", nos permiten utilizar los resultados de una consulta dentro de otra consulta.
@@ -2684,7 +2684,7 @@ FROM (
 
 ## Dia 12: Combinacion de consultas
 
-[ir al inicio](.#tabla-de-contenidos)
+:arrow_up: :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
 ### Introduccion a la clausula UNION
 
@@ -3011,7 +3011,7 @@ FROM gerentes
 
 ## Dia 13: Insercion de registros
 
-[ir al inicio](.#tabla-de-contenidos)
+:arrow_up: :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
 ### Añadir un registro en una tabla
 Con SQL podemos ingresar datos nuevos a tablas ya existentes. Para lograrlo utilizaremos la instruccion **INSERT**
@@ -3383,7 +3383,7 @@ INSERT  INTO USUARIOS
 
 
 ## Dia 14: Borrado y modificación de registros
-[ir al inicio](.#tabla-de-contenidos)
+:arrow_up: :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
 ### Borrar todos los registros de una tabla
 En SQL la clausula DELETEnos ayuda a eliminar registros existenes de una base de datos. Sin embargo, hay que tener en cuenta que es una operacion destructiva y puede borrar permanentemente datos de nuestra base de datos.
@@ -3591,7 +3591,7 @@ WHERE ID =  1
 ```
 
 ## Dia 15: Tablas
-[ir al inicio](.#tabla-de-contenidos)
+:arrow_up: :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 ### Nuestra primera tabla
 
 Hasta este punto hemos aprendido cómo realizar consultas en tablas predefinidas e incluso como insertar datos a las tablas,, pero ¿cómo creamos nuestras propias tablas?
@@ -3875,7 +3875,7 @@ VALUES
 ```
 
 ## Dia 16: Restricciones
-[ir al inicio](.#tabla-de-contenidos)
+:arrow_up: :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
 ### Introduccion a restricciones
 Al crear tablas, podemos añadir restricciones (en ingles **constraints**) a las columnas para evitar que se ingresen datos que no cumplan ciertas condiciones.
