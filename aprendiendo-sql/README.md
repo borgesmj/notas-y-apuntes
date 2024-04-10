@@ -36,11 +36,11 @@ SQL consiste en varios componentes, cada uno con su único propósito en comunic
 
 * Consultas: Es el componente que permite recuperar datos de una base de datos. La sentencia SELECT es la más utilizada para este fin.
 * Lenguaje de definición de datos ( Data Definition Language - DDL): Permite crear, modificar o eliminar bases de datos y sus objetos relacionados, como tablas, vistas, etc. Los comandos incluyen:
-  - CREATE TABLE
+  - [CREATE TABLE](./#nuestra-primera-tabla)
   - CREATE INDEX
   - CREATE VIEW
-  - ALTER
-  - DROP
+  - [ALTER](./#actualizar-una-tabla)
+  - [DROP](./#borrar-una-tabla)
   - TRUNCATE
 * Lenguaje de manipulación de datos ( Data manipulation Language - DML): Permite gestionar datos dentro de objetos de bases de datos. Estos comandos incluyen:
   - [SELECT](./#select)
