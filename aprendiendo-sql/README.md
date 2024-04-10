@@ -3874,7 +3874,7 @@ VALUES
 	('Camisa XL',  1000.0,  'Camisa de manga larga')
 ```
 
-## Dia 16:  Restricciones
+## Dia 16: Restricciones
 [ir al inicio](.#tabla-de-contenidos)
 
 ### Introduccion a restricciones
