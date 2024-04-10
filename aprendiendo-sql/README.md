@@ -23,6 +23,7 @@ Este contenido estará estructurado acorde al contenido de Desafío LATAM y se r
 | Dia 13: Insercion de registros | [ir](.#dia-13-insercion-de-registros) |
 | Dia 14: Borrado y modificación de registros | [ir](.#dia-14-Borrado-y-modificación-de-registros) |
 | Dia 15: Tablas | [ir](.#dia-15-tablas) |
+| Dia 16: Restricciones | [ir](.#dia-16-Restricciones) |
 
 
 ## Dia 1: Introducción
@@ -3708,11 +3709,11 @@ Luego inserta un registro dentro de la tabla cerada utilizando los siguientes da
 
 ```sql
 CREATE  TABLE USUARIOS (
-NOMBRE TEXT,
-APELLIDO TEXT,
-EDAD INT,
-ACTIVO BOOLEAN,
-NACIMIENTO DATE
+	NOMBRE TEXT,
+	APELLIDO TEXT,
+	EDAD INT,
+	ACTIVO BOOLEAN,
+	NACIMIENTO DATE
 );
 INSERT  INTO USUARIOS
 VALUES  (
@@ -3872,3 +3873,451 @@ VALUES
 	('Pantalón',  2000.0,  'Pantalón de mezclilla'),
 	('Camisa XL',  1000.0,  'Camisa de manga larga')
 ```
+
+## Dia 16:  Restricciones
+[ir al inicio](.#tabla-de-contenidos)
+
+### Introduccion a restricciones
+Al crear tablas, podemos añadir restricciones (en ingles **constraints**) a las columnas para evitar que se ingresen datos que no cumplan ciertas condiciones.
+> son usados para especificar reglas para la  data en una tabla. Las restricciones son usadas para limitar el tipo de data que puede ir dentro de una tabla. Esto asegura la presicion y fiabilidad de la data en una tabla.
+
+#### NOT NULL
+Asegura que a la columna no se le pueda añadir un valor nulo.
+En este ejercicio, aprenderemos la restriccion `NOT NULL` que impide valores nulos en una columna. POr ejemplo, al crear una tabla de personas con nombre y apellido, podemos hacer que el nombre sea obligatorio (no nulo) y el apellido opcional.
+
+Para lograrlo, crearemos la tabla de la siguiente forma:
+
+```sql
+CREATE TABLE personas (
+    nombre TEXT NOT NULL,
+    apellido TEXT
+)
+```
+
+Para agregar una restriccion, simplemente debemos especificarla con la columna
+
+Para indicar las restricciones, utilizaremos una columna adicional llamada **Cnstrains**, en nuestros diagramas. Ejemplo con la tabla **personas**
+
+| COLUMN   | DATA TYPE | CONSTRAINTS |
+|----------|-----------|-------------|
+| nombre   | TEXT      | NOT NULL    |
+| apellido | TEXT      |             |
+
+Pongamos a prueba nuestra restriccion con distintas consultas y observemos los resultados
+
+| QUERY                                                             | RESULTADO                                                       |  
+|-------------------------------------------------------------------|-----------------------------------------------------------------|
+| ```INSERT INTO personas (nombre, apellido) VALUES ('Juan', 'Pérez');``` | Funciona                                                        |  
+| ```INSERT INTO personas (nombre, apellido) VALUES (NULL, 'Pérez');```   | No funciona, error: NOT NULL constraint failed: personas.nombre | 
+| ```INSERT INTO personas (apellido) VALUES ('Pérez');```                 | No funciona, error: NOT NULL constraint failed: personas.nombre | 
+
+En resumen: en esta tabla que acabamos de crear podremos hacer un insert de una persona con nombre y sin apellido, pero no podremos ingresar una persona sin nombre
+
+Ejercicio:
+
+Crea una tabla llamada **empleados** con las siguientes columnas
+
+| COLUMNA  | TIPO DE DATO | RESTRICCIONES |
+|----------|--------------|---------------|
+| nombre   | TEXT         | NOT NULL      |
+| apellido | TEXT         |               |
+
+Luego ingresa los siguientes datos:
+
+* Nombre: Pedro
+* Apellido: Perez
+
+```sql
+CREATE  TABLE EMPLEADOS (
+nombre TEXT NOT  NULL,
+apellido TEXT
+);
+
+INSERT  INTO EMPLEADOS (nombre, apellido)
+
+VALUES  ('Pedro',  'Pérez')
+```
+
+### Agregar una restriccion a una tabla existente
+En SQL tambien es posible agregar la restriccion a una tabla ya creada. Supongamos que tenemos la siguiente tabla **personas**
+| COLUMNA  | TIPO DE DATO | RESTRICCIONES |
+|----------|--------------|---------------|
+| nombre   | TEXT         | 		      |
+| apellido | TEXT         |               |
+
+y queremos agregarle la restriccion NOT NULL a la columna nombre. El problema es que en SQLite no podemos agregar restricciones directamente a una tabla existente.
+
+En otros motores de bases de datos como PostgreSQL o MySQL [si es posible agregar restricciones a tablas existentes](./#adding-not-null-to-an-existing-table).
+
+Lo que tenemos que hacer es:
+1. Crear una nueva tabla con la restriccion.
+```sql
+CREATE TABLE personas2(
+	nombre TEXT NOT NULL,
+	apellido TEXT
+)
+```
+2. Copiar los datos de la tabla original a la nueva tabla
+```sql
+INSERT INTO personas2(nombre, apellido)
+	SELECT nombre, apellido
+	FROM personas;
+```
+
+3. Borrar la tabla original
+```sql
+DROP TABLE personas
+```
+4. Renombrar la nueva tabla con el nombre de la tabla original
+```sql
+ALTER TABLE personas2 RENAME TO personas;
+```
+
+Ejercicio:
+Se tiene una tabla llamadas patentes, con las siguientes columnas
+
+| COLUMNA  | TIPO DE DATO | RESTRICCIONES |
+|----------|--------------|---------------|
+| patente  | TEXT         | 		      |
+
+con la siguiente información 
+| PATENTE |
+|---------|
+| ABC123  |
+| ABC124  |
+
+Se pide agregar una restriccion de not null a la columna patente
+
+```sql
+create  table patentes2 (
+patente TEXT NOT  NULL
+);
+INSERT  INTO patentes2(patente)
+	SELECT patente
+	FROM patentes;
+DROP  TABLE patentes;
+ALTER  TABLE patentes2 RENAME  TO patentes
+```
+
+### Borrar una restriccion
+En SQLite borrar una restriccion tiene las mismas limitaciones que modificarla y el procedimiento es igual:
+
+1. Crear una tabla sin la restriccion
+2. Copiar los datos de la tabla original
+3. Borrar la tabla original
+4. Renombrar la nueva tabla con el nombre de la tabla original
+
+Ejercicio:
+Se tiene la tabla llamada **personas** con las siguientes columnas
+
+| COLUMNA  | TIPO DE DATO | RESTRICCIONES |
+|----------|--------------|---------------|
+| nombre   | TEXT         | NOT NULL      |
+| apellido | TEXT         | NOT NULL      |
+| edad     | INTEGER      |               |
+
+Se pide borrar la restricción de `NOT NULL` de las columnas nombre y apellido:
+
+```sql
+CREATE  TABLE personas2 (
+nombre TEXT,
+apellido TEXT,
+edad INTEGER
+);
+INSERT  INTO personas2(nombre, apellido, edad)
+SELECT nombre, apellido, edad
+FROM personas;
+DROP  TABLE personas;
+ALTER  TABLE personas2 RENAME  TO personas;
+```
+
+###### Adding NOT NULL to an existing table
+Fragmento tomado de [roadmap](https://roadmap.sh/sql)
+Podemos añadir una restriccion NOT NULL  a una tabla existente, usando ela declaracion `ALTER TABLE`. Sin embargo, primero debemos **verificar que la columna no contenga valores NULL** antes de añadir la restriccion `NOT NULL`
+
+Aui tenemos un ejemplo:
+```sql
+ALTER TABLE Employees
+MODIFY Address varchar(255) NOT NULL;
+```
+
+Este comando va a modificar la tabla `Employees` y configurar la columna `Address` como `NOT NULL`
+
+> Nota: en unos sistemas como PostgreSQL podemos usar el comando `ALTER TABLE` seguido por `SET NOT NULL`
+
+### Restriccion UNIQUE
+La restriccion de unicidad, o **UNIQUE** nos permite evitar duplicados en una columna especifica. Un caso muy popular de estas restricciones es evitar personas con el mismo correo electronico.
+
+Para agregar una restriccion de UNIQUE simplemente tenemos que especificar la restriccion justo despues de especificar el tipo de dato. Por ejemplo:
+
+```sql
+CREATE TABLE personas (
+	nombre text
+	apellido text
+	email text UNIQUE
+)
+```
+
+Pongamos a prueba nuestra restriccion con distintas consultas y observemos los resultados:
+
+| QUERY                                                                                              | FUNCIONA                                                     |
+|----------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| INSERT INTO personas (nombre, apellido, email) VALUES ('Juan', 'Pérez', 'juan.perez@email.com');   | Funciona                                                     |
+| INSERT INTO personas (nombre, apellido, email) VALUES ('María', 'García', 'juan.perez@email.com'); | No funciona, error: UNIQUE constraint failed: personas.email |
+| INSERT INTO personas (nombre, apellido, email) VALUES ('Pedro', 'Pérez', 'pedro.perez@email.com'); | Funciona                                                     |
+
+En resumen, en esta tabla que acabamos de crear, el correo electronico debe ser unico, no ingresar dos personas con el mismo correo electronico.
+
+Ejercicio:
+
+En este ejercicio, vamos a crear una tabla llamada **productos** con las siguientes columnas:
+
+| COLUMNA | TIPO DE DATO | RESTRICCIONES |
+|---------|--------------|---------------|
+| nombre  | TEXT         | NOT NULL      |
+| codigo  | TEXT         | UNIQUE        |
+| precio  | REAL         | NOT NULL      |
+
+Y luego vamos a ingresar los siguientes registros:
+
+| NOMBRE    | PRECIO  | CODIGO  |
+|-----------|---------|---------|
+| Camisa    | 1000.00 | CAM-001 |
+| Pantalón  | 2000.00 | PAN-001 |
+| Camisa XL | 1000.00 | CAM-002 |
+
+> Pista: para poder ingresar las dos queries requeridas, recuerda añadir punto y coma al final de cada una.
+
+> Si quieres probar un insert para observar el error puedes hacerlo con el código CAM-001.
+
+```sql
+CREATE  TABLE productos (
+	nombre TEXT NOT  NULL,
+	precio float  NOT  NULL,
+	codigo TEXT UNIQUE
+);
+INSERT  INTO productos
+VALUES
+	('Camisa',  1000.00,  'CAM-001'),
+	('Pantalón',  2000.00,  'PAN-001'),
+	('CAmisa XL',  1000.00,  'CAM-002');
+```
+#### Añadiendo una restriccion `UNIQUE` a una tabla existente
+
+Para añadir una restriccion `UNIQUE` a una table existente debemos usar el comando `ALTER TABLE`.
+
+Aqui la sintaxis:
+
+```sql
+ALTER TABLE table_name
+ADD UNIQUE (column1, column2, ...);
+```
+
+Aqui, `table_name` es el nombre de la tabla donde vamos a definir la restriccion, y `column1`, `column2` etc, son los nobres de las columnas incluidas en la restriccion.
+
+### Resticciones con check
+Hasta ahora hemos trabajado con dos tipos de restricciones:
+* NOT NULL: que permite que un valor no pueda ser nulo
+* UNIQUE: que permite especificar que un valor debe ser único.
+
+En este ejercicio aprederemos a utilizar la restriccion `CHECK`, que nos permite establecer una condicion que los valores de una columna se deben cumplir.
+`CHECK`limita el rango de valores que son colocados en una columna.
+Aqui la sintaxis basica
+
+```sql
+CREATE TABLE table_name (
+	column1 datatype CONSTRAINT constraint_name CHECK (condition)
+	column2 datatype
+```
+
+Para agregar una restriccion de CHECK, simplemente tenemos que especifcar en la definicion de la columna proporcionando la condicion que debe cumplir el valor de la columna. Por ejemplo:
+
+```sql
+CREATE TABLE empleados (
+	nombre TEXT,
+	salario REAL CHECK (salario > 0)
+);
+```
+Ejercicio:
+En este ejercicio vamos a crear una tabla llamada **productos** con las siguientes columnas:
+
+| COLUMNA | TIPO DE DATO | RESTRICCIONES      |
+|---------|--------------|--------------------|
+| nombre  | TEXT         | NOT NULL           |
+| precio  | REAL         | NOT NULL           |
+| stock   | INTEGER      | CHECK (stock >= 0) |
+
+Luego, vamos a insertar los siguientes registros:
+
+| NOMBRE    | PRECIO  | STOCK |
+|-----------|---------|-------|
+| Camisa    | 1000.00 | 10    |
+| Pantalón  | 2000.00 | 5     |
+| Camisa XL | 1000.00 | 3     |
+
+> Pista: para poder ingresar las dos queries requeridas, recuerda añadir punto y coma al final de cada una.
+
+> Si quieres probar un insert para observar el error puedes hacerlo ingresando un stock negativo.
+
+```sql
+CREATE  TABLE productos (
+	nombre TEXT NOT  NULL,
+	precio float  NOT  NULL,
+	stock integer  CHECK  (stock >=  0)
+);
+INSERT  INTO productos
+VALUES
+	('Camisa',  1000.00,  10),
+	('Pantalón',  2000.00,  5),
+	('Camisa XL',  1000.00,  3)
+```
+Si queremos aplicar `CHECK` a multiples columnas:
+
+```sql
+CREATE TABLE employees (
+	ID int NOT NULL,
+	Age int,
+	Salary int,
+	CONSTRAINT chk_person CHECK (Age >= 18 AND Salary>=0)
+```
+Tambien es posible usar el comando `ALTER TABLE`para añadir una restriccion  `CHECK` despues que la tabla fue creada
+
+```sql
+ALTER TABLE Employees
+ADD CONSTRAINT CHK_EmployeeAge CHECK (Age >= 21 and Age <= 60)
+```
+
+### Clave Unica
+La clave primaria, o en ingles **PRIMARY KEY** nos ayuda a identofocar de forma unica cada registro en una tabla. Esto lo hace impidiendo que se ingresen valores duplicados o nulos en la columna que es la clave primaria.
+
+| ID | MONTO DE LA BOLETA | FECHA DE EMISION |
+|----|--------------------|------------------|
+| 1  | 10.000             | 2021-10-01       |
+| 2  | 12.000             | 2021-10-02       |
+| 3  | 16.000             | 2021-10-03       |
+
+Si dijeramos que el campo **id** es la clave primaria, entonces cada registro de la tabla tiene un valor unico para el campo **id** . Este id no podria ser nulo ni podria ser el mismo que el de otro registro.
+
+Cuando tenemos una clave primaria, tenemos certeza que podemos buscar cualquier registro en la base de datos y luego modificarlo o eliminarlo, y no habrá ningun otro registro modificado o elominado que el seleccionado. Esto nos permite cuidar la integridad de los datos.
+
+Podemos definir una clave primaria en SQL cuando creamos o modificamos una tabla.
+```sql
+CREATE TABLE Employees (
+	ID INT PRIMARY KEY,
+	NAME TEXT,
+	AGE INT,
+	ADDRESS CHAR(50)
+); 
+```
+
+Ejercicio:
+Crea una tabla llamada POSTS con las siguientes columnas:
+
+| COLUMN NAME | DATA TYPE | CONSTRAINTS |
+|-------------|-----------|-------------|
+| id          | INT       | PRIMARY KEY |
+| title       | TEXT      |             |
+| content     | TEXT      |             |
+
+inserta los siguientes registros
+
+| ID | TITLE           | CONTENT                                                 |
+|----|-----------------|---------------------------------------------------------|
+| 1  | Introducción    | ¡Bienvenido al mundo de la programación!                |
+| 2  | Primeros Pasos  | Sumérgete en los conceptos básicos de la programación.  |
+| 3  | Temas Avanzados | Explora conceptos y técnicas avanzadas en programación. |
+
+> Pista: para poder ingresar las dos queries requeridas, recuerda añadir punto y coma al final de cada una.
+
+> Si quieres poner a prueba la clave primaria puedes intentar insertar un id nulo o un id que ya hayas ingresado.
+
+```sql
+CREATE  TABLE POSTS (
+	ID INT  PRIMARY  KEY,
+	TITLE TEXT,
+	CONTENT TEXT
+);
+INSERT  INTO POSTS
+VALUES
+	(1,  'Introducción',  '¡Bienvenido al mundo de la programación!'),
+	(2,  'Primeros Pasos',  'Sumérgete en los conceptos básicos de la programación.'),
+	(3,  'Temas Avanzados',  'Explora conceptos y técnicas avanzadas en programación.')
+```
+
+### Autoincremental
+Los campos autoincrementales nos permite generar un valor unico de forma automatica, para cada registro que insertemos en una tabla
+
+De esta forma si tenemos una tabla como la siguiente
+
+| ID | MONTO DE LA BOLETA | FECHA DE EMISION |
+|----|--------------------|------------------|
+| 1  | 10.000             | 2021-10-01       |
+| 2  | 12.000             | 2021-10-02       |
+| 3  | 16.000             | 2021-10-03       |
+
+Podemos ingresar un nuevo registro sin tener que especificar el valor del campo id, y la base de datos se encargará de generar un valor unico para ese campo. Para lograrlo simplemente no incluimos el campo id en la query
+
+Ejemplo:
+
+```sql
+INSERT INTO boletas (monto_de_la_boleta, fecha_de_emision)
+VALUES 
+	(20.000, '2021-10-04')
+```
+
+Luego si seleccionamos todos los registros de la tabla, veremos que el campo id del nuevo registro tiene un valor unico y mayor al de los registros anteriores.
+
+| ID | MONTO DE LA BOLETA | FECHA DE EMISION |
+|----|--------------------|------------------|
+| 1  | 10.000             | 2021-10-01       |
+| 2  | 12.000             | 2021-10-02       |
+| 3  | 16.000             | 2021-10-03       |
+| 4  | 20.000             | 2021-10-04       |
+
+Un campo definido como `INTEGER`(o INT) + `PRIMARY KEY` se convierte automaticamente en un campo autoincremental en SQLite.
+
+Ejercicio:
+
+Crea una tabla llamada usuarios con las siguientes columnas:
+
+| COLUMNA        | TIPO DE DATO | RESTRICCIONES |
+|----------------|--------------|---------------|
+| id             | INTEGER      | PRIMARY KEY   |
+| nombre         | TEXT         | NOT NULL      |
+| fecha_creacion | DATE         |               |
+
+Luego vamos a insertar los siguientes registros
+
+| NOMBRE  | FECHA_CREACION |
+|---------|----------------|
+| Ana     | 2024-01-01     |
+| Gonzalo | 2024-01-02     |
+| Juan    | 2024-01-03     |
+| María   | 2024-01-04     |
+
+> Pista: No ingreses los ids, la base de datos se encargará de generarlos automáticamente.
+
+```sql
+CREATE  TABLE USUARIOS (
+	ID INTEGER  PRIMARY  KEY,
+	NOMBRE TEXT NOT  NULL,
+	FECHA_CREACION DATE
+);
+INSERT  INTO USUARIOS (NOMBRE, FECHA_CREACION)
+VALUES
+	('Ana',  '2024-01-01'),
+	('Gonzalo',  '2024-01-02'),
+	('Juan',  '2024-01-03'),
+	('María',  '2024-01-04')
+```
+
+Resultado:
+
+| ID | NOMBRE  | FECHA_CREACION |
+|----|---------|----------------|
+| 1  | Ana     | 2024-01-01     |
+| 2  | Gonzalo | 2024-01-02     |
+| 3  | Juan    | 2024-01-03     |
+| 4  | María   | 2024-01-04     |
+
+### Autoincremental parte 2
