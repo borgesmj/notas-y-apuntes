@@ -4321,3 +4321,306 @@ Resultado:
 | 4  | María   | 2024-01-04     |
 
 ### Autoincremental parte 2
+Cuando tenemos campos autoincrementales en una tabla e insertamos un nuevo registro con valor mas alto que el de la secuencia actual, la base de datos se encarga de actualizar la secuencia para que el siguiente registro tenga un valor al del registro que acabamos de insertar. 
+
+Por ejemplo, si tenemos una tabla con los siguientes registros:
+
+| ID | NOMBRE  |
+|----|---------|
+| 1  | Ana     |
+| 2  | Gonzalo |
+| 3  | Juan    |
+
+Luego insertamos un nuevo registro coin un id mayor al de la secuencuia actual:
+
+```sql
+INSERT INTO usuarios (id, nombre)
+VALUES (10, 'María')
+```
+
+Y luego insertamos un nuevo registro sin especificar el id:
+
+```sql
+INSERT INTO usuarios (nombre)
+VALUES ('Pedro')
+```
+
+Obtendremos la siguiente tabla
+
+| ID | NOMBRE  |
+|----|---------|
+| 1  | Ana     |
+| 2  | Gonzalo |
+| 3  | Juan    |
+| 10 | María   |
+| 11 | Pedro   |
+
+Ejercicio:
+
+Crea una tabla llamada **transacciones** con las siguientes columna:
+
+| COLUMNA | TIPO DE DATO | RESTRICCIONES |
+|---------|--------------|---------------|
+| id      | INTEGER      | PRIMARY KEY   |
+| monto   | REAL         | NOT NULL      |
+| fecha   | DATE         |               |
+
+Luego vamos a insertar los siguientes registros:
+
+| ID | MONTO   | FECHA      |
+|----|---------|------------|
+|    | 1000.00 | 2024-01-01 |
+|    | 2000.00 | 2024-01-02 |
+|    | 3000.00 | 2024-01-03 |
+| 10 | 4000.00 | 2024-01-04 |
+|    | 5000.00 | 2024-01-05 |
+
+> **Importante**: Al único campo que vamos a agregar un id de forma personalizada va a ser al cuarto registro, esto con el fin de observar la relación que se genera entre el campo incremental y como aumenta según el valor que insertemos.
+
+```sql
+CREATE  TABLE TRANSACCIONES (
+	ID INTEGER  PRIMARY  KEY,
+	MONTO FLOAT  NOT  NULL,
+	FECHA DATE
+);
+INSERT  INTO TRANSACCIONES (MONTO, FECHA)
+VALUES
+	(1000.00,  '2024-01-01'),
+	(2000.00,  '2024-01-02'),
+	(3000.00,  '2024-01-03');
+INSERT  INTO TRANSACCIONES (ID, MONTO, FECHA)
+VALUES
+	(10,  4000.00,  '2024-01-04');
+INSERT  INTO TRANSACCIONES (MONTO, FECHA)
+VALUES
+	(5000.00,  '2024-01-05');
+```
+
+Resultado:
+
+| ID | MONTO | FECHA      |
+|----|-------|------------|
+| 1  | 1000  | 2024-01-01 |
+| 2  | 2000  | 2024-01-02 |
+| 3  | 3000  | 2024-01-03 |
+| 10 | 4000  | 2024-01-04 |
+| 11 | 5000  | 2024-01-05 |
+
+### Primary key y texto
+La clave primaria no está limitada exclusivamente a valores numericos, tambien se pueden tilizar datos de texto. Tomemos, por ejemplo, una tabla de personas, donde podriamos emplear la direccion de correo electronico como la clave primaria, ya que cada individuo posee una direccion de correo única.
+
+En SQLite, los campos que son de tipo INTEGER y se designan como PRIMARY KEY no pueden contener valores nulos. No obstante, a diferencia de otros sistemas de gestion de bases de datos como MySQL o POstgreSQL cuando se utiliza PRIMARY KEY con tipos de datos como texto u otros, se permite que el valor sea nulo.
+
+POr lo tanto, si queremos que un campo sea tanto clave primaria como no nulo, debemos especificarlo mediante la combinacion de PRIMARY KEY y NOT NULL
+
+Ejemplo:
+
+```sql
+CREATE TABLE posts (
+	title TEXT PRIMARY KEY NOT NULL
+)
+```
+
+Ejercicio:
+
+Crea una tabla llamada **personas** con las siguientes columnas:
+
+| COLUMN NAME | DATA TYPE | CONSTRAINTS          |
+|-------------|-----------|----------------------|
+| email       | TEXT      | PRIMARY KEY NOT NULL |
+| nombre      | TEXT      |                      |
+| apellido    | TEXT      |                      |
+
+Inserta los siguientes registros:
+
+| EMAIL                | NOMBRE | APELLIDO |
+|----------------------|--------|----------|
+| example1@example.com | John   | Doe      |
+| example2@example.com | Jane   | Smith    |
+| example3@example.com | Mike   | Johnson  |
+
+> Puedes probar usando el mismo email en dos registros diferentes para que observes como se comporta la restricción.
+
+```sql
+CREATE  TABLE PERSONAS (
+	EMAIL TEXT PRIMARY  KEY  NOT  NULL,
+	NOMBRE TEXT,
+	APELLIDO TEXT
+);
+INSERT  INTO PERSONAS
+VALUES
+	('example1@example.com',  'John',  'Doe'),
+	('example2@example.com',  'Jane',  'Smith'),
+	('example3@example.com',  'Mike',  'Johnson')
+```
+
+### Clave foránea
+Una clave Foránea (Foreign Key)  es usada para enlazar dos tablas juntas. Es una restriccion que se le puede agregar a una columna de una tabla para indicar que los valores que se inserten en esa columna deben existir en otra tabla.
+Por ejemplo: si tenemos una tabla de personas y una tabla de autos, podriamos agregar una columna **personas_id** a la tabla de autos, y agregarle la resticcion de clave foránea, para indicar que el valor de esa columna debe existir en la tabla de personas. De esta forma nos aseguramos que  no se inserten autos de personas que no existen o que se borren personas que tienen autos asignados a su nombre, dejando autos sin dueño.
+
+**personas**
+| COLUMNA  | TIPO DE DATO | RESTRICCIONES |
+|----------|--------------|---------------|
+| id       | INTEGER      | PRIMARY KEY   |
+| nombre   | TEXT         |               |
+| apellido | TEXT         |               |
+
+**autos**
+
+| COLUMNA    | TIPO DE DATO | RESTRICCIONES                                    |
+|------------|--------------|--------------------------------------------------|
+| id         | INTEGER      | PRIMARY KEY                                      |
+| patente    | TEXT         |                                                  |
+| persona_id | INTEGER      | FOREIGN KEY (persona_id) REFERENCES personas(id) |
+
+Con los siguientes datos:
+
+**personas**
+| ID | NOMBRE | APELLIDO |
+|----|--------|----------|
+| 1  | John   | Doe      |
+| 2  | Jane   | Smith    |
+
+**autos**
+| ID | PATENTE | PERSONA_ID |
+|----|---------|------------|
+| 1  | ABC123  | 1          |
+| 2  | DEF456  | 2          |
+
+
+Podemos ver que el auto con patente **ABC123** pertenece a la persona con el id **1**, y el auto con patente **DEF456** pertenece a la persona con el id **2**. Adicionalmente, la clave foranea nos asegura que no podemos borrar la persona con el id 1, mientras que exista un aut con persona_id 1. De esta misma forma, no podremos insertar un auto con persona_id 3 ya que no existe una persona copn id 3
+
+#### Agregando clave foránea
+
+Para agregar una clave foranea a una tabla existente, debemos especificar la restriccion `FOREIGN KEY` seguida del nombre de la columna y la tabla a la que hace referencia y finalmente la columna de la tabla a la que hace referencia.
+
+La sintaxis es la siguiente
+
+```sql
+ALTER TABLE nombre_tabla
+ADD COLUMN nombre_columna tipo_dato REFERENCES nombre_tabla_referencia(nombre_columna_referencia)
+```
+
+Se ve complicado, pero veamos un ejemplo con las tablas **personas** y **autos**
+
+```sql
+ALTER TABLE autos
+ADD COLUMN personas_id INTEGER REFERENCES personas(id)
+```
+
+La clave foránea debe hacer referencia a una columna que ya tenga una restriccion de **clave primaria**.
+
+
+Otra sintaxis, extraida de [roadmap.sh](https://roadmap.sh/sql)
+
+```sql
+ALTER TABLE child_table
+ADD FOREIGN KEY (fk_column)
+REFERENCES parent_table(parent_key_column)
+```
+
+Ejercicio:
+
+Se tiene las tablas **articulos**  y **categorias** con la siguiente estructura
+
+**articulos**
+
+| COLUMNA | TIPO DE DATO | RESTRICCIONES |
+|---------|--------------|---------------|
+| id      | INTEGER      | PRIMARY KEY   |
+| nombre  | TEXT         |               |
+| precio  | REAL         |               |
+
+**Categorias**
+
+| COLUMNA | TIPO DE DATO | RESTRICCIONES |
+|---------|--------------|---------------|
+| id      | INTEGER      | PRIMARY KEY   |
+| nombre  | TEXT         |               |
+
+Se pide agregar una clave foránea a la tabla **articulos** para que la columna **categoria_id** haga referencia a la columna **id** de la tabla **categorias**.
+
+```sql
+ALTER  TABLE articulos
+ADD  COLUMN categoria_id INTEGER  REFERENCES categorias(id)
+```
+
+### Pk y Fks
+
+Los conceptos de clave primaria y clave foránea son fundamentales para el diseño de bases de datos y los ocuparemos tan frecuentemente que los abreviaremos PK (primary key) y FK (foreign key).
+Con la clave primaria podemos identificar de forma unica cada registro de una tabla, y con la clave foranea podemos relacionar dos tablas entre si y evitar que existan registros que no tengan una relacion valida.
+
+A partir de ahora utilizaremos frecuentemente las abreviaciones (PK y FK). Tambien veremos que casi todas las tablas tendran una clave primaria. **Esto se debe a que la clave primaria nos ayuda a mantener la integridad de los datos y nos permite identificar de forma unica cada registro de una tabla**
+
+Una practica comun en el diseño de base de datos es utilizar una columna llamada **id** como *PK*. Esta columna es de tipo **INTEGER** y tiene la resticcion `PRIMARY KEY` . Ademas, es comun que esta columna sea autoincremental, es decir, que el valor de la columna se incremente automaticamente cada vez que se inserta un registro nuevo. Pero esto *no es una obigacion*. Definir una clave primaria es una decision de diseño y en algunos casos puede ser mas conveniente utilizar otra columna como clave primaria.
+
+Ejercicio:
+
+Se tiene la tabla **transacciones** y la tabla **usuarios** con la siguiente estructura:
+
+
+**transacciones**
+
+| COLUMNA    | TIPO DE DATO | RESTRICCIONES                                    |
+|------------|--------------|--------------------------------------------------|
+| id         | INTEGER      | PRIMARY KEY                                      |
+| monto      | REAL         |                                                  |
+| usuario_id | INTEGER      | FOREIGN KEY (usuario_id) REFERENCES usuarios(id) |
+
+**Usuraios**
+
+| COLUMNA  | TIPO DE DATO | RESTRICCIONES |
+|----------|--------------|---------------|
+| id       | INTEGER      | PRIMARY KEY   |
+| nombre   | TEXT         |               |
+| apellido | TEXT         |               |
+
+
+Con los siguientes datos:
+**transacciones**
+
+| ID | MONTO | USUARIO_ID |
+|----|-------|------------|
+| 1  | 100   | 1          |
+| 2  | 200   | 2          |
+| 3  | 300   | 1          |
+
+**usuarios**
+
+| ID | NOMBRE | APELLIDO |
+|----|--------|----------|
+| 1  | John   | Doe      |
+| 2  | Jane   | Smith    |
+
+1.  En este ejercicio primero intentaremos crear una transacción con un usuario que no existe para observar el error.
+    
+2.  Intentaremos borrar un usuario que tiene transacciones asociadas para observar el error.
+    
+3.  Luego eliminaremos nuestras consultas anteriores y modificaremos la tabla de transacciones para eliminar la clave foránea. Solo se debe eliminar la clave foránea, no la columna.
+    
+
+> TIP: Esto requiere crear una tabla temporal, copiar los datos de la tabla original a la tabla temporal, borrar la tabla original, y renombrar la tabla temporal con el nombre de la tabla original.
+
+4.  Finalmente se deben asociar las transacciones al usuario con id 3. El cual no existe y la idea es demostrar que sin la FK podemos insertar transacciones sin usuarios asociados.
+
+> Los puntos 1 y 2 son para observar que sucede. Para lograr la respuesta correcta tienes que realizar los puntos 3 y 4 en el editor.
+
+```sql
+-- Creamos una tabla copia
+CREATE  TABLE transacciones2(
+id INTEGER  PRIMARY  KEY,
+monto float,
+usuario_id INTEGER
+);
+-- Insertamos los valores originales a la tabla copia
+INSERT  INTO transacciones2(id, monto, usuario_id)
+SELECT  *
+FROM transacciones;
+-- Eliminamos la tabla original
+DROP  TABLE transacciones;
+-- Renombramos la tabla copia al nombre original
+ALTER  TABLE transacciones2 RENAME  TO transacciones;
+-- Colocamos todas las transcaciones con un valor de usuario_id 3
+UPDATE transacciones
+SET usuario_id =  3
+```
