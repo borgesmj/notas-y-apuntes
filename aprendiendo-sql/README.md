@@ -4,6 +4,9 @@ Notas tomadas del [**curso interactivo de Desafío LATAM**](https://sqlinteracti
 
 Este contenido estará estructurado acorde al contenido de Desafío LATAM y se refuerza con la información del roadmap.sh
 
+> Nota rápida: siempre tener en cuenta el [orden de las clausulas](./#orden-de-clausulas)
+
+
 ## Tabla de contenidos
 
 | DIA                           | Enlace                                  |
