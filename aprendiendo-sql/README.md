@@ -26,6 +26,7 @@ Este contenido estará estructurado acorde al contenido de Desafío LATAM y se r
 | Dia 16: Restricciones | [ir](.#dia-16-restricciones) |
 | Dia 17: Consultas en multiples tablas | [ir](.#dia-17-consultas-en-multiples-tablas) |
 | Dia 18: Tipos de join | [ir](.#dia-18-Tipos-de-join) |
+| Operadores | [ir](.#operadores) |
 
 
 ## Dia 1: Introducción
@@ -5265,3 +5266,57 @@ Resultado:
 | 1           | Producto A | 1         | 1           | 10.99  |
 | 2           | Producto B | 2         | 2           | 15.99  |
 | 3           | Producto C |           |             |        |
+
+
+
+## Operadores:
+
+:arrow_up: [ir al inicio](.#tabla-de-contenidos)
+
+### Operadores aritmeticos:
+* `+`: Adicion
+* `-`: Subtraccion
+* `*`: Multiplicacion
+* `/`: Division
+* `%`: Módulo 
+
+Ejemplo:
+```sql
+SELECT product, price, (price *0.18) as tax
+FROM products;
+```
+
+### Operadores de comparacion
+* `=`: igual que
+* `!=` o `<>`: no igual que
+* `>`: mayor que
+* `<`: menos que
+* `>=`: mayor o igual que
+* `<=`: menor o igual que
+
+Ejemplo:
+```sql
+SELECT name, age
+FROM students
+WHERE age > 18;
+```
+
+### Operadores lógicos
+* `AND`: retorna verdadero si ambas condiciones son verdaderas
+* `OR`: retorna verdadero si alguna de las soa condiciones es veradera
+* `NOT`: retorna el booleano opuesto de una condicion
+
+Ejemplo:
+
+```sql
+SELECT *
+FROM employees
+WHERE salary > 50000 AND age < 30
+```
+
+### Operadores bit a bit
+* `&`: AND
+* `|`: OR
+* `^`: XOR
+
+Los operadores bit a bit son mucho menos usados en SQL que los demas operadores
