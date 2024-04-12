@@ -25,6 +25,8 @@ Este contenido estará estructurado acorde al contenido de Desafío LATAM y se r
 | Dia 15: Tablas | [ir](.#dia-15-tablas) |
 | Dia 16: Restricciones | [ir](.#dia-16-restricciones) |
 | Dia 17: Consultas en multiples tablas | [ir](.#dia-17-consultas-en-multiples-tablas) |
+| Dia 18: Tipos de join | [ir](.#dia-18-Tipos-de-join) |
+
 
 ## Dia 1: Introducción
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
@@ -4979,3 +4981,287 @@ Resultado:
 |Nombre| TOTAL_VENDIDO  |
 |--|--|
 | PRODUCTO C | 55 |
+
+## Dia 18: Tipos de join
+
+:arrow_up: [ir al inicio](.#tabla-de-contenidos)
+
+## INNER JOIN
+
+La clausula `INNER JOIN` en SQL es un tipo de union que retorna los registros coincidentes en ambas tablas. Esta operacion compara cada fila de la primera tabla con cada fila de la segunda tabla para encontrar todos los pares de filas que satisfaga la condicion.
+
+Cuando no se especifica el punto de JOIN en la consulta, por defecto sera `INNER JOIN`
+
+Es decir:
+```sql
+SELECT *
+FROM USUARIOS
+JOIN DATOS_CONTACTO ON USUARIOS.EMAIL = USUARIOS.EMAIL
+```
+
+es lo mismo que decir:
+
+```sql
+SELECT *
+FROM USUARIOS
+INNER JOIN DATOS_CONTACTO ON USUARIOS.EMAIL = DATOS_CONTACTO.EMAIL
+```
+
+* Es el `JOIN`por defecto en SQL. Si mencionamos `JOIN`sin especificar el tipo, SQL considerará que es un `INNER JOIN`
+* Retorna solo las filas coincidentes en ambas tablas
+* En una operación de Inner Join se combinan los registros de ambas tablas siempre y cuando la clave en común esté en ambas tablas. Si en una de las tablas no está la clave ese registro no aparecerá en el resutlado final.
+
+Ejercicio:
+
+Une las tablas utilizando JOIN (o INNER JOIN) para obtener todos los registros de ambas tablas. Mira las tablas antes de realizar el ejercicio y pon especial atención en Francisco quien no tiene ninguna nota en el sistema.
+
+Tabla Usuarios:
+
+| EMAIL                      | NOMBRE         | EDAD |
+|----------------------------|----------------|------|
+| juan.perez@example.com     | Juan Pérez     | 30   |
+| maria.gonzalez@example.com | Maria González | 25   |
+| john.doe@example.com       | John Doe       | 40   |
+| francisco@example.com      | Test User      | 22   |
+
+Tabla Notas:
+
+| EMAIL                      | NOTAS |
+|----------------------------|-------|
+| juan.perez@example.com     | 90    |
+| maria.gonzalez@example.com | 100   |
+| john.doe@example.com       | 80    |
+| juan.perez@example.com     | 100   |
+| maria.gonzalez@example.com | 100   |
+
+```sql
+SELECT  *
+FROM USUARIOS
+INNER  JOIN NOTAS ON NOTAS.EMAIL = USUARIOS.EMAIL;
+```
+
+
+| EMAIL                      | NOMBRE         | EDAD | EMAIL                      | NOTAS |
+|----------------------------|----------------|------|----------------------------|-------|
+| juan.perez@example.com     | Juan Pérez     | 30   | juan.perez@example.com     | 90    |
+| maria.gonzalez@example.com | Maria González | 25   | maria.gonzalez@example.com | 100   |
+| john.doe@example.com       | John Doe       | 40   | john.doe@example.com       | 80    |
+| juan.perez@example.com     | Juan Pérez     | 30   | juan.perez@example.com     | 100   |
+| maria.gonzalez@example.com | Maria González | 25   | maria.gonzalez@example.com | 100   |
+
+### Left Join
+La clausula `LEFT JOIN`combina filas de dos o mas tablas basado en una columna relacionada entre ellas, y retorna todas las filas desde la tabla de la izquierda (tabla 1) y las coincidencias de la tabla de la derecha (tabla 2). Si no hay coincidencias, el resultado es `NULL`en la tabla de la derecha.
+
+![left join](https://github.com/borgesmj/notas-y-apuntes/assets/121818423/4c198d4d-d653-40e1-adde-77b5516d6f21)
+
+
+Con los siguientes datos, al hacer un INNER JOIN no obtendremos dentro de los resultados a [**Francisco**](./#inner-join), lo cual podría ser un gran error si estuviésemos haciendo un reporte de todos los estudiantes.
+
+Tabla usuarios:
+
+| EMAIL                      | NOMBRE         | EDAD |
+|----------------------------|----------------|------|
+| juan.perez@example.com     | Juan Pérez     | 30   |
+| maria.gonzalez@example.com | Maria González | 25   |
+| john.doe@example.com       | John Doe       | 40   |
+| francisco@example.com      | Test User      | 22   |
+
+Tabla notas
+
+| EMAIL                      | NOTAS |
+|----------------------------|-------|
+| juan.perez@example.com     | 90    |
+| maria.gonzalez@example.com | 100   |
+| john.doe@example.com       | 80    |
+| juan.perez@example.com     | 100   |
+| maria.gonzalez@example.com | 100   |
+
+Con un `LEFT JOIN` todas las filas de la tabla de la izquierda (USUARIOS en este caso) apareceran en el resultado, y si un usuario no tiene una coincidencia en la tabla de la derecha (NOTAS), los campos correspondientes en la tabla de notas se llenaran con valores `NULL`.
+
+La sintaxis para utilizar LEFT JOIN es similar a INNER JOIN 
+
+```sql
+SELECT *
+FROM TABLA1
+LEFT JOIN TABLA2 ON TABLA1.ATRIBUTO = TABLA2.ATRIBUTO
+```
+Ejemplo:
+Asumamos que tenemos doa tablas: **Orders** y **Customers**
+
+```sql
+SELECT ORDERS.ORDERID, CUSTOMERS.CUSTOMERNAME
+FROM ORDERS
+LEFT JOIN CUSTOMERS
+ON ORDERS.CUSTOMERID = CUSTOMERS.CUSTOMERID
+```
+Ejercicio:
+Se tiene una tabla de empleados y otra de departamentos. Utilizando lo aprendido, selecciona a todos los empleados junto a sus departamentos correspondientes incluyendo a los empleados que aun no han sido asignados a ningun departamento. En ambas tablas existe la columna email
+
+```sql
+SELECT  *
+FROM EMPLEADOS
+LEFT  JOIN DEPARTAMENTOS ON EMPLEADOS.EMAIL = DEPARTAMENTOS.EMAIL
+```
+
+Resultado:
+
+| EMAIL                      | NOMBRE         | EDAD | EMAIL                      | DEPARTAMENTO |
+|----------------------------|----------------|------|----------------------------|--------------|
+| juan.perez@example.com     | Juan Pérez     | 30   | juan.perez@example.com     | Marketing    |
+| juan.perez@example.com     | Juan Pérez     | 30   | juan.perez@example.com     | RRHH         |
+| maria.gonzalez@example.com | Maria González | 25   | maria.gonzalez@example.com |              |
+| john.doe@example.com       | John Doe       | 40   | john.doe@example.com       | TI           |
+| francisco@example.com      | Test User      | 22   |                            |              |
+
+### Right Join
+La clausula `RIGTH JOIN` retorna todos los registros de la tabla de la derecha (tabla 2) y los resultados coincidentes de la tabla de la izquierda (tabla 1). Si no hay coincidencias, el resultado será `NULL`en la tabla de la izquierda.
+
+Utilizando las tablas previas de **usuarios** y **notas** si quieres obtener todos los registros de las notas y los correspondientes usuarios, incluso si hay notas que no tienen usuarios asociados (lo cual seria atipico en este contexto, pero sirve para el ejemplo) puede usar RIGHT JOIN.
+
+```sql
+SELECT *
+FROM TABLA1
+RIGHT JOIN TABLA2 ON TABLA1.ATRIBUTO = TABLA2.ATRIBUTO
+```
+
+Tabla usuarios
+
+| EMAIL                      | NOMBRE         | EDAD |
+|----------------------------|----------------|------|
+| juan.perez@example.com     | Juan Pérez     | 30   |
+| maria.gonzalez@example.com | Maria González | 25   |
+| francisco@example.com      | Test User      | 22   |
+
+Tabla notas:
+
+| EMAIL                      | NOTAS |
+|----------------------------|-------|
+| juan.perez@example.com     | 90    |
+| maria.gonzalez@example.com | 100   |
+| juan.perez@example.com     | 100   |
+| maria.gonzalez@example.com | 100   |
+| emilio@example.com         | 90    |
+
+En este ejemplo puntual **emilio@example.com ** tiene notas, pero no tenemos su registro en la tabla usuarios. Utilizando RIGHT JOIN podemos mostrar su informacion.
+
+Ejercicio:
+
+Dada las tablas **empleados** y **departamentos** se pide los registros de los departamentos de una oficina y sus correspondientes empleados, incluso si hay departamentos sin empleados asociados. En amas tablas existe la columna email.
+
+```sql
+SELECT  *
+FROM EMPLEADOS
+RIGHT  JOIN DEPARTAMENTOS ON EMPLEADOS.EMAIL = DEPARTAMENTOS.EMAIL
+```
+
+RESULTADO:
+| EMAIL                  | NOMBRE     | EDAD | EMAIL                  | DEPARTAMENTO |
+|------------------------|------------|------|------------------------|--------------|
+| juan.perez@example.com | Juan Pérez | 30   | juan.perez@example.com | Marketing    |
+| juan.perez@example.com | Juan Pérez | 30   | juan.perez@example.com | RRHH         |
+|                        |            |      |                        | Finanzas     |
+|                        |            |      | john.doe@example.com   | TI           |
+
+### Left Join y Right Join
+
+Utilizar LEFT JOIN y RIGHT JOIN depende simplemente de que tabla queremos nombrar primero:
+
+```sql
+SELECT *
+FROM tabla1
+LEFT JOIN tabla2 ON tabla1.id = tabla2.id
+```
+
+Es practicamete lo mismo que
+
+```sql
+SELECT *
+FROM tabla1
+RIGHT JOIN tabla2 ON tabla1.id = tabla2.id
+```
+
+LEFT JOIN y RIGHT JOIN son un reflejo uno del otrp, sin embargo, existe una pequeña diferencia cuando los utilizamos en conjunto con `SELECT *`, dado que los atributos de la primera tabla se mostraran primero.
+
+Por ejemplo, si tenemos las siguientes tablas:
+
+Usuarios 
+
+| EMAIL                      | NOMBRE         | EDAD |
+|----------------------------|----------------|------|
+| juan.perez@example.com     | Juan Pérez     | 30   |
+| maria.gonzalez@example.com | Maria González | 25   |
+| francisco@example.com      | Test User      | 22   |
+
+Notas:
+
+| EMAIL                      | NOTAS |
+|----------------------------|-------|
+| juan.perez@example.com     | 90    |
+| maria.gonzalez@example.com | 100   |
+| juan.perez@example.com     | 100   |
+| maria.gonzalez@example.com | 100   |
+| emilio@example.com         | 90    |
+
+Con 
+
+```sql
+SELECT *
+FROM USUARIOS
+LEFT JOIN NOTAS ON USUARIOS.EMAIL = NOTAS.EMAIL;
+```
+
+Nos regresa:
+
+| EMAIL                      | NOMBRE         | EDAD | EMAIL                      | NOTAS |
+|----------------------------|----------------|------|----------------------------|-------|
+| juan.perez@example.com     | Juan Pérez     | 30   | juan.perez@example.com     | 90    |
+| juan.perez@example.com     | Juan Pérez     | 30   | juan.perez@example.com     | 100   |
+| maria.gonzalez@example.com | Maria González | 25   | maria.gonzalez@example.com | 100   |
+| maria.gonzalez@example.com | Maria González | 25   | maria.gonzalez@example.com | 100   |
+| francisco@example.com      | Test User      | 22   | NULL                       | NULL  |
+
+En cambio, con
+
+```sql
+SELECT *
+FROM NOTAS
+RIGHT JOIN USUARIOS ON NOTAS.EMAIL = USUARIOS.EMAIL
+```
+
+Obtendremos:
+
+| EMAIL                      | NOTAS | EMAIL                      | NOMBRE         | EDAD |
+|----------------------------|-------|----------------------------|----------------|------|
+| juan.perez@example.com     | 90    | juan.perez@example.com     | Juan Pérez     | 30   |
+| juan.perez@example.com     | 100   | juan.perez@example.com     | Juan Pérez     | 30   |
+| maria.gonzalez@example.com | 100   | maria.gonzalez@example.com | Maria González | 25   |
+| maria.gonzalez@example.com | 100   | maria.gonzalez@example.com | Maria González | 25   |
+| NULL                       | NULL  | francisco@example.com      | Test User      | 22   |
+
+Para obtener los resultados en el mismo orden, simplemente podemos especificar el orden que queremos:
+
+```sql
+SELECT USUARIOS.*, NOTAS.*
+FROM NOTAS
+RIGHT JOIN USUARIOS ON NOTAS.EMAIL = USUARIOS.EMAIL
+```
+
+A partir de este ejercicio. queda a nuestra discrecion como resolver los problemas, ya sea utilizando LEFT JOIN o RIGHT JOIN pero para que las respuestas sean marcadas correctas los atributos deben aparecer en el mismo orden que las tablas son mencionadas, a menos que se especifique lo contrario.
+
+Ejercicio:
+
+Selecciona todos los registros de todos los productos (tabla productos) junto a sus precios (tabla precios), incluyendo a los productos que no tienen precio asignado. Las tablas se relacionan entre si por la columna producto_id.
+
+```sql
+SELECT PRODUCTOS.*, PRECIOS.*
+FROM PRODUCTOS
+LEFT  JOIN PRECIOS ON PRECIOS.PRODUCTO_ID = PRODUCTOS.PRODUCTO_ID
+```
+
+Resultado:
+
+| PRODUCTO_ID | NOMBRE     | PRECIO_ID | PRODUCTO_ID | PRECIO |
+|-------------|------------|-----------|-------------|--------|
+| 1           | Producto A | 1         | 1           | 10.99  |
+| 2           | Producto B | 2         | 2           | 15.99  |
+| 3           | Producto C |           |             |        |
