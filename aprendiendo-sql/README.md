@@ -4625,7 +4625,9 @@ UPDATE transacciones
 SET usuario_id =  3
 ```
 ## Dia 17: Consultas en multiples tablas
+
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
+
 Cuando trabajamos con bases de datos relacionales, surge con frecuencia la necesidad de combinar datos de varias tablas:
 
 Veamos un ejemplo:
