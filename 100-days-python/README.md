@@ -97,7 +97,9 @@ El entorno de desarrollo está basado en Replit, que proporciona las siguientes 
 | Dia 64 | [*OPP*](./Dia-64/README.md) | [Codigo](./Dia-64/main.py)|
 | Dia 65 | [*Desafío del día 65*](./Dia-65/README.md) | [Codigo](./Dia-65/main.py)|
 | Dia 66 | [*GUIs pegajosos*](./Dia-66/README.md) | [Codigo](./Dia-66/main.py)|
-| Dia 66 | [*For Your Eyes Only*](./Dia-70/README.md) | [Codigo](./Dia-70/main.py)|
+| Dia 70 | [*For Your Eyes Only*](./Dia-70/README.md) | [Codigo](./Dia-70/main.py)|
+| Dia 71 | [*Se llama Hashing*](./Dia-71/README.md) | [Codigo](./Dia-71/main.py)|
+| Dia 72 | [*Desafío del día 72*](./Dia-72/README.md) | [Codigo](./Dia-72/main.py)|
 
 
 Para calcular el progreso segun la fecha actual, uso este [código](https://gist.github.com/borgesmj/7271f7d6a02e10024227a468f537c628)
