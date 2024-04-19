@@ -29,6 +29,7 @@ El entorno de desarrollo está basado en Replit, que proporciona las siguientes 
 
 
 ## Contenido
+
 | Dia    |  README    |  Codigo   |
 |-------|---------|--------|
 | Dia 1 | [*print()*](./Dia-01/README.md) | [Codigo](./Dia-01/main.py) |
@@ -100,8 +101,8 @@ El entorno de desarrollo está basado en Replit, que proporciona las siguientes 
 | Dia 70 | [*For Your Eyes Only*](./Dia-70/README.md) | [Codigo](./Dia-70/main.py)|
 | Dia 71 | [*Se llama Hashing*](./Dia-71/README.md) | [Codigo](./Dia-71/main.py)|
 | Dia 72 | [*Desafío del día 72*](./Dia-72/README.md) | [Codigo](./Dia-72/main.py)|
-| Dia 73 | [*Hyper Text Markup Language*](./Dia-73/README.md) | [Demo](./Dia-73/index.html)|
-| Dia 74 | *CSS* | [Demo](./Dia-73/index.html)|
+| Dia 73 | [*Hyper Text Markup Language*](./Dia-73/README.md) | [Demo]([./Dia-73/index.html](https://borgesmj.github.io/notas-y-apuntes/100-days-python/Dia-73/))|
+| Dia 74 | *CSS* | [Demo]([./Dia-73/index.html](https://borgesmj.github.io/notas-y-apuntes/100-days-python/Dia-73/))|
 
 
 Para calcular el progreso segun la fecha actual, uso este [código](https://gist.github.com/borgesmj/7271f7d6a02e10024227a468f537c628)
