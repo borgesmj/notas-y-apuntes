@@ -30,9 +30,9 @@ El entorno de desarrollo está basado en Replit, que proporciona las siguientes 
 
 ## Contenido
 
-| Dia    |  README    |  Codigo   |
-|-------|---------|--------|
-| Dia 1 | [*print()*](./Dia-01/README.md) | [Codigo](./Dia-01/main.py) |
+| Dia    |  README                            |  Codigo                          |
+|-------|----------------------------------|----------------------------------|
+| Dia 1 | [*print()*](./Dia-01/README.md)   | [Codigo](./Dia-01/main.py)      |
 | Dia 2 | [*Input y variables*](./Dia-02/README.md) | [Codigo](./Dia-02/main.py) |
 | Dia 3 | [*Concatenar*](./Dia-03/README.md) | [Codigo](./Dia-03/main.py) |
 | Dia 4 | [*Concatenar pt2*](./Dia-04/README.md) | [Codigo](./Dia-04/main.py) |
@@ -88,21 +88,21 @@ El entorno de desarrollo está basado en Replit, que proporciona las siguientes 
 | Dia 54 | [*Comma-Separated Values*](./Dia-54/README.md) | [Codigo](./Dia-54/main.py) |
 | Dia 55 | [*La librería `os`*](./Dia-55/README.md) | [Codigo](./Dia-55/main.py) |
 | Dia 56 | [*reto: Servicio de streaming de música*](./Dia-56/README.md) | [Codigo](./Dia-56/main.py) |
-| Dia 57 | [*¿Qué es la recursión?*](./Dia-57/README.md) | Codigo|
-| Dia 58 | [*Depuración*](./Dia-58/README.md) | [Codigo](./Dia-58/main.py)|
-| Dia 59 | [*Palindromos*](./Dia-59/README.md) | [Codigo](./Dia-59/main.py)|
-| Dia 60 | [*La magia del tiempo*](./Dia-60/README.md) | [Codigo](./Dia-60/main.py)|
-| Dia 61 | [*Replit DB*](./Dia-61/README.md) | [Codigo](./Dia-61/main.py)|
-| Dia 62 | [*Desafío del día 62*](./Dia-62/README.md) | [Codigo](./Dia-62/main.py)|
-| Dia 63 | [*Múltiples archivos*](./Dia-63/README.md) | [Codigo](./Dia-63/main.py)|
-| Dia 64 | [*OPP*](./Dia-64/README.md) | [Codigo](./Dia-64/main.py)|
-| Dia 65 | [*Desafío del día 65*](./Dia-65/README.md) | [Codigo](./Dia-65/main.py)|
-| Dia 66 | [*GUIs pegajosos*](./Dia-66/README.md) | [Codigo](./Dia-66/main.py)|
-| Dia 70 | [*For Your Eyes Only*](./Dia-70/README.md) | [Codigo](./Dia-70/main.py)|
-| Dia 71 | [*Se llama Hashing*](./Dia-71/README.md) | [Codigo](./Dia-71/main.py)|
-| Dia 72 | [*Desafío del día 72*](./Dia-72/README.md) | [Codigo](./Dia-72/main.py)|
-| Dia 73 | [*Hyper Text Markup Language*](./Dia-73/README.md) | [Demo]([./Dia-73/index.html](https://borgesmj.github.io/notas-y-apuntes/100-days-python/Dia-73/))|
-| Dia 74 | *CSS* | [Demo]([./Dia-73/index.html](https://borgesmj.github.io/notas-y-apuntes/100-days-python/Dia-73/))|
+| Dia 57 | [*¿Qué es la recursión?*](./Dia-57/README.md) | Codigo |
+| Dia 58 | [*Depuración*](./Dia-58/README.md) | [Codigo](./Dia-58/main.py) |
+| Dia 59 | [*Palindromos*](./Dia-59/README.md) | [Codigo](./Dia-59/main.py) |
+| Dia 60 | [*La magia del tiempo*](./Dia-60/README.md) | [Codigo](./Dia-60/main.py) |
+| Dia 61 | [*Replit DB*](./Dia-61/README.md) | [Codigo](./Dia-61/main.py) |
+| Dia 62 | [*Desafío del día 62*](./Dia-62/README.md) | [Codigo](./Dia-62/main.py) |
+| Dia 63 | [*Múltiples archivos*](./Dia-63/README.md) | [Codigo](./Dia-63/main.py) |
+| Dia 64 | [*OPP*](./Dia-64/README.md) | [Codigo](./Dia-64/main.py) |
+| Dia 65 | [*Desafío del día 65*](./Dia-65/README.md) | [Codigo](./Dia-65/main.py) |
+| Dia 66 | [*GUIs pegajosos*](./Dia-66/README.md) | [Codigo](./Dia-66/main.py) |
+| Dia 70 | [*For Your Eyes Only*](./Dia-70/README.md) | [Codigo](./Dia-70/main.py) |
+| Dia 71 | [*Se llama Hashing*](./Dia-71/README.md) | [Codigo](./Dia-71/main.py) |
+| Dia 72 | [*Desafío del día 72*](./Dia-72/README.md) | [Codigo](./Dia-72/main.py) |
+| Dia 73 | [*Hyper Text Markup Language*](./Dia-73/README.md) | [Demo](https://borgesmj.github.io/notas-y-apuntes/100-days-python/Dia-73/) |
+| Dia 74 | *CSS* | [Demo](https://borgesmj.github.io/notas-y-apuntes/100-days-python/Dia-73/) |
 
 
 Para calcular el progreso segun la fecha actual, uso este [código](https://gist.github.com/borgesmj/7271f7d6a02e10024227a468f537c628)
