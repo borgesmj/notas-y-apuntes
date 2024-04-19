@@ -1,4 +1,4 @@
-# Flask!
+s# Flask!
 
 La razon por la que hemos pasado los ultimos dias aprendiendo sobre HTML y CSS es para que podamos combianarlo con Python usando **Flask**
 
@@ -29,11 +29,12 @@ app.run(host='0.0.0.0', port=81) # This line should ALWAYS come last. It's the l
 
 Cuando corremos este codigo iniciador, esta es la pagina que nos regresa:
 
-![download](download.png)
+![image](https://github.com/borgesmj/notas-y-apuntes/assets/121818423/5f7f60ee-629d-42a8-823d-b1841f2d10d0)
+
 
 Puedes ves que la URL de la pagina en la parte de arriba del screenshot. Puedes visitar la pagina la misma URL dessde tu tlf o tablet y veras la misma pagina.
 
-## Mas pagina
+## Mas paginas
 
 Ahora, vamos a añadir la pagina 'about' al codigo Flask.
 
