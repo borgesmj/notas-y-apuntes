@@ -105,6 +105,8 @@ El entorno de desarrollo está basado en Replit, que proporciona las siguientes 
 | Dia 74 | *CSS* | [Demo](https://borgesmj.github.io/notas-y-apuntes/100-days-python/Dia-73/) |
 | Dia 76 | [*Flask!*](./Dia-76/README.md) | [Codigo](./Dia-76/main.py) |
 | Dia 77 | [*Demasiado código*](./Dia-77/README.md) | [Codigo](./Dia-77/main.py) |
+| Dia 78 | [*👉 Desafío del día 78*](./Dia-78/README.md) | [Codigo](./Dia-78/main.py) |
+| Dia 77 | [*Formularios*](./Dia-79/README.md) | [Codigo](./Dia-79/index.html) |
 
 
 Para calcular el progreso segun la fecha actual, uso este [código](https://gist.github.com/borgesmj/7271f7d6a02e10024227a468f537c628)

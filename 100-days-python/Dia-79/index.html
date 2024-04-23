@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html style="height: 100%; width: 100%;">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body style="height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; background-color: aliceblue;">
+  <form action="/login" method="post" style="border: 1px solid black; padding: 10px; border-radius: 10px; ">
+    <div class="field" style="margin-block: 25px; width: 100%; display: flex; justify-content: space-between;">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div class="field" style="margin-block: 25px; width: 100%;display: flex; justify-content: space-between;">
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" required>
+    </div>
+    <div class="field" style="margin-block: 25px; width: 100%;display: flex; justify-content: space-between;">
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" required>
+    </div>
+    <div class="field" style="margin-block: 25px; width: 100%; display: flex; justify-content: center; align-items: center;">
+      <button type="submit">Login</button>
+    </div>
+  </form>
+  <script src="script.js"></script>
+
+  <!--
+  This script places a badge on your repl's full-browser view back to your repl's cover
+  page. Try various colors for the theme: dark, light, red, orange, yellow, lime, green,
+  teal, blue, blurple, magenta, pink!
+  -->
+  <script src="https://replit.com/public/js/replit-badge.js" theme="blue" defer></script>
+</body>
+
+</html>
