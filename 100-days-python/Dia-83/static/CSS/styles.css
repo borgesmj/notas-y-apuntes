@@ -1,0 +1,55 @@
+:root {
+    --primary-100: #3498db;
+    --primary-200: #007cbd;
+    --primary-300: #004079;
+    --accent-100: #e74c3c;
+    --accent-200: #ffe6c7;
+    --text-100: #333333;
+    --text-200: #5c5c5c;
+    --bg-100: #f4f4f4;
+    --bg-200: #eaeaea;
+    --bg-300: #c1c1c1;
+  }
+  
+  body{
+    background-color: green;
+  }
+  
+  .theme-dark{
+    background-color: var(--primary-300);
+    color: var(--bg-200);
+  }
+  
+  .theme-light{
+    background-color: var(--bg-100);
+    color: var(--text-100)
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 10px
+  }
+  
+  ul > li {
+    background-color: var(--accent-100);
+  }
+  
+  ul > li > a {
+    text-decoration: none;
+    color: var(--text-100);
+    padding: 2rem;
+    border-radius: 10px;
+    font-weight: bold;
+  }
+  
+  h2 > a {
+    color: black;
+  }
+  

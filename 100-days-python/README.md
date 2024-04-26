@@ -109,6 +109,7 @@ El entorno de desarrollo está basado en Replit, que proporciona las siguientes 
 | Dia 79 | [*Formularios*](./Dia-79/README.md) | [Codigo](./Dia-79/index.html) |
 | Dia 80 | [*Incoming*](./Dia-80/README.md) | [Codigo](./Dia-80/main.py) |
 | Dia 82 | [*Incoming*](./Dia-82/README.md) | [Codigo](./Dia-82/main.py) |
+| Dia 83 | [*👉 Desafío del Día 83*](./Dia-83/README.md) | [Codigo](./Dia-83/main.py) |
 
 
 Para calcular el progreso segun la fecha actual, uso este [código](https://gist.github.com/borgesmj/7271f7d6a02e10024227a468f537c628)
