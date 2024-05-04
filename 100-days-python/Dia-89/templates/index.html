@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body style="height: 100dvh; overflow: hidden; background: #edf7fd">
+  <header style="display: flex; justify-content: space-evenly; align-items: center">
+    <h1>You're logged in as {username}</h1>
+    <a href="/logout">Logout</a>
+  </header>
+  <section id="messageSection" style="height: 70%; overflow-y: auto; display: grid; flex-direction: column">{messages}</section>
+  <form id="messageForm" action="/post" method="post" style="position: fixed; bottom: 0; left: 0; right: 0; width: 100dvw; background: #706b6b; padding: 10px; display: flex; justify-content: space-around; align-items: center;">
+    <textarea required style="resize: none; width: 80%; height: 50px; border-radius: 10px; padding: 10px; outline: none;" name="message" id="message" cols="30" rows="10"></textarea>
+    <button type="submit" style="height: 70px; padding: 10px; border-radius: 10px; border-style: none; background-color: #4fe64f; width: 10%; cursor: pointer; display: flex; justify-content: center; align-items: center;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#ffffff" viewBox="0 0 256 256"><path d="M231.87,114l-168-95.89A16,16,0,0,0,40.92,37.34L71.55,128,40.92,218.67A16,16,0,0,0,56,240a16.15,16.15,0,0,0,7.93-2.1l167.92-96.05a16,16,0,0,0,.05-27.89ZM56,224a.56.56,0,0,0,0-.12L85.74,136H144a8,8,0,0,0,0-16H85.74L56.06,32.16A.46.46,0,0,0,56,32l168,95.83Z"></path></svg>
+    </button>
+  </form>
+  <script>
+    var eventSource = new EventSource("/stream");
+
+    eventSource.onmessage = function(event) {
+        // Maneja el evento recibido desde el servidor
+        var message = event.data;
+        // Actualiza la interfaz de usuario con el nuevo mensaje
+        document.getElementById("messageSection").innerHTML += message;
+    };
+  </script>
+</body>
+</html>

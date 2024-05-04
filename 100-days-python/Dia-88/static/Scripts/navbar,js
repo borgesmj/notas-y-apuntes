@@ -1,0 +1,14 @@
+let navbar = document.querySelector('nav')
+let header = document.createElement('h1')
+header.innerText = "Welcome to Miguel's blog"
+navbar.appendChild(header)
+
+blogLink = document.createElement('a')
+blogLink.innerText = 'Go to blog'
+blogLink.setAttribute('href', './')
+navbar.appendChild(blogLink)
+
+adminLink = document.createElement('a')
+adminLink.innerText = 'Go to admin Panel'
+adminLink.setAttribute('href', './admin')
+navbar.appendChild(adminLink)

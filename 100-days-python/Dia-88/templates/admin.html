@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="static/CSS/style.css">
+  <title>Document</title>
+</head>
+<body>
+  <nav></nav>
+  <form action="/admin" method="post" style="display: flex;flex-direction: column;justify-content: space-between;align-items: center;width: 350px;">
+    <div style="display: flex; justify-content: space-around;">
+      <label for="post-title">Title: </label>
+    <input type="text" name="post-title" id="post-title">
+      
+    </div>
+    <div>
+      <label for="post-content">Text: </label>
+    <textarea name="post-content" id="post-content" cols="30" rows="10" style="resize: none"></textarea>
+    </div>
+    <button type="submit">Enviar</button>
+  </form>
+  <ul>
+    {posts-list}
+  </ul>
+  <a href="/logout">logout</a>
+  <script src="static/Scripts/navbar.js"></script>
+</body>
+</html>
