@@ -11,28 +11,28 @@ Este contenido estará estructurado acorde al contenido de Desafío LATAM y se r
 
 | DIA                           | Enlace                                  |
 |-------------------------------|-----------------------------------------|
-| Dia 1: Conceptos básicos      | [ir](.#dia-1-introduccion)           |
-| Dia 2: Seleccionando filas     | [ir](.#dia-2-seleccionando-filas)    |
-| Dia 3: Ordenando Resultados   | [ir](.#dia-3-ordenando-resultados)   |
-| Dia 4: Limit                  | [ir](.#dia-4-limit)                  |
-| Dia 5: Operaciones con string | [ir](.#dia-5-operaciones-con-string) |
-| Dia 6: Operaciones con fechas | [ir](.#dia-6-operaciones-con-fechas) |
-| Dia 7: Funciones de agregacion | [ir](.#dia-7-funciones-de-agregacion) |
-| Dia 8: Distinct | [ir](.#dia-8-distinct) |
-| Dia 9: Introducción a grupos | [ir](.#dia-9-introducción-a-grupos) |
-| Dia 10: HAVING | [ir](.#dia-10-having) |
-| Dia 11: Subconsultas | [ir](.#dia-11-subconsultas) |
-| Dia 12: Combinacion de consultas | [ir](.#dia-12-combinacion-de-consultas) |
-| Dia 13: Insercion de registros | [ir](.#dia-13-insercion-de-registros) |
-| Dia 14: Borrado y modificación de registros | [ir](.#dia-14-Borrado-y-modificación-de-registros) |
-| Dia 15: Tablas | [ir](.#dia-15-tablas) |
-| Dia 16: Restricciones | [ir](.#dia-16-restricciones) |
-| Dia 17: Consultas en multiples tablas | [ir](.#dia-17-consultas-en-multiples-tablas) |
-| Dia 18: Tipos de join | [ir](.#dia-18-Tipos-de-join) |
+| Tema 1: Conceptos básicos      | [ir](.#tema-1-introduccion)           |
+| Tema 2: Seleccionando filas     | [ir](.#tema-2-seleccionando-filas)    |
+| Tema 3: Ordenando Resultados   | [ir](.#tema-3-ordenando-resultados)   |
+| Tema 4: Limit                  | [ir](.#tema-4-limit)                  |
+| Tema 5: Operaciones con string | [ir](.#tema-5-operaciones-con-string) |
+| Tema 6: Operaciones con fechas | [ir](.#tema-6-operaciones-con-fechas) |
+| Tema 7: Funciones de agregacion | [ir](.#tema-7-funciones-de-agregacion) |
+| Tema 8: Distinct | [ir](.#tema-8-distinct) |
+| Tema 9: Introducción a grupos | [ir](.#tema-9-introducción-a-grupos) |
+| Tema 10: HAVING | [ir](.#tema-10-having) |
+| Tema 11: Subconsultas | [ir](.#tema-11-subconsultas) |
+| Tema 12: Combinacion de consultas | [ir](.#tema-12-combinacion-de-consultas) |
+| Tema 13: Insercion de registros | [ir](.#tema-13-insercion-de-registros) |
+| Tema 14: Borrado y modificación de registros | [ir](.#tema-14-Borrado-y-modificación-de-registros) |
+| Tema 15: Tablas | [ir](.#tema-15-tablas) |
+| Tema 16: Restricciones | [ir](.#tema-16-restricciones) |
+| Tema 17: Consultas en multiples tablas | [ir](.#tema-17-consultas-en-multiples-tablas) |
+| Tema 18: Tipos de join | [ir](.#tema-18-Tipos-de-join) |
 | Operadores | [ir](.#operadores) |
 
 
-## Dia 1: Introducción
+## Tema 1: Introducción
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 ### ¿Qué significa SQL?
 SQL viene de Structured Query Language (Lenguaje Estructurado de Consultas); es un lenguaje de programación que se utiliza para comunicarse y administrar bases de datos. SQL es un estándar para manipular datos almacenados en sistemas de gestión de bases de datos relacionales (relational database management systems - RDBMS), así como para el procesamiento de flujos en sistemas de gestión de flujos de datos relacionales (in a relational data stream management system - RDSMS). Fue desarrollado por primera vez en la década de 1970 por IBM.
@@ -66,7 +66,7 @@ SQL consiste en varios componentes, cada uno con su único propósito en comunic
   - Char(n): almacena de 1 a 255 caracteres fijo.
   - varchar(n): datos de cadena de tamañp variable
 * Fecha:
-  - Date: almacena fechas con dia, mes y año
+  - Date: almacena fechas con tema, mes y año
   - datetime: almacena fechas con fecha y hora
 * Logicos:
   - BIT: tipo bit. Se aplica logica booleana
@@ -163,7 +163,7 @@ Selecciona el nombre y el email de los usuarios de la tabla usuarios, y asigna e
 ```sql
 select nombre, email as "Correo electrónico" from usuarios
 ```
-## Dia 2: Seleccionando filas
+## Tema 2: Seleccionando filas
 
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
@@ -391,7 +391,7 @@ Algunos registros pueden tener valores nulos para algunos de sus campos. Por eje
 |------|-------------|-----------------------|
 | 1    | Juan Perez  | juan.perez@email.com  |
 | 2    | María Gomez | maria.gomez@email.com |
-| 3    |             | carlos.diaz@mail.com  |
+| 3    |             | carlos.temaz@mail.com  |
 | 4    |             | ana.torres@email.com  |
 | 5    | Luis Mendez | luis.mendez@email.com |
 
@@ -428,10 +428,10 @@ select *
 from usuarios
 where email is null
 ```
-## Dia 3: Ordenando resultados
+## Tema 3: Ordenando resultados
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 ### Ordenando filas
-En este ejercicio aprenderemos a ordenar las filas de una tabla SQL y para estoi estudiaremos una nueva clausula llamada *ORDER BY*
+En este ejercicio aprenderemos a ordenar las filas de una tabla SQL y para estoi estutemaremos una nueva clausula llamada *ORDER BY*
 La clasusula *order by* en SQL es usada para ordernar los resultados de una declaracion SELECT in orden ascendente o descendente. El comando ordena por defecto de maera ascendente, siq ueremos ordenar de manera descendente debemos usar la palabra clave `desc`
 
 
@@ -531,7 +531,7 @@ Selecciona todos los registros de la tabla 'productos' y ordénalos primero por 
 select * from productos order by stock desc, color asc
 ```
 
-## Dia 4: Limit
+## Tema 4: Limit
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 ### Limitando la cantidad de resultados
 La cláusula LIMIT se utiliza para limitar la cantidad de resultados devueltos por una consulta. Esto es útil cuando sólo necesitamos ver una cierta cantidad de registros en lugar de todos los registros que cumplan con la condición de la consulta.
@@ -590,7 +590,7 @@ FROM conciertos
 ORDER BY entradas_vendidas DESC 
 LIMIT 1
 ```
-## Dia 5: Operaciones con string
+## Tema 5: Operaciones con string
 
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
@@ -767,7 +767,7 @@ where nombre = 'María'
 ```
 
 
-## Dia 6: Operaciones con fechas
+## Tema 6: Operaciones con fechas
 
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
@@ -776,7 +776,7 @@ SQL provee de varias funciones para manipular fechas.
 SQL provee de muchas funciones para manejar la fecha:
 
 ### Obteniendo la fecha de hoy 
-con la funcion `DATE()` podemos obtener la fecha de hoy, por ejemplo podemos utilizar la clausula `WHERE`  para obtener los registros del dia de hoy.
+con la funcion `DATE()` podemos obtener la fecha de hoy, por ejemplo podemos utilizar la clausula `WHERE`  para obtener los registros del tema de hoy.
 
 ```
 SELECT * FROM usuarios WHERE fecha_registro = DATE();
@@ -804,7 +804,7 @@ En SQL es posible obtener fechas futuras.  En SQLite lo podemos lograr pasando u
 DATE('now', '1 day')
 ```
 
-En este ejemplo estamos sumando 1 dia a la fecha actual (now). Si queremos sumar mas dias, por ejemplo 5 dias utilizaremos `Date('now', '5 day')`. Tambien es posible sumar semamas, meses, con:
+En este ejemplo estamos sumando 1 tema a la fecha actual (now). Si queremos sumar mas temas, por ejemplo 5 temas utilizaremos `Date('now', '5 day')`. Tambien es posible sumar semamas, meses, con:
 
 2semanas: `DATE('now', '2 week')`
 3 meses: `DATE('now', '3 month')`
@@ -947,7 +947,7 @@ Dada una tabla ventas con las columnas monto y fecha_venta, selecciona toda la i
 ```
 select * from ventas where strftime('%Y', fecha_venta) = '2015'
 ```
-## Dia 7: Funciones de agregacion
+## Tema 7: Funciones de agregacion
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
 ### El mayor valor de una columna
@@ -1012,7 +1012,7 @@ FROM empleados
 ```
 
 ### Suma de elementos de una columna
-Hasta el momento hemos estudiado dos funciones de agregacion:
+Hasta el momento hemos estutemado dos funciones de agregacion:
 * MAX()
 * MIN()
 
@@ -1084,7 +1084,7 @@ select count(*) from empleados
 
 ### Ejercicio 1: Funciones de agregacion con where
 
-Las funciones de agregación se pueden combinar con las claúsulas previamente estudiadas. Simplemente tenemos que respetar el orden establecido de las claúsulas.
+Las funciones de agregación se pueden combinar con las claúsulas previamente estutemadas. Simplemente tenemos que respetar el orden establecido de las claúsulas.
 
 A la hora de extraer datos de base de datos será muy común que utilicemos las funciones de agregación en conjunto con where.
 
@@ -1195,7 +1195,7 @@ Cuenta la cantidad de usuarios cuyo nombre termina con la letra 'a' en la tabla 
 ```
 select count(*) from usuarios where nombre like '%a' 
 ```
-## Dia 8: Distinct
+## Tema 8: Distinct
 
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
@@ -1249,7 +1249,7 @@ Dada la siguiente tabla de usuarios
 | jose.hernandez@empresa.com   |
 | francisco.martin@empresa.com |
 | laura.sanchez@empresa.com    |
-| antonio.diaz@empresa.com     |
+| antonio.temaz@empresa.com     |
 | juan.perez@empresa.com       |
 | maria.gonzalez@empresa.com   |
 
@@ -1360,7 +1360,7 @@ Dada la siguiente tabla de usuarios
 | jose.hernandez@empresa.com   |
 | francisco.martin@empresa.com |
 | laura.sanchez@empresa.com    |
-| antonio.diaz@empresa.com     |
+| antonio.temaz@empresa.com     |
 | juan.perez@empresa.com       |
 | maria.gonzalez@empresa.com   |
 
@@ -1418,7 +1418,7 @@ Para la siguiente tabla "productos" deseamos obtener todas las combinaciones ún
 SELECT DISTINCT categoria, precio
 FROM productos
 ```
-## Dia 9: Introducción a grupos
+## Tema 9: Introducción a grupos
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 ### Agrupando valores con GROUUP BY
 La clausula GROUP BY es una poderosa gherramienta en SQL que se utilizar para agrupar filas con valores identicos en una o varias columnas especificas, permitiendo realizar operaciones de agregacion en ada grupo.
@@ -1523,7 +1523,7 @@ Dada la siguiente tabla de usuarios:
 | jose.hernandez@empresa.com   |
 | francisco.martin@empresa.com |
 | laura.sanchez@empresa.com    |
-| antonio.diaz@empresa.com     |
+| antonio.temaz@empresa.com     |
 | juan.perez@empresa.com       |
 | maria.gonzalez@empresa.com   |
 
@@ -1599,7 +1599,7 @@ Dada la siguiente tabla de usuarios
 | jose.hernandez@empresa.com   |
 | francisco.martin@empresa.com |
 | laura.sanchez@empresa.com    |
-| antonio.diaz@empresa.com     |
+| antonio.temaz@empresa.com     |
 | juan.perez@empresa.com       |
 | maria.gonzalez@empresa.com   |
 
@@ -1690,7 +1690,7 @@ SELECT categoria as categoria, sum(monto) as monto_total
 FROM ventas
 group by categoria
 ```
-### Agruopar y promediar
+### Agruopar y prometemar
 
 Previamente aprendimos que AVG nos permite calcular el promedio de los elementos de una columna en una tabla. En este ejercicio lo utilizaremos para calcular promedios po grupo.
 
@@ -1702,7 +1702,7 @@ GROUP BY grupo
 
 Ejercicio
 
-Dada la siguiente tabla de estudiantes
+Dada la siguiente tabla de estutemantes
 
 
 | NOMBRE_COMPLETO | NOTA |
@@ -1723,13 +1723,13 @@ Dada la siguiente tabla de estudiantes
 | Luis Morales    | 6    |
 | Luis Morales    | 5    |
 
-Encuentra el promedio de notas de cada estudiante. Las columnas deben tener el nombre completo y promedio_notas respectivamente
+Encuentra el promedio de notas de cada estutemante. Las columnas deben tener el nombre completo y promedio_notas respectivamente
 
-Este ejercicio tiene un supuesto importante, que no hay dos estudiantes con el mismo nombre y apellido. DIscutiremos este tipo de supuestos mas adelante cuando revisemos el concepto de integridad.
+Este ejercicio tiene un supuesto importante, que no hay dos estutemantes con el mismo nombre y apellido. DIscutiremos este tipo de supuestos mas adelante cuando revisemos el concepto de integridad.
 
 ```
 SELECT nombre_completo, AVG(nota) as promedio_notas
-FROM estudiantes
+FROM estutemantes
 GROUP BY nombre_completo
 ```
 
@@ -1973,28 +1973,28 @@ GROUP BT 1, 2
 ```
 
 Ejercicio
-Tenemos la siguiente tabla estudiantes
+Tenemos la siguiente tabla estutemantes
 
 | CORREO                  | MATERIA     | NOTA |
 |-------------------------|-------------|------|
-| estudiante1@ejemplo.com | Matemáticas | 8.5  |
-| estudiante2@ejemplo.com | Matemáticas | 9.0  |
-| estudiante3@ejemplo.com | Matemáticas | 7.5  |
-| estudiante1@ejemplo.com | Ciencias    | 8.0  |
-| estudiante2@ejemplo.com | Ciencias    | 9.5  |
-| estudiante3@ejemplo.com | Ciencias    | 7.0  |
-| estudiante1@ejemplo.com | Historia    | 8.7  |
-| estudiante2@ejemplo.com | Historia    | 9.2  |
-| estudiante3@ejemplo.com | Historia    | 7.8  |
+| estutemante1@ejemplo.com | Matemáticas | 8.5  |
+| estutemante2@ejemplo.com | Matemáticas | 9.0  |
+| estutemante3@ejemplo.com | Matemáticas | 7.5  |
+| estutemante1@ejemplo.com | Ciencias    | 8.0  |
+| estutemante2@ejemplo.com | Ciencias    | 9.5  |
+| estutemante3@ejemplo.com | Ciencias    | 7.0  |
+| estutemante1@ejemplo.com | Historia    | 8.7  |
+| estutemante2@ejemplo.com | Historia    | 9.2  |
+| estutemante3@ejemplo.com | Historia    | 7.8  |
 
-Calcula el promedio de cada estudiante en cada materia. LAs columnas deben llamarse correo, materi y promedio_notas
+Calcula el promedio de cada estutemante en cada materia. LAs columnas deben llamarse correo, materi y promedio_notas
 
 ```
 SELECT correo, materia, AVG(nota) as promedio_notas
-FROM estudiantes
+FROM estutemantes
 group by 1,2
 ```
-## Dia 10: HAVING
+## Tema 10: HAVING
 
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
@@ -2069,7 +2069,7 @@ Se tiene la tabla correos_corporativos
 | jose.hernandez@empresa.com   |
 | francisco.martin@empresa.com |
 | laura.sanchez@empresa.com    |
-| antonio.diaz@empresa.com     |
+| antonio.temaz@empresa.com     |
 | juan.perez@empresa.com       |
 | maria.gonzalez@empresa.com   |
 
@@ -2128,7 +2128,7 @@ Se tiene la siguiente tabla notas
 | Alumno3@ejemplo.com | 30    |
 | Alumno3@ejemplo.com | 10    |
 
-Crea una consulta para determinar cuales son los estudiantes que aprobaron. El criterio de aprobacion es promedio_de_notas >= 50
+Crea una consulta para determinar cuales son los estutemantes que aprobaron. El criterio de aprobacion es promedio_de_notas >= 50
 
 LAs columnas a mostrar deben ser email y promedio_notas
 
@@ -2213,7 +2213,7 @@ RESULTADO
 | Ventas       | 3400             |
 | Marketing    | 3150             |
 
-## Dia 11: Subconsultas
+## Tema 11: Subconsultas
 
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
@@ -2464,7 +2464,7 @@ WHERE pais IN (SELECT * from otra tabla)
 
 Operador IN en subconsultas:
 
-Se tiene la siguiente tabla de estudiantes
+Se tiene la siguiente tabla de estutemantes
 
 | ESTUDIANTE_ID | NOMBRE |
 |---------------|--------|
@@ -2485,16 +2485,16 @@ y la tabla de notas
 Se nos pide mostar los nombres de todas las personas que tengan un promedio de notas menor que 50.
 
 1. Seleccionamos los IDs de la tabla notas con promedio_notas <= 50
-2. Seleccionamos los nombres de la tabla _estudiantes_ cuyo id este dentro de la subconsulta anterior
+2. Seleccionamos los nombres de la tabla _estutemantes_ cuyo id este dentro de la subconsulta anterior
 
 
 ```
-SELECT nombre from estudiantes
-WHERE estudiante_id IN (SELECT estudiante_id from notas where promedio_notas <= 50)
+SELECT nombre from estutemantes
+WHERE estutemante_id IN (SELECT estutemante_id from notas where promedio_notas <= 50)
 ```
 
 Ejercicio
-Se tiene una tabla estudiantes con un código y un nombre
+Se tiene una tabla estutemantes con un código y un nombre
 
 | ESTUDIANTE_ID | NOMBRE |
 |---------------|--------|
@@ -2503,7 +2503,7 @@ Se tiene una tabla estudiantes con un código y un nombre
 | 3             | Pedro  |
 | 4             | Ana    |
 
-Y se tiene una tabla _promedios_ con el codigo dek estudiante y su promedio de notas
+Y se tiene una tabla _promedios_ con el codigo dek estutemante y su promedio de notas
 
 | ESTUDIANTE_ID | PROMEDIO_NOTAS |
 |---------------|----------------|
@@ -2512,17 +2512,17 @@ Y se tiene una tabla _promedios_ con el codigo dek estudiante y su promedio de n
 | 3             | 49             |
 | 4             | 38             |
 
-Muestra los nombres de todos los estudiantes que tengan un promedio denotas sobre 50.
+Muestra los nombres de todos los estutemantes que tengan un promedio denotas sobre 50.
 
 Tip:
-1. No necesitas agrupar ni promediar ni contar.
+1. No necesitas agrupar ni prometemar ni contar.
 2. Hay mas de una forma de resolver este ejercicio, no te adelantes a joins e intenta resolverlo utilizando subqueries.
 
 
 ```
 SELECT nombre
-FROM estudiantes
-WHERE estudiante_id IN (SELECT estudiante_id from promedios where promedio_notas > 50)
+FROM estutemantes
+WHERE estutemante_id IN (SELECT estutemante_id from promedios where promedio_notas > 50)
 ```
 
 ### Subconsultas con IN parte 2
@@ -2688,7 +2688,7 @@ FROM (
 ```
 > Recuerde que no todas las bases de datos SQL admiten todos los tipos de subconsultas. Aprender cómo y cuándo utilizar cada formulario es un aspecto esencial para crear consultas SQL efectivas.
 
-## Dia 12: Combinacion de consultas
+## Tema 12: Combinacion de consultas
 
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
@@ -2709,9 +2709,9 @@ LAs columnas que se seleccionan en los SELECT deben tener los mismos nombres de 
 
 Veamos un ejemplo:
 
-Supongamos que tenemos dos tablas "Estudiantes" y "Profesores", que contienen una lista de apellidos e cada una. Queremos crear una lista que combine los apellidos de ambas tablas.
+Supongamos que tenemos dos tablas "Estutemantes" y "Profesores", que contienen una lista de apellidos e cada una. Queremos crear una lista que combine los apellidos de ambas tablas.
 
-Estudiantes
+Estutemantes
 
 
 | ID | NOMBRE | APELLIDO  |
@@ -2731,7 +2731,7 @@ Al hacer la consulta
 
 ```
 SEKECT apellido
-FROM Estudiantes
+FROM Estutemantes
 UNION
 SELECT apellido
 FROM profesores
@@ -2749,7 +2749,7 @@ Nos dará el resultado
 | Mendoza   |
 
 Ejercicio:
-Dada las tablas **estudiantes**
+Dada las tablas **estutemantes**
 
 | NOMBRE |
 |--------|
@@ -2768,7 +2768,7 @@ Escribe una consulta SQL para combinar los nombres de ambas tablas. LA columna r
 
 ```
 SELECT nombre as nombres
-FROM estudiantes
+FROM estutemantes
 UNION
 Select nombre
 FROM profesores
@@ -3015,7 +3015,7 @@ SELECT nombre
 FROM gerentes
 ```
 
-## Dia 13: Insercion de registros
+## Tema 13: Insercion de registros
 
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
@@ -3259,7 +3259,7 @@ INSERT  INTO PRODUCTOS
 
 ###  Añadiendo fecha formateada
 Si queremos insertar una fecha cualquiera al momento de crear un registro, simplemente debemos hacerlo especificando la fecha en el formato esperado.
-El formato de fecha es `YYYY-MM-DD`o sea, año.mes-dia, donde el año es de 4 digitos, el mes de dos digitos, y el dia de dos digitos.
+El formato de fecha es `YYYY-MM-DD`o sea, año.mes-tema, donde el año es de 4 digitos, el mes de dos digitos, y el tema de dos digitos.
 
 Ejemplo: 
 ```
@@ -3315,7 +3315,7 @@ VALUES
 ```
 ### Crear un registro con un campo **autoincremental**
 
-En una base de datos de SQL, es posible agilizar el proceso de insercion de datos en una tabla mediante el uso de un campo autoincremental.Este tipo de campo es especialmente util cuando se trata de gestionar indentificadores unicos, como por ejemplo, el campo de 'id' de una tabla. La caracteristica de autoincremento se logra empleando la clausula AUTOINCREMENT en la definicion del campo.
+En una base de datos de SQL, es posible agilizar el proceso de insercion de datos en una tabla metemante el uso de un campo autoincremental.Este tipo de campo es especialmente util cuando se trata de gestionar indentificadores unicos, como por ejemplo, el campo de 'id' de una tabla. La caracteristica de autoincremento se logra empleando la clausula AUTOINCREMENT en la definicion del campo.
 Para ilustrar este proceso, consideremos una tabla llamada "empleados" con tres colimnas "id" (autoincremental), "nombre" y "apellido". Esta es la forma en que se crea la tabla
 
 ```
@@ -3388,7 +3388,7 @@ INSERT  INTO USUARIOS
 ```
 
 
-## Dia 14: Borrado y modificación de registros
+## Tema 14: Borrado y modificación de registros
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
 ### Borrar todos los registros de una tabla
@@ -3414,7 +3414,7 @@ WHERE condition;
 
 Es crucial usar `DELETE` con mucho cuidado, tiene el potencial de borrar ciertas filas importantes de la tabla o borrar la tabla por completo.
 
-> Nota: La eliminación realizada mediante la sentencia "DELETE" es permanente y no puede deshacerse. Asegúrese siempre de tener una copia de seguridad antes de ejecutar una consulta DELETE, especialmente cuando se trata de una base de datos de producción.
+> Nota: La eliminación realizada metemante la sentencia "DELETE" es permanente y no puede deshacerse. Asegúrese siempre de tener una copia de seguridad antes de ejecutar una consulta DELETE, especialmente cuando se trata de una base de datos de producción.
 
 Ejercicio:
 Borra todos los datos de la tabla PRODUCTOS
@@ -3596,7 +3596,7 @@ SET
 WHERE ID =  1
 ```
 
-## Dia 15: Tablas
+## Tema 15: Tablas
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 ### Nuestra primera tabla
 
@@ -3880,7 +3880,7 @@ VALUES
 	('Camisa XL',  1000.0,  'Camisa de manga larga')
 ```
 
-## Dia 16: Restricciones
+## Tema 16: Restricciones
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
 ### Introduccion a restricciones
@@ -3902,7 +3902,7 @@ CREATE TABLE personas (
 
 Para agregar una restriccion, simplemente debemos especificarla con la columna
 
-Para indicar las restricciones, utilizaremos una columna adicional llamada **Cnstrains**, en nuestros diagramas. Ejemplo con la tabla **personas**
+Para indicar las restricciones, utilizaremos una columna adicional llamada **Cnstrains**, en nuestros temagramas. Ejemplo con la tabla **personas**
 
 | COLUMN   | DATA TYPE | CONSTRAINTS |
 |----------|-----------|-------------|
@@ -4417,7 +4417,7 @@ La clave primaria no está limitada exclusivamente a valores numericos, tambien 
 
 En SQLite, los campos que son de tipo INTEGER y se designan como PRIMARY KEY no pueden contener valores nulos. No obstante, a diferencia de otros sistemas de gestion de bases de datos como MySQL o POstgreSQL cuando se utiliza PRIMARY KEY con tipos de datos como texto u otros, se permite que el valor sea nulo.
 
-POr lo tanto, si queremos que un campo sea tanto clave primaria como no nulo, debemos especificarlo mediante la combinacion de PRIMARY KEY y NOT NULL
+POr lo tanto, si queremos que un campo sea tanto clave primaria como no nulo, debemos especificarlo metemante la combinacion de PRIMARY KEY y NOT NULL
 
 Ejemplo:
 
@@ -4630,7 +4630,7 @@ ALTER  TABLE transacciones2 RENAME  TO transacciones;
 UPDATE transacciones
 SET usuario_id =  3
 ```
-## Dia 17: Consultas en multiples tablas
+## Tema 17: Consultas en multiples tablas
 
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
@@ -4986,7 +4986,7 @@ Resultado:
 |--|--|
 | PRODUCTO C | 55 |
 
-## Dia 18: Tipos de join
+## Tema 18: Tipos de join
 
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 
@@ -5059,7 +5059,7 @@ La clausula `LEFT JOIN`combina filas de dos o mas tablas basado en una columna r
 ![left join](https://github.com/borgesmj/notas-y-apuntes/assets/121818423/4c198d4d-d653-40e1-adde-77b5516d6f21)
 
 
-Con los siguientes datos, al hacer un INNER JOIN no obtendremos dentro de los resultados a [**Francisco**](./#inner-join), lo cual podría ser un gran error si estuviésemos haciendo un reporte de todos los estudiantes.
+Con los siguientes datos, al hacer un INNER JOIN no obtendremos dentro de los resultados a [**Francisco**](./#inner-join), lo cual podría ser un gran error si estuviésemos haciendo un reporte de todos los estutemantes.
 
 Tabla usuarios:
 
