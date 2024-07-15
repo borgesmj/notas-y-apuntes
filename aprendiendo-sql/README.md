@@ -161,7 +161,7 @@ En este ejemplo, las tablas `employees` y `departments` son llamadas `e` y `d`re
 Selecciona el nombre y el email de los usuarios de la tabla usuarios, y asigna el nombre 'Correo electrónico' a la columna 'email'.
 
 ```sql
-select nombre, email as "Correo electrónico" from usuarios
+select nombre, email as "Correo electrónico" from usuariosF
 ```
 ## Tema 2: Seleccionando filas
 
@@ -5323,3 +5323,72 @@ WHERE salary > 50000 AND age < 30
 * `^`: XOR
 
 Los operadores bit a bit son mucho menos usados en SQL que los demas operadores
+
+## Tema 19: Cardinalidad
+
+:arrow_up: [ir al inicio](.#tabla-de-contenidos)
+
+### Relaciones 1 a 1
+¿Que es la cardinalidad de una relacion?
+La cardinalidad de una relacion es la cantidad de elementos de una tabla que pueden estar relacionadas con otra tabla.
+
+Las relaciones de las tablas se pueden clafisicar en tres tipos segun su cardinalidad.
+
+En este ejercicio veremos la relacion 1 a 1, denotada como `1:1`. En esta relacion cada relacion de una tabla estará relacionada con un unico registro de otra tabla, por ejemplo, cada persona puede tener un unico pasaporte y cada pasaporte tiene una unica persona:
+
+Tabla **personas** 
+
+| id | nombre |
+|:--:|:------:|
+| 1  | Juan   |
+| 2  | María  |
+| 3  | Carlos |
+
+Tabla **pasaportes**
+
+| id | persona_id |
+|:--:|:----------:|
+| 1  | 1          |
+| 2  | 2          |
+| 3  | 3          |
+
+Al hacer un `join` entre las tablas personas y pasaportes, obtendriamos:
+
+| id | nombre | id | persona_id |
+|:--:|:------:|:--:|:----------:|
+| 1  | Juan   | 1  | 1          |
+| 2  | María  | 2  | 2          |
+| 3  | Carlos | 3  | 3          |
+
+Es decir, por cada registro de la tabla personas hay un unico registro en la tabla pasaportes.
+
+**Ejercicio**
+
+Dada las siguientes tablas:
+
+Tabla **Vehiculos**
+
+| id |     modelo     |
+|:--:|:--------------:|
+| 1  | Toyota Corolla |
+| 2  | Honda Civic    |
+| 3  | Ford Focus     |
+
+Tabla **matriculas**
+
+| id | vehiculo_id | matricula |
+|:--:|:-----------:|:---------:|
+| 1  | 1           | ABC-123   |
+| 2  | 2           | XYZ-456   |
+| 3  | 3           | DEF-789   |
+
+Se pide crear una consulta que muestre toda la informacion de las matriculas de los vehiculos junto a sus matriculas correspondientes.
+
+**Solucion**
+
+```sql
+SELECT *
+FROM vehiculos
+JOIN matriculas
+ON vehiculos.id = matriculas.id
+```
