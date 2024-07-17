@@ -5054,7 +5054,85 @@ INNER  JOIN NOTAS ON NOTAS.EMAIL = USUARIOS.EMAIL;
 | juan.perez@example.com     | Juan Pérez     | 30   | juan.perez@example.com     | 100   |
 | maria.gonzalez@example.com | Maria González | 25   | maria.gonzalez@example.com | 100   |
 
+### Inner JOIN con diagrama de venn
+
+Un diagrama de venn nos permite visualizar conjunts y operaciones entre ellos,. Estos diagramas se representan con circulos que repesentan conjuntos de datos, en ellos, los elementos que tienen en comun los conjuntos de datos se representan en la interseccion de los circulos.
+
+Cuando trabajamos con bases de datos, podemos utilizar estos diagramas para visualizar los registros que se obtendrian al realizar los distintos tipos de `JOIN`.
+
+Para hacerlo, pondremos como elementos las claves de union de las tablas. Los elementos que solo esten en la primera tabla, los representaremos en un circulo, los elementos que esten en la segunda tabla los representaremos en el segundo circulo, y los elementos que esten en ambas tablas los representaremos en la interseccion.
+
+Ejemplo:
+
+Tenemos la **tabla productos**
+
+| id |   nombre   | precio |
+|:--:|:----------:|:------:|
+| 1  | Producto 1 | 100    |
+| 2  | Producto 2 | 200    |
+| 3  | Producto 3 | 300    |
+
+**Tabla Ventas**
+
+| id | id_producto | cantidad |
+|:--:|:-----------:|:--------:|
+| 1  | 3           | 2        |
+| 2  | 4           | 2        |
+
+Las claves en comun de estas tablas son `id` en **productos** y `id_producto` en **ventas**, estos los ponemos en el circulo de venn:
+
+![circulo venn](https://tutorial-sql.s3.amazonaws.com/sql_images/3571_Inner+Join+con+diagrama+de+venn_15-Inner_Join_en_venn.png)
+
+Para armar este diagrama, primero identificamos las claves de union de las tablas. Luego, en un circulo izquiero, que representa la tabla **productos** ponemos los registros 1, 2 y 3 asociados a la clave `id`. EN el circulo derecho, que representa la tabla **ventas** ponemos los registros 3 y 4 asociados a la clave `id_producto` , en la interseccion de ambos productos, ponemos el registro 3 ya que es el unico que se encuentra en ambas tablas.
+
+Mirando el diagrama, y con lo que hemos aprendido, podemos decir que un `INNER JOIN` entre estas dos tablas nos devolvera el registro 3, ya que es el unico que se encuentra en ambas tablas. Es decir, un **inner join** nos regresa la interseccion de ambos conjuntos.
+
+**Ejercicio**
+
+Dada las siguientes tablas
+
+Tabla **actores**
+
+| actor_id |       nombre       |
+|:--------:|:------------------:|
+| 1        | Robert Downey Jr.  |
+| 2        | Scarlett Johansson |
+| 3        | Chris Hemsworth    |
+| 4        | Mark Ruffalo       |
+| 5        | Chris Evans        |
+
+Tabla **peliculas**
+
+| pelicula_id |      titulo     | actor_id |
+|:-----------:|:---------------:|:--------:|
+| 101         | Iron Man        | 1        |
+| 102         | Avengers        | 1        |
+| 103         | Black Widow     | 2        |
+| 104         | Thor            | 3        |
+| 105         | Avengers        | 3        |
+| 106         | Avengers        | 4        |
+| 107         | Avengers        | 5        |
+| 108         | Captain America | 5        |
+
+
+
+En un papel, dibuja un diagrama de Venn que muestre los registros que se obtendrían al realizar un INNER JOIN entre las tablas actores y peliculas.
+
+En el editor de código a continuación, realiza una consulta que muestre el nombre de los actores y los títulos de las películas en las que han actuado.
+
+¿El resultado del código coincide con tu dibujo?
+
+![imagen](https://github.com/user-attachments/assets/4dd93bf6-cd51-407f-8494-eb36c791a3ac)
+
+```sql
+Select a.nombre, p.titulo
+from actores as a
+inner join peliculas as p 
+ON a.actor_id = p.actor_id
+```
+
 ### Left Join
+
 La clausula `LEFT JOIN`combina filas de dos o mas tablas basado en una columna relacionada entre ellas, y retorna todas las filas desde la tabla de la izquierda (tabla 1) y las coincidencias de la tabla de la derecha (tabla 2). Si no hay coincidencias, el resultado es `NULL`en la tabla de la derecha.
 
 ![left join](https://github.com/borgesmj/notas-y-apuntes/assets/121818423/4c198d4d-d653-40e1-adde-77b5516d6f21)
@@ -5117,6 +5195,61 @@ Resultado:
 | maria.gonzalez@example.com | Maria González | 25   | maria.gonzalez@example.com |              |
 | john.doe@example.com       | John Doe       | 40   | john.doe@example.com       | TI           |
 | francisco@example.com      | Test User      | 22   |                            |              |
+
+### Left Join en Diagrama de Venn
+
+Armemos un diagrama de Venn
+
+Tabla **productos**
+
+| id |   nombre   | precio |
+|:--:|:----------:|:------:|
+| 1  | Producto 1 | 100    |
+| 2  | Producto 2 | 200    |
+| 3  | Producto 3 | 300    |
+
+Tabla **ventas**
+
+| id | id_producto | cantidad |
+|:--:|:-----------:|:--------:|
+| 1  | 3           | 2        |
+| 2  | 4           | 2        |
+
+Para armar este diagrama, repetimos los pasos que aprendimos previamente. Primero identificamos las claves de union de las tablas, Luego en un circulo izquierdo, representa la tabla **productos**, ponemos los registros 1, 2 y 3, asociados a la clave `id`. EN el circulo derechom que representa a la tabla **ventas** ponemos los registros 3 y 4 asociados a la clave `id_producto`. En la interseccion ds ambos  ponemos el registro 3, que es el unico que se encuentra en ambas tablas.
+
+<img width="705" alt="3618_Left Join en diagrama de venn_leftJoin" src="https://github.com/user-attachments/assets/483bea39-0bb0-442e-ac11-3268c3fad664">
+
+Cuando hacemos una operación de Left Join entre la tabla A y la tabla B, en los resultados aparecerán todos los registros de la tabla A, incluso aquellos que no tienen una clave correspondiente en la tabla B. O sea podemos visualizar el Left Join como el conjunto de la izquierda en un diagrama de Venn.
+
+**Ejercicio**
+
+Dadas las siguientes tablas:
+
+**Tabla profesion**
+
+| id |  Profesion |
+|:--:|:----------:|
+| 1  | Ingeniero  |
+| 2  | Médico     |
+| 3  | Abogado    |
+| 4  | Arquitecto |
+
+**Tabla Personas**
+
+| id | Nombre | profesion_id |
+|:--:|:------:|:------------:|
+| 1  | Juan   | 1            |
+| 2  | Maria  | 2            |
+| 3  | Ana    | 3            |
+
+Se tiene una tabla llamada Personas que contiene el nombre de las personas y el id de la profesión a la que pertenecen. Se quiere obtener un listado de todas las profesiones y las personas que pertenecen a cada una de ellas. Si una profesión no tiene personas asociadas, se debe mostrar el nombre de la profesión y NULL en el campo Nombre. La tabla resultante sólo debe contener dos columnas: Profesion y Nombre.
+
+```SQL
+SELECT PRO.PROFESION, PER.NOMBRE
+FROM PROFESION AS PRO
+LEFT JOIN PERSONAS AS PER
+ON PRO.ID = PER.PROFESION_ID;
+```
 
 ### Right Join
 La clausula `RIGTH JOIN` retorna todos los registros de la tabla de la derecha (tabla 2) y los resultados coincidentes de la tabla de la izquierda (tabla 1). Si no hay coincidencias, el resultado será `NULL`en la tabla de la izquierda.
