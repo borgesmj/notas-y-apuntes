@@ -33,7 +33,7 @@ Este contenido estará estructurado acorde al contenido de Desafío LATAM y se r
 | Operadores | [ir](.#operadores) |
 
 
-## Tema 1: Introducción
+## Tema 1.1: Introducción
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
 ### ¿Qué significa SQL?
 SQL viene de Structured Query Language (Lenguaje Estructurado de Consultas); es un lenguaje de programación que se utiliza para comunicarse y administrar bases de datos. SQL es un estándar para manipular datos almacenados en sistemas de gestión de bases de datos relacionales (relational database management systems - RDBMS), así como para el procesamiento de flujos en sistemas de gestión de flujos de datos relacionales (in a relational data stream management system - RDSMS). Fue desarrollado por primera vez en la década de 1970 por IBM.
@@ -113,13 +113,13 @@ WHERE employees.dept_id = departments.dept_id;
 En este ejemplo, la clausula `FROM` está seguida por dos tablas `employees` y `departments`. `employees.name` y `departments.name` indica que estamos seleccionando la columna `name` desde la tabla `employees` y la columna `department` desde la tabla `departments`
 
 
-### Seleccionando todas las columnas de una tabla
+### 1.2 Seleccionando todas las columnas de una tabla
 Si queremos seleccionar todas las columnas de una tabla, podemos usar el `*` asi:
 
 ```sql
 SELECT * FROM table_name
 ```
-### Seleccionando una columna de la tabla
+### 1.3 Seleccionando una columna de la tabla
 En este ejercicio se tiene una tabla llamado usuarios que tiene las columnas nombre, apellido, email y telefono.
 
 Selecciona sólo los nombres de la tabla usuarios.
@@ -129,21 +129,21 @@ SELECT nombre
 from usuarios
 ```
 
-### Seleccionando múltiples columnas de una tabla
+### 1.4 Seleccionando múltiples columnas de una tabla
 Supongamos que tenemos una tabla llamada productos con las columnas 'nombre', 'precio', 'cantidad' y 'proveedor'. Selecciona sólo el nombre, precio y el proveedor
 
 ```sql
 SELECT nombre, precio, proveedor FROM productos
 ```
 
-### Asignando un alias a una columna con "AS"
+### 1.6  Asignando un alias a una columna con "AS"
 Se tiene una tabla llamada usuarios con las columnas nombre, apellido, email y teléfono. Selecciona todos los nombres bajo el alias "cliente"
 
 ```sql
 SELECT nombre as cliente from usuarios
 ```
 
-### Asignando un alias a varias columnas con "AS"
+### 1.7 Asignando un alias a varias columnas con "AS"
 Cambia el nombre de la columna 'nombre' a 'nombre_usuario' y el nombre de la columna 'apellido' a 'apellido_usuario' en la tabla usuarios.
 
 ```sql
@@ -157,7 +157,7 @@ WHERE e.dept_id = d.dept_id;
 ```
 En este ejemplo, las tablas `employees` y `departments` son llamadas `e` y `d`respectivamente.
 
-### Asignando un alias con AS y comillas dobles
+### 1.8 Asignando un alias con AS y comillas dobles
 
 Selecciona el nombre y el email de los usuarios de la tabla usuarios, y asigna el nombre 'Correo electrónico' a la columna 'email'.
 
@@ -5404,6 +5404,118 @@ Resultado:
 | 2           | Producto B | 2         | 2           | 15.99  |
 | 3           | Producto C |           |             |        |
 
+### Identificando tipos de Join
+* Existen múltuplis tipos de join
+* Hasta este momento solo hemos visto `INNER`, `LEFT`, `RIGHT` JOIN
+* Debemos saber identificar el tipo de `JOIN` a utilizar en una consulta a partir de una peticion.
+
+|  | **INNER JOIN**  | **LEFT JOIN (o LEFT OUTER JOIN)** | **RIGHT JOIN (o RIGHT OUTER JOIN)** |
+|--|--|--| --|
+| **¿Cuando usarlo?** | Cuando necesitas SOLO las filas donde haya coincidencias en ambas tablas  | Cuando necesitas TODAS las filas de la tabla izquierda y las filas coincidentes de la tabla derecha | Cuandp necesitas TODAS las filas de la tabla derecha y las filas coincidentes de la tabla izquierda |
+| **Resultado** | Devuelve solo las filas con datos correspondientes en ambas tablas  | Devuelve todas las filas de la tabla de la izquierda y las coincidencias de la tabla de la derecha, con NULLs donde no haya coincidencias. |Devuelve todas las filas de la tabla de la derecha y las coincidencias de la tabla de la izquierda, con NULLs donde no haya coincidencias. |
+
+**Ejercicio**
+
+Se tienna base de datos con dos tas principales **autores** y **libros**
+
+Crea una consulta con el fin de obtener informacion con el nombre del autor junto con el titulo del libro que ha escrito. **La consulta debe incluir sólo aquellos libros que tienen autores asignados**
+
+Las columnas de la consulta deben llamarse:
+*    `nombre_autor`
+-   `titulo_libro`
+Tabla **Autores**
+
+| id |         nombre         |
+|:--:|:----------------------:|
+| 1  | Gabriel García Márquez |
+| 2  | Isabel Allende         |
+| 3  | J.K. Rowling           |
+
+Tabla **libros**
+
+| id |               titulo               | id_autor |
+|:--:|:----------------------------------:|:--------:|
+| 1  | Cien Años de Soledad               | 1        |
+| 2  | La Casa de los Espíritus           | 2        |
+| 3  | Harry Potter y la Piedra Filosofal | 3        |
+| 4  | Libro sin Autor                    | NULL     |
+
+```SQL
+SELECT A.NOMBRE AS NOMBRE_AUTOR, L.TITULO AS TITULO_LIBRO
+FROM AUTORES AS A
+INNER  JOIN LIBROS AS L 
+ON A.ID = L.ID_AUTOR
+```
+
+### Identificando tipos de Join parte 2
+
+Ejercicio: 
+
+Se tiene una base de datos con dos tablas principales: empleados y proyectos.
+
+Crea una consulta con el fin de obtener información detallada, y que muestre el nombre del empleado junto con el nombre del proyecto en el que participa.
+
+Tabla **empleados**
+
+| id |     nombre     | id_proyecto |
+|:--:|:--------------:|:-----------:|
+| 1  | Juan Pérez     | 1           |
+| 2  | María Gonzalez | 2           |
+| 3  | Pedro López    | NULL        |
+| 4  | Ana Rodríguez  | 3           |
+
+Tabla **Proyectos**
+
+| id |    nombre_proyecto    |
+|:--:|:---------------------:|
+| 1  | Desarrollo Web        |
+| 2  | App Móvil             |
+| 3  | Sistema de Inventario |
+
+El resultado debe tener las columnas con los siguientes nombres e incluir a todos los empleados, aunque no tengan asignado proyecto.
+
+-   nombre_empleado
+-   nombre_proyecto
+```SQL
+SELECT E.NOMBRE AS NOMBRE_EMPLEADO, P.NOMBRE_PROYECTO
+FROM EMPLEADOS AS E
+LEFT  JOIN PROYECTOS AS P
+ON E.ID_PROYECTO = P.ID
+```
+### Identificando tipos de Join parte 3
+
+Ejercicio:
+
+Se tiene una base de datos con dos tablas principales: empleados y proyectos.
+
+Se pide obtener una lista de todos los proyectos junto con los nombres de los empleados asignados a cada proyecto, incluyendo aquellos proyectos que no tienen empleados asignados", se utilizan las siguientes columnas:
+
+El resultado debe estar únicamente compuesto por las columnas nombre_empleado y nombre_proyecto que corresponden al nombre del empleado y al nombre del proyecto de sus respectivas tablas, incluso aquellos que no tienen empleados asignados (empleado NULL).
+
+Tabla **empleados**
+| id |     nombre     | id_proyecto |
+|:--:|:--------------:|:-----------:|
+| 1  | Juan Pérez     | 1           |
+| 2  | María González | 2           |
+| 3  | Pedro López    | NULL        |
+| 4  | Ana Rodríguez  | 3           |
+
+Tabla **Proyectos**
+
+| id |    nombre_proyecto    |
+|:--:|:---------------------:|
+| 1  | Desarrollo Web        |
+| 2  | App Móvil             |
+| 3  | Sistema de Inventario |
+| 4  | Marketing Digital     |
+
+```SQL
+SELECT E.NOMBRE AS NOMBRE_EMPLEADO, P.NOMBRE_PROYECTO
+FROM EMPLEADOS AS E
+RIGHT  JOIN PROYECTOS AS P
+ON P.ID = E.ID_PROYECTO
+```
+
 ## Tema 19: Cardinalidad
 
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
@@ -5896,117 +6008,6 @@ ON E.ID = EMPLEADOS_PROYECTOS.EMPLEADO_ID
 JOIN PROYECTOS
 ON EMPLEADOS_PROYECTOS.PROYECTO_ID = PROYECTOS.ID
 GROUP  BY e.NOMBRE
-```
-### Identificando tipos de Join
-* Existen múltuplis tipos de join
-* Hasta este momento solo hemos visto `INNER`, `LEFT`, `RIGHT` JOIN
-* Debemos saber identificar el tipo de `JOIN` a utilizar en una consulta a partir de una peticion.
-
-|  | **INNER JOIN**  | **LEFT JOIN (o LEFT OUTER JOIN)** | **RIGHT JOIN (o RIGHT OUTER JOIN)** |
-|--|--|--| --|
-| **¿Cuando usarlo?** | Cuando necesitas SOLO las filas donde haya coincidencias en ambas tablas  | Cuando necesitas TODAS las filas de la tabla izquierda y las filas coincidentes de la tabla derecha | Cuandp necesitas TODAS las filas de la tabla derecha y las filas coincidentes de la tabla izquierda |
-| **Resultado** | Devuelve solo las filas con datos correspondientes en ambas tablas  | Devuelve todas las filas de la tabla de la izquierda y las coincidencias de la tabla de la derecha, con NULLs donde no haya coincidencias. |Devuelve todas las filas de la tabla de la derecha y las coincidencias de la tabla de la izquierda, con NULLs donde no haya coincidencias. |
-
-**Ejercicio**
-
-Se tienna base de datos con dos tas principales **autores** y **libros**
-
-Crea una consulta con el fin de obtener informacion con el nombre del autor junto con el titulo del libro que ha escrito. **La consulta debe incluir sólo aquellos libros que tienen autores asignados**
-
-Las columnas de la consulta deben llamarse:
-*    `nombre_autor`
--   `titulo_libro`
-Tabla **Autores**
-
-| id |         nombre         |
-|:--:|:----------------------:|
-| 1  | Gabriel García Márquez |
-| 2  | Isabel Allende         |
-| 3  | J.K. Rowling           |
-
-Tabla **libros**
-
-| id |               titulo               | id_autor |
-|:--:|:----------------------------------:|:--------:|
-| 1  | Cien Años de Soledad               | 1        |
-| 2  | La Casa de los Espíritus           | 2        |
-| 3  | Harry Potter y la Piedra Filosofal | 3        |
-| 4  | Libro sin Autor                    | NULL     |
-
-```SQL
-SELECT A.NOMBRE AS NOMBRE_AUTOR, L.TITULO AS TITULO_LIBRO
-FROM AUTORES AS A
-INNER  JOIN LIBROS AS L 
-ON A.ID = L.ID_AUTOR
-```
-
-### Identificando tipos de Join parte 2
-
-Ejercicio: 
-
-Se tiene una base de datos con dos tablas principales: empleados y proyectos.
-
-Crea una consulta con el fin de obtener información detallada, y que muestre el nombre del empleado junto con el nombre del proyecto en el que participa.
-
-Tabla **empleados**
-
-| id |     nombre     | id_proyecto |
-|:--:|:--------------:|:-----------:|
-| 1  | Juan Pérez     | 1           |
-| 2  | María Gonzalez | 2           |
-| 3  | Pedro López    | NULL        |
-| 4  | Ana Rodríguez  | 3           |
-
-Tabla **Proyectos**
-
-| id |    nombre_proyecto    |
-|:--:|:---------------------:|
-| 1  | Desarrollo Web        |
-| 2  | App Móvil             |
-| 3  | Sistema de Inventario |
-
-El resultado debe tener las columnas con los siguientes nombres e incluir a todos los empleados, aunque no tengan asignado proyecto.
-
--   nombre_empleado
--   nombre_proyecto
-```SQL
-SELECT E.NOMBRE AS NOMBRE_EMPLEADO, P.NOMBRE_PROYECTO
-FROM EMPLEADOS AS E
-LEFT  JOIN PROYECTOS AS P
-ON E.ID_PROYECTO = P.ID
-```
-### Identificando tipos de Join parte 3
-
-Ejercicio:
-
-Se tiene una base de datos con dos tablas principales: empleados y proyectos.
-
-Se pide obtener una lista de todos los proyectos junto con los nombres de los empleados asignados a cada proyecto, incluyendo aquellos proyectos que no tienen empleados asignados", se utilizan las siguientes columnas:
-
-El resultado debe estar únicamente compuesto por las columnas nombre_empleado y nombre_proyecto que corresponden al nombre del empleado y al nombre del proyecto de sus respectivas tablas, incluso aquellos que no tienen empleados asignados (empleado NULL).
-
-Tabla **empleados**
-| id |     nombre     | id_proyecto |
-|:--:|:--------------:|:-----------:|
-| 1  | Juan Pérez     | 1           |
-| 2  | María González | 2           |
-| 3  | Pedro López    | NULL        |
-| 4  | Ana Rodríguez  | 3           |
-
-Tabla **Proyectos**
-
-| id |    nombre_proyecto    |
-|:--:|:---------------------:|
-| 1  | Desarrollo Web        |
-| 2  | App Móvil             |
-| 3  | Sistema de Inventario |
-| 4  | Marketing Digital     |
-
-```SQL
-SELECT E.NOMBRE AS NOMBRE_EMPLEADO, P.NOMBRE_PROYECTO
-FROM EMPLEADOS AS E
-RIGHT  JOIN PROYECTOS AS P
-ON P.ID = E.ID_PROYECTO
 ```
 ## Operadores:
 
