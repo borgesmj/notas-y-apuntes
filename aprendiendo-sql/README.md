@@ -323,7 +323,7 @@ Sobre las fechas podemos hacer distinto tipo de operaciones, pero primero aprend
 
 `SELECT * FROM productos WHERE fecha_de_creación >= '2022-01-01';` 
 
-Ejercicio
+#### Ejercicio
 Se tiene una tabla de productos con los campos id, nombre, precio y fecha_de_creación. El campo fecha_de_creacion es de tipo Date.
 
 Selecciona todos los productos de la tabla productos que fueron creados después de '2021-05-01'.
@@ -361,7 +361,7 @@ En esta consulta, estamos utilizando el operador LIKE para buscar todos los nomb
 
 El símbolo '%' es un comodín que representa cualquier cantidad de caracteres adicionales. En este caso, estamos utilizando '%' después de la letra 'J' para indicar que queremos buscar cualquier nombre que comience con 'J' y tenga cualquier número de caracteres adicionales después de ella.
 
-Ejercicio
+#### Ejercicio
 Se tiene una tabla usuarios con los campos id, nombre, apellido, email y teléfono. El campo nombre es de tipo texto.
 
 Se pide seleccionar todos los usuarios cuyo apellido empiece con 'Ma'
@@ -376,7 +376,7 @@ where apellido like "Ma%"
 Supongamos que queremos buscar todos los usuarios cuyo nombre termine con la letra 's' en la tabla de usuarios. Podemos hacer esto utilizando la siguiente consulta:
 
 `SELECT * FROM usuarios WHERE nombre LIKE '%s'`
-Ejercicio
+#### Ejercicio
 Selecciona todos los usuarios de la tabla usuarios cuyo nombre termine con la letra 'o'
 ```sql
 select *
@@ -407,7 +407,7 @@ Esto nos devolverá todos los usuarios cuyo nombre no sea nulo.
 | 2    | María Gomez | maria.gomez@email.com |
 | 5    | Luis Mendez | luis.mendez@email.com |
 
-Ejercicio
+#### Ejercicio
 Se tiene una tabla productos con id, nombre, precio y descuento, siendo descuento de tipo integer.
 
 Selecciona todos los registros de la tabla productos cuyo campo descuento no sea nulo.
@@ -450,7 +450,7 @@ from table_name
 order by column1, column2, desc
 ```
 
-Ejercicio:
+#### Ejercicio:
 Ordena los registros de la tabla usuarios por el campo 'nombre'
 ```sql
 select * from usuarios order by nombre
@@ -5516,6 +5516,85 @@ RIGHT  JOIN PROYECTOS AS P
 ON P.ID = E.ID_PROYECTO
 ```
 
+### Full Outer Join
+Existen distintos tipos de JOIN:
+* Al utilizar `INNER JOIN` si en una des tablas no está la clave correspondiente, el registro no aparecerá en los resultados.
+* Con `LEFT JOIN`, si en la tabla de la izquierda está la clave pero en la tabla de la derecha no, el registro de la tabla izquierda aparecerá en el resultado final con valores `NULL` en los registros de la tabla derecha.
+* Con `RIGHT JOIN` si en la tabla de la derecha está la clave pero en la tabla de la izquierda no, el registro de la tabla derecha aparecerá en el resultado final con valores `NULL` en los registros de la tabla izquierda.
+* Al utilizar `FULL OUTER JOIN` se obtienen todos los registros de ambas tablas, incluyendo los registros no coincidentes.
+
+Un `FULL OUTER JOIN`  en SQL es un método para combinar filas de dos o mas tablas, basado en una columna relacionada entre ellos. Regresa todas las filas de la tabla de la izquierda (tabla 1) y de la tabla de la derecha (tabla 2).
+
+La palabra clave `FULL OUTER JOIN` combina el resultados de ambas uniones, izquierda y derecha, y retorna todas (coincidentes y no coincidentes) las filas de las tablas en ambos lados de de la clausula join.
+
+**Sintaxis**:
+
+```SQL
+SELECT column_name(s)
+FROM table1
+FULL OUTER JOIN table2
+ON table1.column_name = table2.column_name;
+```
+
+Diagrama de Veen
+
+![diagrama de venn en FULL OUTER JOIN](https://www.tutorialrepublic.com/lib/images/full-join.png)
+
+Ejemplo:
+Se tiene dos tablas
+
+Tabla **empleados**
+| id_empleado | nombre | id_departamento |
+|:-----------:|:------:|:---------------:|
+| 1           | Ana    | 10              |
+| 2           | Juan   | 20              |
+| 3           | María  | 30              |
+
+Tabla **Departamento**
+
+| id_departamento |   departamento   |
+|:---------------:|:----------------:|
+| 10              | Recursos Humanos |
+| 20              | Finanzas         |
+| 40              | Marketing        |
+
+Una consulta con `FULL OUTER JOIN` entre las tablas empleados y departamentos, utilizando el campo `id_departamento`, daría como resultado:
+
+| id_empleado | nombre | id_departamento |   departamento   |
+|:-----------:|:------:|:---------------:|:----------------:|
+| 1           | Ana    | 10              | Recursos Humanos |
+| 2           | Juan   | 20              | Finanzas         |
+| 3           | María  | 30              | NULL             |
+| NULL        | NULL   | 40              | Marketing        |
+
+Estos datoss ayudan a identificar que empleados no está relacionado con un departamento o que departamento no tiene empleados.
+
+### `FULL OUTER JOIN` en SQLite
+El motor de búsqueda SQLite no soporta no soporta operaciones de `FULL OUTER JOIN` , sim embargo, se ede lograr el mismo efecto usando esta sintaxis.
+
+```sql
+SELECT *
+FROM tableA
+LEFT JOIN tableB
+  ON tableA.column_name = tableB.column_name
+UNION
+SELECT *
+FROM tableA
+RIGHT JOIN tableB
+  ON tableA.column_name = tableB.column_name
+```
+
+#### Ejercicio
+
+Dada las tablas `empleados` y `departamentos` que vimos previamente, escribe una consulta que devuelva todos los registros coincidentes y no coincidentes entre las tablas empleados y departamentos.
+
+```SQL
+SELECT E.*, D.*
+FROM EMPLEADOS E
+FULL  OUTER  JOIN DEPARTAMENTOS D
+ON E.ID_DEPARTAMENTO = D.ID_DEPARTAMENTO
+```
+
 ## Tema 19: Cardinalidad
 
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
@@ -5554,7 +5633,7 @@ Al hacer un `join` entre las tablas personas y pasaportes, obtendríamos:
 
 Es decir, por cada registro de la tabla personas hay un único registro en la tabla pasaportes.
 
-**Ejercicio**
+**#### Ejercicio**
 
 Dada las siguientes tablas:
 
@@ -5617,7 +5696,7 @@ Al hacer un `join` entre las tablas `empleados` y `departamentos` obtendríamos
 
 Podemos ver que, por cada registro de la tabla **empleados** hay un único registro en la tabla **departamentos** pero un registro de la tabla **departamentos** puede estar relacionado con varios registros de la tabla **empleados**
 
-**Ejercicio**
+**#### Ejercicio**
 
 Dada las siguientes tablas:
 
@@ -5717,7 +5796,7 @@ JOIN alumnos
 ON profesores_alumnos.alumno_id = alumnos.alumno_id;
 ```
 
-**Ejercicio**
+**#### Ejercicio**
 
 Se tiene una base de datos con un catalogo de objetos y colores. Cada objeto puede tener varios colores, y cada color puede estar asociado a varios objetos
 
@@ -5837,7 +5916,7 @@ tabla **profesores_alumnos**
 
 Por cada entrada en la tabla **profesores_alumnos**  tenemos una relacion entre un profesor y un alumno, si queremos saber que profesores tienen un alumno o que alumno tiene un profesor podemos hacer un `JOIN` entre las tablas **profesores_alumnos** y **profesores** o **alumnos** 
 
-**Ejercicio** 
+**#### Ejercicio** 
 Se tiene un sistema que guarda informacion de **profesores** y **alumnos** . Cada profesor puede tener varios alumnos y cada alumno puede tener varios profesores, para lograr esto se tiene una tabla **profesores**, una tabla *¨*alumnos** y una tabla **profesores_alumnos** que relaciona a profesores y alumnos.
 
 tabla **profesores**
@@ -5910,7 +5989,7 @@ En este ejemplo, tiene sentido que un usuario pueda pedir un libro mas de una ve
 
 Dentro de la tabla podemos ver que el **usuario 1** ha pedido el **libro 1** mas de una vez, lo cual no implica un problema si no hay una restriccion de unicidad.
 
-Ejercicio:
+#### Ejercicio:
 
 tabla **libros**
 | libro_id |   titulo   |
@@ -5966,7 +6045,7 @@ FOREIGN KEY (proyecto_id) REFERENCES Proyectos(id)
 
 De esta manera, si se intenta crear un registro con un empleado y un proyecto que ya existen en la tabla, se generará un error, lo que asegura que no haya registros duplicados en la tabla intermedia.
 
-**Ejercicio**:
+**#### Ejercicio**:
 
 Dadas las tablas:
 
