@@ -5569,7 +5569,7 @@ Una consulta con `FULL OUTER JOIN` entre las tablas empleados y departamentos, u
 
 Estos datoss ayudan a identificar que empleados no está relacionado con un departamento o que departamento no tiene empleados.
 
-### `FULL OUTER JOIN` en SQLite
+#### `FULL OUTER JOIN` en SQLite
 El motor de búsqueda SQLite no soporta no soporta operaciones de `FULL OUTER JOIN` , sim embargo, se ede lograr el mismo efecto usando esta sintaxis.
 
 ```sql
@@ -5594,6 +5594,8 @@ FROM EMPLEADOS E
 FULL  OUTER  JOIN DEPARTAMENTOS D
 ON E.ID_DEPARTAMENTO = D.ID_DEPARTAMENTO
 ```
+
+aqui va
 
 ## Tema 19: Cardinalidad
 
