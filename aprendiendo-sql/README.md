@@ -5595,7 +5595,130 @@ FULL  OUTER  JOIN DEPARTAMENTOS D
 ON E.ID_DEPARTAMENTO = D.ID_DEPARTAMENTO
 ```
 
-aqui va
+### Full Outer Join parte 2
+unperacion de `Full Outer Join` la union`RIGHT JOIN` y `LEFT JOIN` , devuelve todos los registros de ambas tablas incluyendo los registros no coincidentes.
+
+#### UNION vs UNION ALL
+Si miramos detenidamente, que si simplemente unimos los resultados de `LEFT JOIN` y `RIGHT JOIN` podríamos estar duplicando registros en el punto de intersección. Aqui es donde des recordar la direfencia entre [`UNION`.  y `UNION ALL` ](#union-vs-union-all). `UNION` elimina los registros dupliados mientras que `UNION ALL` no lo hace,r lo tanto si unimos los resultados de un `LEFT JOIN` y `RIGHT JOIN` debemos utilizar `UNION` para evitar duplicados.
+
+```sql
+SELECT *
+FROM tableA
+LEFT JOIN tableB
+  ON tableA.column_name = tableB.column_name
+UNION
+SELECT *
+FROM tableA
+RIGHT JOIN tableB
+  ON tableA.column_name = tableB.column_name
+```
+
+#### Ejercicio:
+
+Se tienen las tablas **Clientes** y **Pedidos** 
+Tabla **CLientes**
+
+| id_cliente | nombre_cliente |
+|:----------:|:--------------:|
+| 1          | Cliente A      |
+| 2          | Cliente B      |
+| 3          | Cliente C      |
+| 4          | Cliente D      |
+
+Tabla **Pedidos**
+
+| id_pedido | id_cliente | fecha_pedido |
+|:---------:|:----------:|:------------:|
+| 101       | 1          | 2023-01-10   |
+| 102       | 3          | 2023-02-15   |
+| 103       | 5          | 2023-03-20   |
+
+Crea una consulta que devuelva todos los registros coincidentes y no coincidentes entre las tablas `clientes` y `pedidos`.
+
+```sql
+select c.*, p.*
+from clientes c
+left join pedidos p
+on c.id_cliente = p.id_cliente
+union
+select c.*, p.*
+from clientes c
+right join pedidos p
+on c.id_cliente = p.id_cliente
+```
+
+### Left excluding join
+
+Al utilizar `LEFT JOIN` , si la clave está presente en la tabla de la izquierda, pero ausente en la tabla de la derecha, el registro de la tabla izquierda se mostrara al final con valores NULL, en los campos de la tabla derecha.
+
+Un `left excluding join` es unambinacion del `LEFT JOIN` con la clausula `WHERE`, para mostrar los registros de la tabla izquierda que **no** tienen coincidencias en la tabla derecha.
+
+#### Tabla Alumnos
+
+| id | nombre | apellido |
+|:--:|:------:|:--------:|
+| 1  | Juan   | Perez    |
+| 2  | Maria  | Garcia   |
+| 3  | Pedro  | Lopez    |
+
+#### Tabla Calificaciones
+
+| id | alumno_id | calificacion |
+|:--:|:---------:|:------------:|
+| 1  | 1         | 8.5          |
+| 2  | 1         | 7.9          |
+| 3  | 2         | 9.2          |
+| 4  | 2         | 8.8          |
+
+En este ejemplo, si queremos obtener los alumnos que no tienen calificaciones, podemos hacerlo con un left excuding join
+
+```sql
+SELECT *
+FROM alumnos a
+LEFT JOIN calificaciones c
+ON a.id = c.alumno_id
+WHERE c.calificacion IS NULL;
+```
+
+y como resultado obtendriamos:
+
+| id | nombre | apellido | id | alumno_id | calificacion |
+|:--:|:------:|:--------:|:--:|:---------:|:------------:|
+| 3  | Pedro  | Lopez    |    |           |              |
+
+Dado que Pedro es el único alumno que **no tiene calificaciones** es el único que aparece en el resultado final.
+
+#### Ejercicio 
+Dada las siguientes tablas:
+
+tabla **profesion** 
+
+| id |   Nombre  |
+|:--:|:---------:|
+| 1  | Ingeniero |
+| 2  | Doctor    |
+| 3  | Abogado   |
+
+Tabla **Personas**
+
+| id | Nombre | Apellido | Profesion_id |
+|:--:|:------:|:--------:|:------------:|
+| 1  | Juan   | Perez    | 1            |
+| 2  | Maria  | Garcia   | 2            |
+| 3  | Pedro  | Lopez    | 2            |
+
+Crea una consulta SQL que muestre todos los datos de las tablas mencionadas de las personas que no tienen profesión.
+
+```sql
+SELECT  *
+FROM PERSONAS P
+LEFT  JOIN PROFESION PR
+ON P.Profesion_id = PR.ID
+WHERE P.NOMBRE IS  NULL
+```
+
+
+
 
 ## Tema 19: Cardinalidad
 
