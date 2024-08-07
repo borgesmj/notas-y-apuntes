@@ -5717,9 +5717,82 @@ ON P.Profesion_id = PR.ID
 WHERE P.NOMBRE IS  NULL
 ```
 
+### Right Excluding JOIN
+Un right excluding join es una combinación de right join con una cláusula `WHERE` para mostrar los registros de la tabla derecha que no tienen coincidencias en la tabla izquierda.
+`Right Excluding JOIN` es similar a `LEFT EXCLUDING JOIN`. Una consulta de right excluding join nos regresa los registros que **no tienen coincidencias** en la **tabla izquierda**
+```SQL
+SELECT *
+FROM tableA
+RIGHT JOIN tableB
+  ON tableA.name = tableB.name
+WHERE tableA.name IS NULL
+```
 
+Es importante observar que además de cambiar el JOIN hay que cambiar el `WHERE` y sustituir **tableA** por **tableB**
 
+En una base de datos se tienen las tablas de calificaciones y cursos
 
+tabla **calificaciones**
+| id | alumno_id | curso_id | calificacion |
+|:--:|:---------:|:--------:|:------------:|
+| 1  | 1         | 1        | 8.5          |
+| 2  | 1         | 2        | 7.9          |
+| 3  | 2         | 1        | 9.2          |
+| 4  | 2         | 2        | 8.8          |
+| 5  | 3         | 1        | 7.5          |
+| 6  | 4         | 2        | 9.1          |
+
+tabla **cursos**
+| id |    nombre   | docente_id |
+|:--:|:-----------:|:----------:|
+| 1  | Matemáticas | 1          |
+| 2  | Ciencias    | 1          |
+| 3  | Arte        | 1          |
+
+Nos piden obtener toda la información de los cursos que no tienen calificaciones. Para resolver esto con un right excluding join, la consulta sería:
+
+```sql
+SELECT *
+FROM calificaciones c
+RIGHT JOIN cursos cu
+ON cu.id = c.curso_id
+WHERE c.id IS NULL;
+```
+
+Esto nos da como resultado:
+
+| id | alumno_id | curso_id | calificacion | id | nombre | docente_id |
+|:--:|:---------:|:--------:|:------------:|:--:|:------:|:----------:|
+|    |           |          |              | 3  | Arte   | 1          |
+
+#### Ejercicio:
+
+Dadas las siguientes tablas:
+
+tabla **docentes**
+| id |  nombre  |
+|:--:|:--------:|
+| 1  | Benjamin |
+| 2  | Felipe   |
+| 3  | Susana   |
+
+tabla **cursos**
+
+| id |    nombre   | docente_id |
+|:--:|:-----------:|:----------:|
+| 1  | Matemáticas | 1          |
+| 2  | Ciencias    | 1          |
+| 3  | Arte        | 1          |
+
+Utiliza un right join para obtener a los docentes que aún no tienen un curso asignado.
+
+```sql
+SELECT  *
+FROM CURSOS C
+RIGHT  JOIN DOCENTES D
+ON D.ID = C.DOCENTE_ID
+WHERE C.ID IS  NULL
+```
 ## Tema 19: Cardinalidad
 
 :arrow_up: [ir al inicio](.#tabla-de-contenidos)
@@ -6264,6 +6337,7 @@ WHERE salary > 50000 AND age < 30
 * `^`: XOR
 
 Los operadores bit a bit son mucho menos usados en SQL que los demas operadores
+
 
 
 
