@@ -11,7 +11,7 @@ Este contenido estará estructurado acorde al contenido de Desafío LATAM y se r
 
 | DIA                           | Enlace                                  |
 |-------------------------------|-----------------------------------------|
-| Tema 1: Conceptos básicos      | [ir](.#tema-1-introduccion)           |
+| Tema 1: Conceptos básicos      | [ir](./01-Introduccion.md)           |
 | Tema 2: Seleccionando filas     | [ir](.#tema-2-seleccionando-filas)    |
 | Tema 3: Ordenando Resultados   | [ir](.#tema-3-ordenando-resultados)   |
 | Tema 4: Limit                  | [ir](.#tema-4-limit)                  |

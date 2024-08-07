@@ -1,18 +1,17 @@
 ## Tema 1.1: Introducción
 :arrow_up: [ir al inicio](./README.md)
 
-[Introducción](#introducción)
-   1.1 [¿Qué significa SQL?](#qué-significa-sql)
-   1.2 [Select](#select)
-   1.3 [FROM](#from)
-
-2. [Seleccionando datos](#seleccionando-datos)
-   2.1 [Seleccionando todas las columnas de una tabla](#seleccionando-todas-las-columnas-de-una-tabla)
-   2.2 [Seleccionando una columna de la tabla](#seleccionando-una-columna-de-la-tabla)
-   2.3 [Seleccionando múltiples columnas de una tabla](#seleccionando-múltiples-columnas-de-una-tabla)
-   2.4 [Asignando un alias a una columna con "AS"](#asignando-un-alias-a-una-columna-con-as)
-   2.5 [Asignando un alias a varias columnas con "AS"](#asignando-un-alias-a-varias-columnas-con-as)
-   2.6 [Asignando un alias con AS y comillas dobles](#asignando-un-alias-con-as-y-comillas-dobles)
+* [Introducción](#introducción)
+* 1.1 [¿Qué significa SQL?](#qué-significa-sql)
+* 1.2 [Select](#select)
+* 1.3 [FROM](#from)
+* [Seleccionando datos](#seleccionando-datos)
+* 2.1 [Seleccionando todas las columnas de una tabla](#seleccionando-todas-las-columnas-de-una-tabla)
+* 2.2 [Seleccionando una columna de la tabla](#seleccionando-una-columna-de-la-tabla)
+* 2.3 [Seleccionando múltiples columnas de una tabla](#seleccionando-múltiples-columnas-de-una-tabla)
+* 2.4 [Asignando un alias a una columna con "AS"](#asignando-un-alias-a-una-columna-con-as)
+* 2.5 [Asignando un alias a varias columnas con "AS"](#asignando-un-alias-a-varias-columnas-con-as)
+* 2.6 [Asignando un alias con AS y comillas dobles](#asignando-un-alias-con-as-y-comillas-dobles)
 
 ### ¿Qué significa SQL?
 SQL viene de Structured Query Language (Lenguaje Estructurado de Consultas); es un lenguaje de programación que se utiliza para comunicarse y administrar bases de datos. SQL es un estándar para manipular datos almacenados en sistemas de gestión de bases de datos relacionales (relational database management systems - RDBMS), así como para el procesamiento de flujos en sistemas de gestión de flujos de datos relacionales (in a relational data stream management system - RDSMS). Fue desarrollado por primera vez en la década de 1970 por IBM.
