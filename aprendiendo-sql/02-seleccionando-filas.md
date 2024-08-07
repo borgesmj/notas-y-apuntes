@@ -5,22 +5,22 @@
 
 | Sección | Título |
 |---------|--------|
-| 2.1 | [Cláusula WHERE](.#where) |
-| 2.2 | [Operador mayor o igual que](.#utilizando-el-operador-mayor-o-igual-que) |
-| 2.3 | [Operador menor que](.#utilizando-el-operador-menor-que) |
-| 2.4 | [Operador menor o igual que](.#utilizando-el-operador-menor-o-igual-que-en-una-condicion) |
-| 2.5 | [Condición de igualdad](.#seleccionando-filas-bajo-una-condicion-de-igualdad) |
-| 2.6 | [Condición de igualdad con strings](.#seleccionando-filas-bajo-una-condicion-de-igualdad-tipo-de-dato-string) |
-| 2.7 | [Condición de igualdad con booleanos](.#seleccionando-filas-bajo-una-condicion-de-igualdad-tipo-de-dato-booleano-true) |
+| 2.1 | [Cláusula WHERE](#where) |
+| 2.2 | [Operador mayor o igual que](#utilizando-el-operador-mayor-o-igual-que) |
+| 2.3 | [Operador menor que](#utilizando-el-operador-menor-que) |
+| 2.4 | [Operador menor o igual que](#utilizando-el-operador-menor-o-igual-que-en-una-condicion) |
+| 2.5 | [Condición de igualdad](#seleccionando-filas-bajo-una-condicion-de-igualdad) |
+| 2.6 | [Condición de igualdad con strings](#seleccionando-filas-bajo-una-condicion-de-igualdad-tipo-de-dato-string) |
+| 2.7 | [Condición de igualdad con booleanos](#seleccionando-filas-bajo-una-condicion-de-igualdad-tipo-de-dato-booleano-true) |
 | 2.8 | [Condición de igualdad con booleanos (falso)](.#seleccionando-filas-bajo-una-condicion-de-igualdad-tipo-de-dato-booleano-false) |
-| 2.9 | [Operador AND](.#utilizando-dos-condiciones-con-operador-and) |
-| 2.10 | [Operador OR](.#utilizando-operador-or) |
-| 2.11 | [Seleccionando fechas](.#seleccionando-una-fecha) |
-| 2.12 | [Operador BETWEEN](.#seleccionando-datos-entre-dos-valores-con-between) |
-| 2.13 | [Operador LIKE](.#seleccionando-filas-con-like) |
-| 2.14 | [Comodín al principio](.#seleccionando-con-comodin-al-principio) |
-| 2.15 | [Valores no nulos](.#seleccionando-registros-sin-valores-nulos) |
-| 2.16 | [Valores nulos](.#seleccionando-registros-con-valores-nulos) |
+| 2.9 | [Operador AND](#utilizando-dos-condiciones-con-operador-and) |
+| 2.10 | [Operador OR](#utilizando-operador-or) |
+| 2.11 | [Seleccionando fechas](#seleccionando-una-fecha) |
+| 2.12 | [Operador BETWEEN](#seleccionando-datos-entre-dos-valores-con-between) |
+| 2.13 | [Operador LIKE](#seleccionando-filas-con-like) |
+| 2.14 | [Comodín al principio](#seleccionando-con-comodin-al-principio) |
+| 2.15 | [Valores no nulos](#seleccionando-registros-sin-valores-nulos) |
+| 2.16 | [Valores nulos](#seleccionando-registros-con-valores-nulos) |
 
 
 SQL provee una clausula WHERE que es usada basicamente para filtrar los registros. Si la condicion especificada en la clausula WHERE se cumple, entonces solo se muestra los valores especificios de la tabla. Debes usar la clasusula WHERE para filtrar los registros y traer los registros necesarios.
