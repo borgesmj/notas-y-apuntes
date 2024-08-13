@@ -804,3 +804,266 @@ RIGHT  JOIN DOCENTES D
 ON D.ID = C.DOCENTE_ID
 WHERE C.ID IS  NULL
 ```
+### Full outer excluding join
+Un Full outer excluding joing es la unión entre un `full outer join` con `where`.
+`FULL OUTER EXCLUDING JOIN` nos entrega los registros coincidentes, pero también los no coincidentes de la tabla de la derecha como de la izquierda.
+
+Aunque SQLite no soporta directamente `FULL OUTER JOIN`, podemos realizar un `FULL OUTER EXCLUDING JOIN` utilizando una combinación de `LEFT EXCLUDING JOIN` y `RIGHT EXCLUDING JOIN`.
+
+```sql
+SELECT *
+FROM tabla_A
+LEFT JOIN tabla_B ON tabla_A.clave = tabla_B.clave
+WHERE tabla_B.clave IS NULL
+UNION
+SELECT *
+FROM tabla_A
+RIGHT JOIN tabla_B ON tabla_A.clave = tabla_B.clave
+WHERE tabla_A.clave IS NULL
+```
+
+Esta consulta nos dará todos los registros de tabla_A que no tienen coincidencia en tabla_B, y todos los registros de tabla_B que no tienen coincidencia en tabla_A.
+
+#### Ejercicio
+Consideremos las siguientes tablas:
+
+Tabla **empleados**
+
+| id_empleado | nombre | id_departamento |
+|:-----------:|:------:|:---------------:|
+| 1           | Ana    | 10              |
+| 2           | Juan   | 20              |
+| 3           | María  | 30              |
+| 4           | Carlos | NULL            |
+
+Tabla **depertamentos**
+| id_departamento |   departamento   |
+|:---------------:|:----------------:|
+| 10              | Recursos Humanos |
+| 20              | Finanzas         |
+| 40              | Marketing        |
+
+Escribe una consulta SQL que implemente un FULL OUTER EXCLUDING JOIN entre las tablas `empleados` y `departamentos`. Esta consulta debe mostrar tanto a los Empleados que no están asignados a ningún departamento existente como a los departamentos que no tienen empleados asignados.
+
+Una vez que hayas escrito la consulta, ejecútala y analiza los resultados y contesta las siguientes preguntas:
+
+1.  ¿Por qué Carlos aparece en el resultado de la consulta?
+2.  ¿Por qué el departamento de Marketing aparece en el resultado?
+3.  ¿Cómo se diferencia este resultado de un FULL OUTER JOIN regular?
+
+```sql
+SELECT E.ID_EMPLEADO, E.NOMBRE, D.ID_DEPARTAMENTO, D.DEPARTAMENTO
+FROM EMPLEADOS E
+FULL  OUTER  JOIN DEPARTAMENTOS D
+ON D.ID_DEPARTAMENTO = E.ID_DEPARTAMENTO
+WHERE E.ID_EMPLEADO IS  NULL
+UNION
+SELECT E.ID_EMPLEADO, E.NOMBRE, E.ID_DEPARTAMENTO, D.DEPARTAMENTO
+FROM EMPLEADOS E
+FULL  OUTER  JOIN DEPARTAMENTOS D
+ON D.ID_DEPARTAMENTO = E.ID_DEPARTAMENTO
+WHERE D.DEPARTAMENTO IS  NULL
+```
+
+Resultado:
+
+| id_empleado | nombre | id_departamento | departamento |
+|:-----------:|:------:|:---------------:|:------------:|
+|             |        | 40              | Marketing    |
+| 3           | María  | 30              |              |
+| 4           | Carlos |                 |              |
+
+### Natural Join
+El **NATURAL JOIN** es un tipo de join en SQL que se utiliza para combinar dos tablas utilizando las columnas que tienen el mismo nombre. Su sintaxis es la siguiente:
+
+```sql
+SELECT columnas
+FROM tabla1
+NATURAL JOIN tabla2;
+```
+
+-   Natural Join es un JOIN que adicionalmente asume que las columnas con el mismo nombre son las columnas de unión.
+-   La ventaja de usar `NATURAL JOIN` es que simplifica la escritura de la consulta, pero solo es útil cuando las columnas de unión tienen el mismo nombre y tipo de datos en ambas tablas.
+
+Veamos un ejemplo:
+Supongamos que tenemos estas tablas:
+Tabla **Clientes**
+| id_cliente | nombre |       email       |
+|:----------:|:------:|:-----------------:|
+| 1          | Juan   | juan@example.com  |
+| 2          | María  | maria@example.com |
+| 3          | Pedro  | pedro@example.com |
+
+Tabla **pedidos**
+| id_pedido | id_cliente |  producto  | cantidad |
+|:---------:|:----------:|:----------:|:--------:|
+| 1         | 1          | Laptop     | 1        |
+| 2         | 2          | Tablet     | 2        |
+| 3         | 1          | Smartphone | 1        |
+
+En este caso, ambas tablas tienen una columna `id_cliente` por lo que, al hacer un Natural Join, esta será la columna utilizada para unir las tablas.
+
+```sql
+SELECT *
+FROM clientes
+NATURAL JOIN pedidos;
+```
+| id_cliente | nombre |       email       | id_pedido |  producto  | cantidad |
+|:----------:|:------:|:-----------------:|:---------:|:----------:|:--------:|
+| 1          | Juan   | juan@example.com  | 1         | Laptop     | 1        |
+| 2          | María  | maria@example.com | 2         | Tablet     | 2        |
+| 3          | Pedro  | pedro@example.com | 3         | Smartphone | 1        |
+
+Ejercicio:
+
+Se tiene las siguiente stablas:
+
+Tabla **productos**
+| id_producto |   nombre   |  categoría  | precio |
+|:-----------:|:----------:|:-----------:|:------:|
+| 1           | Laptop     | Electrónica | 800    |
+| 2           | Smartphone | Electrónica | 500    |
+| 3           | Camiseta   | Ropa        | 20     |
+| 4           | Zapatos    | Calzado     | 50     |
+
+Tabla **ventas**
+| id_venta | id_producto | cantidad |    fecha   |
+|:--------:|:-----------:|:--------:|:----------:|
+| 1        | 1           | 2        | 2024-01-01 |
+| 2        | 2           | 1        | 2024-01-01 |
+| 3        | 3           | 3        | 2024-01-02 |
+| 4        | 4           | 1        | 2024-01-02 |
+
+Realiza una consulta utilizando **NATURAL JOIN** que muestre el nombre del producto, la cantidad vendida y la fecha de venta de cada producto vendido. Utiliza los nombres originales de las columnas.
+
+```sql
+select p.nombre, v.cantidad, v.fecha
+from productos p
+natural  join ventas v
+```
+
+### Natural Left join
+NATURAL LEFT JOIN realiza un LEFT JOIN utilizando las columnas que tienen el mismo nombre en ambas tablas. Su uso es el siguiente:
+```sql
+SELECT columnas
+FROM tabla1
+NATURAL LEFT JOIN tabla2;
+```
+
+-   Natural Join es un JOIN que adicionalmente asume que las columnas con el mismo nombre son las columnas de unión.
+-   La ventaja de usar `NATURAL JOIN` es que simplifica la escritura de la consulta, pero solo es útil cuando las columnas de unión tienen el mismo nombre y tipo de datos en ambas tablas.
+-   Así como para JOIN la opción de INNER es implícita, para NATURAL JOIN la opción de INNER también es implícita. y uno puede utilizar NATURAL INNER JOIN, NATURAL LEFT JOIN, NATURAL RIGHT JOIN.
+
+Ejercicio:
+Dada las tablas entregadas, crea un reporte que seleccione a todos los estudiantes (sus nombres), cursos inscritos y fecha de inscripciones. Si un estudiante no tiene cursos inscritos, se debe mostrar el estudiante sin los datos de inscripción.
+
+Tabla **Estudiantes**
+
+| id_estudiante | nombre | email              |
+|---------------|--------|--------------------|
+| 1             | Carlos | carlos@example.com |
+| 2             | Laura  | laura@example.com  |
+| 3             | Miguel | miguel@example.com |
+| 4             | Ana    | ana@example.com    |
+
+Tabla **inscripciones**
+
+| id_inscripcion | id_estudiante | curso       | fecha       |
+|----------------|---------------|-------------|-------------|
+| 1              | 1             | Matemáticas | 2024-03-01  |
+| 2              | 2             | Historia    | 2024-03-02  |
+| 3              | 1             | Física      | 2024-03-03  |
+| 4              | 3             | Química     | 2024-03-04  |
+
+
+```SQL
+SELECT E.NOMBRE, I.CURSO, I.FECHA
+FROM ESTUDIANTES E
+NATURAL  LEFT  JOIN INSCRIPCIONES I
+```
+
+### Self join
+Un self join es un tipo de join en SQL que se utiliza para combinar una tabla consigo misma. Se usa cuando queremos relacionar filas de una tabla con otras filas de la misma tabla. Aunque el término "self join" se refiere a esta relación consigo misma, en la práctica se utilizan otros tipos de joins como INNER JOIN o LEFT JOIN para realizar esta operación
+-   Un self join se utiliza para combinar una tabla consigo misma.
+-   Self join no es un tipo de join específico, es solo el término utilizado para referirse a la operación de combinar una tabla consigo misma.
+-   Para lograr el self join se utilizan otros tipos de joins como `INNER JOIN` o `LEFT JOIN`.
+
+Ejemplo:
+Supongamos que tenemos la tabla **empleados** con la siguiente estructura
+
+| id_empleado | nombre | id_supervisor |
+|:-----------:|:------:|:-------------:|
+| 1           | Juan   | NULL          |
+| 2           | María  | 1             |
+| 3           | Pedro  | 1             |
+| 4           | Ana    | 2             |
+| 5           | Luis   | 2             |
+
+Para obtener el nombre de **todos** los empleados junto con el nombre de su supervisor, podemos usar un self join de la siguiente manera:
+
+```sql
+SELECT e1.nombre AS nombre_empleado, e2.nombre AS nombre_supervisor
+FROM empleados e1
+LEFT JOIN empleados e2 ON e1.id_supervisor = e2.id_empleado;
+```
+Nos traería como resultado
+| nombre_empleado | nombre_supervisor |
+|:---------------:|:-----------------:|
+| Juan            | NULL              |
+| María           | Juan              |
+| Pedro           | Juan              |
+| Ana             | María             |
+| Luis            | María             |
+
+En este ejemplo, estamos obteniendo el nombre de cada empleado (`e1.nombre`) y el nombre de su supervisor (`e2.nombre`). El self join se realiza uniendo la tabla `empleados` consigo misma (`empleados e1 LEFT JOIN empleados e2`), utilizando la columna `id_supervisor` de `e1` y la columna `id_empleado` de `e2`.
+
+Se utiliza `LEFT JOIN` en lugar de `INNER JOIN` para incluir a los empleados que no tienen supervisor, dado que en la consulta nos pedían los nombres de **todos** los empleados.
+
+Ejercicio:
+
+Se tiene la tabla **clientes** con los siguientes datos:
+
+| id_cliente | nombre | id_cliente_referente |
+|:----------:|:------:|:--------------------:|
+| 1          | Juan   | NULL                 |
+| 2          | María  | 1                    |
+| 3          | Pedro  | 1                    |
+| 4          | Ana    | 2                    |
+| 5          | Luis   | 2                    |
+
+Utilizando lo aprendido escribe una consulta que muestre el nombre de todos los clientes junto con el nombre de su cliente referente. Las columnas de la tabla resultante deben llamarse `nombre_cliente` y `nombre_cliente_referente`.
+
+```SQL
+SELECT 
+	C1.NOMBRE AS NOMBRE_CLIENTE, 
+	C2.NOMBRE AS NOMBRE_CLIENTE_REFERENTE
+FROM CLIENTES C1
+LEFT  JOIN CLIENTES C2
+ON C1.ID_CLIENTE_REFERENTE = C2.ID_CLIENTE
+```
+
+### Self JOIN parte 2
+Ejercicio:
+
+Se tiene la tabla **amigos**
+
+| id_amigo | nombre | id_amigo_conectado |
+|:--------:|:------:|:------------------:|
+| 1        | Carlos | NULL               |
+| 2        | Laura  | 1                  |
+| 3        | Miguel | 1                  |
+| 4        | Ana    | 2                  |
+| 5        | Luis   | 3                  |
+
+Escribe una consulta SQL utilizando self join para obtener el nombre de cada amigo junto con el nombre de su amigo conectado. Solo se deben mostrar los amigos que tienen un amigo conectado. Las columnas de la tabla resultante deben llamarse `nombre` y `nombre_amigo_conectado`.
+
+> Tip 1: ¿Qué tipo de join utilizarías para obtener los amigos conectados? 
+> Tip 2: ¿Qué columnas de la tabla `amigos` se relacionan entre sí?
+```SQL
+SELECT
+	A1.NOMBRE AS NOMBRE,
+	A2.NOMBRE AS NOMBRE_AMIGO_CONECTADO
+FROM AMIGOS A1
+INNER  JOIN AMIGOS A2
+ON A1.ID_AMIGO_CONECTADO = A2.ID_AMIGO
+```

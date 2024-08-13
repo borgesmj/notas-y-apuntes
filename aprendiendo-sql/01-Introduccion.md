@@ -22,17 +22,17 @@ SQL consiste en varios componentes, cada uno con su único propósito en comunic
 
 * Consultas: Es el componente que permite recuperar datos de una base de datos. La sentencia SELECT es la más utilizada para este fin.
 * Lenguaje de definición de datos ( Data Definition Language - DDL): Permite crear, modificar o eliminar bases de datos y sus objetos relacionados, como tablas, vistas, etc. Los comandos incluyen:
-  - [CREATE TABLE](./#nuestra-primera-tabla)
+  - [CREATE TABLE](./15-tablas.md#nuestra-primera-tabla)
   - CREATE INDEX
   - CREATE VIEW
-  - [ALTER](./#actualizar-una-tabla)
-  - [DROP](./#borrar-una-tabla)
+  - [ALTER](./15-tablas.md#actualizar-una-tabla)
+  - [DROP](./15-tablas.md#borrar-una-tabla)
   - TRUNCATE
 * Lenguaje de manipulación de datos ( Data manipulation Language - DML): Permite gestionar datos dentro de objetos de bases de datos. Estos comandos incluyen:
   - [SELECT](./#select)
-  - [INSERT](./#añadir-un-registro-en-una-tabla)
-  - [DELETE](./#borrar-todos-los-registros-de-una-tabla)
-  - [UPDATE](./#editar-registros)
+  - [INSERT](./13-insercion-de-registros.md#añadir-un-registro-en-una-tabla)
+  - [DELETE](./14-borrado-y-modificacion-de-registros.md#borrar-todos-los-registros-de-una-tabla)
+  - [UPDATE](./14-borrado-y-modificacion-de-registros.md#editar-registros)
 * Lenguaje de control de datos ( Data control Language - DCL): Incluye comandos como GRANT y REVOKE, que tratan principalmente de derechos, permisos y otras tareas de gestión a nivel de control para el sistema de base de datos.
 
 **Tipos de  datos**
