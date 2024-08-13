@@ -1,6 +1,6 @@
 ## Tema 2: Seleccionando filas
 
-:arrow_up: [ir al inicio](./README.md)
+:arrow_up: [ir al inicio](./README.md#tabla-de-contenidos)
 
 
 | Sección | Título |

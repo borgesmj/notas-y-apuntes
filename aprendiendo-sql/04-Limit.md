@@ -1,5 +1,5 @@
 ## Tema 4: Limit
-:arrow_up: [ir al inicio](./README.md)
+:arrow_up: [ir al inicio](./README.md#tabla-de-contenidos)
 ### Limitando la cantidad de resultados
 La cláusula LIMIT se utiliza para limitar la cantidad de resultados devueltos por una consulta. Esto es útil cuando sólo necesitamos ver una cierta cantidad de registros en lugar de todos los registros que cumplan con la condición de la consulta.
 

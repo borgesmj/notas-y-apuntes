@@ -1,6 +1,6 @@
 ## Tema 5: Operaciones con string
 
-:arrow_up: [ir al inicio](./README.md)
+:arrow_up: [ir al inicio](./README.md#tabla-de-contenidos)
 
 ### Transformando un string en mayusculas
 Para transformar un string a mayusculas en [*SQLITE*](https://www.sqlite.org/) podemos utilizar la funcion UPPER()

@@ -1,6 +1,6 @@
 ## Tema 13: Insercion de registros
 
-:arrow_up: [ir al inicio](.#tabla-de-contenidos)
+:arrow_up: [ir al inicio](./README.md#tabla-de-contenidos)
 
 ### Añadir un registro en una tabla
 Con SQL podemos ingresar datos nuevos a tablas ya existentes. Para lograrlo utilizaremos la instruccion **INSERT**

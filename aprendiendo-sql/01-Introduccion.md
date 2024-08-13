@@ -1,5 +1,5 @@
 ## Tema 1.1: Introducción
-:arrow_up: [ir al inicio](./README.md)
+:arrow_up: [ir al inicio](./README.md#tabla-de-contenidos)
 
 * [Introducción](#tema-11-introducción)
 * 1.1 [¿Qué significa SQL?](#qué-significa-sql)

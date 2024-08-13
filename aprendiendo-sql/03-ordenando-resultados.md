@@ -1,5 +1,5 @@
 ## Tema 3: Ordenando resultados
-:arrow_up: [ir al inicio](./README.md)
+:arrow_up: [ir al inicio](./README.md#tabla-de-contenidos)
 ### Ordenando filas
 En este ejercicio aprenderemos a ordenar las filas de una tabla SQL y para estoi estutemaremos una nueva clausula llamada *ORDER BY*
 La clasusula *order by* en SQL es usada para ordernar los resultados de una declaracion SELECT in orden ascendente o descendente. El comando ordena por defecto de maera ascendente, siq ueremos ordenar de manera descendente debemos usar la palabra clave `desc`
