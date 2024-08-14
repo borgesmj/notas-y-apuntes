@@ -1067,3 +1067,172 @@ FROM AMIGOS A1
 INNER  JOIN AMIGOS A2
 ON A1.ID_AMIGO_CONECTADO = A2.ID_AMIGO
 ```
+### Cross Join
+El `Cross join` en SQL es usado para combinar todas las filas de la primera tabla, con todas las filas de la segunda tabla. Es tambien conocido como el **Producto Cartesiano**  de dos tablas. El aspecto mas importante de utilizar un `cross join` es que no requiere de una condicion para operar.
+
+El inconveniente con `cross join` es que regresa el resultado del producto cartesiano de dos tablas, lo que significa un numero largo de filas y uso masivo de recursos. POr lo tanto, es critico usarlo sabiamente y cuando sea necesario.
+
+La sintaxis del `cross join` es la siguiente
+```sql
+SELECT columnas
+FROM tabla1
+CROSS JOIN tabla2;
+```
+
+Ejemplo: 
+Se tienen dos tablas, una de figuras geométricas y otra de colores. Se pide generar una consulta que muestre todas las figuras junto con todos los colores posibles.
+Tabla **figuras**
+
+| id_figura | nombre_figura |
+|:---------:|:-------------:|
+| 1         | Círculo       |
+| 2         | Cuadrado      |
+| 3         | Triángulo     |
+
+Tabla **colores**
+| id_color | nombre_color |
+|:--------:|:------------:|
+| 1        | Rojo         |
+| 2        | Verde        |
+| 3        | Azul         |
+
+La consulta SQL necesaria tendrá la siguiente estructura:
+```sql
+SELECT nombre_figura, nombre_color
+from figuras
+cross join colores;
+```
+
+El resultado será una tabla con todas las combinaciones posibles de figuras y colores:
+| nombre_figura | nombre_color |
+|:-------------:|:------------:|
+| Círculo       | Rojo         |
+| Círculo       | Verde        |
+| Círculo       | Azul         |
+| Cuadrado      | Rojo         |
+| Cuadrado      | Verde        |
+| Cuadrado      | Azul         |
+| Triángulo     | Rojo         |
+| Triángulo     | Verde        |
+| Triángulo     | Azul         |
+
+Ejercicio:
+
+Se tiene una tabla de números y una tabla de pintas. Genera una consulta que muestre todos los números junto con todas las pintas posibles simulando una baraja de cartas ordenada por números de menor a mayor y las pintas en orden alfabético. Las columnas de la tabla resultante deben llamarse `numero` y `pinta`.
+
+Tabla **numeros**
+| numero |
+|:------:|
+| 1      |
+| 2      |
+| 3      |
+| 4      |
+| 5      |
+| 6      |
+| 7      |
+| 8      |
+| 9      |
+| 10     |
+| 11     |
+| 12     |
+| 13     |
+
+Tabla **pintas**
+|   pinta   |
+|:---------:|
+| Corazones |
+| Diamantes |
+| Tréboles  |
+| Picas     |
+
+```SQL
+SELECT NUMERO, PINTA
+FROM NUMEROS
+CROSS  JOIN PINTAS
+ORDER  BY NUMERO, PINTA
+```
+
+### Join con funciones agregadas
+-   **Combinar datos de varias tablas**: La claúsula JOIN nos permite combinar filas de dos o más tablas.
+-   **Escoger el tipo de JOIN**: La elección del tipo de JOIN depende de si queremos contabilizar filas sin coincidencias, si es así usamos `LEFT JOIN`, si no usamos `INNER JOIN`.
+-   **Agrupar datos**: El uso de `GROUP BY` permite agrupar filas que tienen el mismo valor en una o más columnas.
+-   **Funciones de agregación**: Sobre datos agrupados, podemos utilizar funciones de agregación como `SUM()`, `COUNT()`, y `AVG()`.
+
+#### ¿Qué vamos a aprender?
+
+En estos ejercicios trabajaremos con problemas muy comunes en el análisis de datos, donde necesitamos combinar datos de varias tablas, agruparlos y obtener información de datos agregados. A lo largo de estos de estos ejercicios aprenderemos a identificar qué tipo de JOIN utilizar para cada caso.
+
+#### Escenario
+
+Se tiene una tabla de productos y una tabla de ventas. Se desea hacer una consulta que muestre cada producto con la cantidad de ventas realizadas.
+
+Tabla **productos**
+
+| id |   nombre   |
+|:--:|:----------:|
+| 1  | smartphone |
+| 2  | tablet     |
+| 3  | camiseta   |
+| 4  | zapatos    |
+
+Tabla **ventas**
+Para este primer ejercicio vamos a suponer que la tabla de ventas solo permite registrar la venta de un producto a la vez.
+| id | id_producto |
+|:--:|:-----------:|
+| 1  | 1           |
+| 2  | 1           |
+| 2  | 2           |
+| 2  | 2           |
+| 3  | 1           |
+
+Si miramos las ventas, veremos que el producto con `id=1` se vendió 3 veces y el producto con `id=2` se vendió 2 veces, y el resto no se ha vendido. Es decir, el resultado esperado sería:
+
+|   nombre   | cantidad_ventas |
+|:----------:|:---------------:|
+| smartphone | 3               |
+| tablet     | 2               |
+| camiseta   | 0               |
+| zapatos    | 0               |
+
+La solución a este ejercicio requiere de unir las tablas `productos` y `ventas` y agrupar los resultados por el nombre del producto para finalmente contar el número de ventas realizadas.
+
+La pregunta importante es: ¿Qué tipo de JOIN deberíamos usar para este caso? ¿`INNER JOIN` o `LEFT JOIN`?
+
+Para tomar la decisión, debemos considerar si queremos contabilizar productos sin ventas. Si queremos contabilizarlos, entonces deberíamos usar un `LEFT JOIN`. Si no queremos contabilizarlos, entonces deberíamos usar un `INNER JOIN`. En el ejemplo, la tabla del reporte muestra camisetas y zapatos que no han sido vendidos, por lo que deberíamos usar un `LEFT JOIN`.
+
+```sql
+SELECT p.nombre, COUNT(v.id) AS cantidad_ventas
+FROM productos p
+LEFT JOIN ventas v ON p.id = v.id_producto
+GROUP BY p.nombre;
+```
+
+#### Ejercicio
+
+Se tiene una tabla de usuarios y una tabla de notas. Se desea hacer una consulta que muestre la cantidad de notas que ha registrado cada usuario incluso si no ha registrado ninguna nota. Las columnas de las tablas deben ser `email` y `cantidad_notas`. Ordena el resultado por la cantidad de notas.
+
+Tabla **usuarios**
+|            email           |     nombre     |
+|:--------------------------:|:--------------:|
+| juan.perez@example.com     | Juan Pérez     |
+| maria.gonzalez@example.com | Maria González |
+| john.doe@example.com       | John Doe       |
+| francisco@example.com      | Test User      |
+
+Tabla **notas**
+
+|            email           | notas |
+|:--------------------------:|:-----:|
+| juan.perez@example.com     | 90    |
+| maria.gonzalez@example.com | 100   |
+| john.doe@example.com       | 80    |
+| juan.perez@example.com     | 100   |
+| maria.gonzalez@example.com | 100   |
+
+```SQL
+SELECT U.EMAIL,  COUNT(N.NOTAS)  AS CANTIDAD_NOTAS
+FROM USUARIOS U
+LEFT  JOIN NOTAS N
+ON U.EMAIL = N.EMAIL
+GROUP  BY U.EMAIL
+```
