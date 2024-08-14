@@ -29,7 +29,8 @@ Este contenido estará estructurado acorde al contenido de Desafío LATAM y se r
 | Tema 16: Restricciones | [ir](./16-restricciones.md) |
 | Tema 17: Consultas en multiples tablas | [ir](./17-consultas-en-multiples-tablas.md) |
 | Tema 18: Tipos de join | [ir](./18-tipos-de-join.md) |
-| Tema 19: Cardinalidad | [ir](./19-cardinalidad.md)
+| Tema 19: Cardinalidad | [ir](./19-cardinalidad.md)|
+| Tema 20: Normalizacion | [ir](./20-normalizacion.md)|
 | Operadores | [ir](.#operadores) |
 
 ## Operadores:
