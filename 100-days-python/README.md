@@ -115,7 +115,8 @@ El entorno de desarrollo está basado en Replit, que proporciona las siguientes 
 | Dia 86 | [*👉 Desafío del día 86*](./Dia-86/README.md) | [Codigo](./Dia-86/main.py) |
 | Dia 87 | [*Autenticación en una linea*](./Dia-87/README.md) | [Codigo](./Dia-87/main.py) |
 | Dia 88 | [*Delicadeza de autenticación*](./Dia-88/README.md) | [Codigo](./Dia-88/main.py) |
-| Dia 87 | [*👉 Desafío del día 89*](./Dia-89/README.md) | [Codigo](./Dia-89/main.py) |
+| Dia 89 | [*👉 Desafío del día 89*](./Dia-89/README.md) | [Codigo](./Dia-89/main.py) |
+| Dia 90 | [*JSON*](./Dia-90/README.md) | [Codigo](./Dia-90/main.py) |
 
 
 Para calcular el progreso segun la fecha actual, uso este [código](https://gist.github.com/borgesmj/7271f7d6a02e10024227a468f537c628)
