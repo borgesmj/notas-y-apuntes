@@ -1,4 +1,4 @@
-s# Flask!
+# Flask!
 
 La razon por la que hemos pasado los ultimos dias aprendiendo sobre HTML y CSS es para que podamos combianarlo con Python usando **Flask**
 
