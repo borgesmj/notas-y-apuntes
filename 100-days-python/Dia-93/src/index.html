@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Not Spotify</title>
+</head>
+
+<body>
+  <h1>Introduce un año y te regresará el top 10 de música de ese año</h1>
+  <form action="/" method="POST">
+    <p>Año: <input type="number" name="year" value="{year}" min="1900" max="2024" id=""> <button
+        type="submit">Buscar</button></p>
+  </form>
+  {songsList}
+</body>
+
+</html>
